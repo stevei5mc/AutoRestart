@@ -1,0 +1,5 @@
+name: AutoRestart
+main: cn.stevei5mc.autorestart.AutoRestartPlugin
+version: '1.0.0-SNAPSHOT'
+author: stevei5mc
+api: ["1.0.14"]
