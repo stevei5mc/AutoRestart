@@ -39,8 +39,12 @@ public class AutoRestartPlugin extends PluginBase {
                     for (Player player : getServer().getOnlinePlayers().values()) {
                         String title = "§c即将重启";
                         String subtitle = "§e本分支服即将在 §6{seconds} §e秒后重启"; 
-                        player.sendTitle(title.replace("{seconds}",String.valueOf(timeLeft)), subtitle.replace("{seconds}",String.valueOf(timeLeft)), 0, 20, 0);
-                        player.sendTip(subtitle.replace("{seconds}",String.valueOf(timeLeft)));
+                        if (config.getBoolean("show_title")) {
+                            player.sendTitle(title.replace("{seconds}",String.valueOf(timeLeft)), subtitle.replace("{seconds}",String.valueOf(timeLeft)), 0, 20, 0);
+                        }
+                        if (config.getBoolean("show_tip")) {
+                            player.sendTip(subtitle.replace("{seconds}",String.valueOf(timeLeft)));
+                        }
                     }
                 }
                 // 如果时间到了，重启服务器
@@ -57,6 +61,6 @@ public class AutoRestartPlugin extends PluginBase {
                     }
                 }
             }
-        }, 20, true); // 每秒运行一次 20tick=1s
+        }, 20, true); // 每20tick运行一次 20tick=1s
     }
 }
