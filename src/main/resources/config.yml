@@ -7,5 +7,9 @@ kick_player: true
 #调试模式(开启后到时间只会给出相对应的提示并不会执行对应的操作)
 debug: false
 #一些显示的设置
+#显示title(包括subtitle)
 show_title: true
+#底部显示(在物品栏上方)
 show_tip: true
+#是否播放音效
+play_sound: true

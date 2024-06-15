@@ -4,6 +4,8 @@ import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.Config;
 import cn.nukkit.Player;
+import cn.nukkit.level.Sound;
+import cn.nukkit.network.protocol.PlaySoundPacket;
 
 import java.util.concurrent.TimeUnit;
 
@@ -45,6 +47,9 @@ public class AutoRestartPlugin extends PluginBase {
                         if (config.getBoolean("show_tip")) {
                             player.sendTip(subtitle.replace("{seconds}",String.valueOf(timeLeft)));
                         }
+                        if (config.getBoolean("play_sound")) {
+                            playSound(player, Sound.RANDOM_TOAST, 1.0F);
+                        }
                     }
                 }
                 // 如果时间到了，重启服务器
@@ -62,5 +67,21 @@ public class AutoRestartPlugin extends PluginBase {
                 }
             }
         }, 20, true); // 每20tick运行一次 20tick=1s
+    }
+
+    /**
+     * 播放音效
+     * @author LYEmerald
+     * https://github.com/LYEmerald/Festival/blob/ae6ade65253859ac8cb03f85d5b8e6be4a09fc16/src/main/java/net/endlight/festival/utils/Utils.java#L42
+    */
+    public static void playSound(Player player, Sound sound,Float pitch) {
+        PlaySoundPacket packet = new PlaySoundPacket();
+        packet.name = sound.getSound();
+        packet.volume = 1.0F;
+        packet.pitch = pitch;
+        packet.x = player.getFloorX();
+        packet.y = player.getFloorY();
+        packet.z = player.getFloorZ();
+        player.dataPacket(packet);
     }
 }
