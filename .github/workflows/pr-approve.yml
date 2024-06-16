@@ -35,8 +35,9 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir staging && cp target/*.jar staging
+        cp ./script/server_script/Windows/*.bat staging
+        cp ./script/server_script/Linux/*.sh staging
     - name: 批准PR
-      if: inputs.run_type == '批准PR'
       uses: hmarr/auto-approve-action@v4.0.0
       with:
         pull-request-number: ${{ inputs.PR_ID }}
@@ -44,7 +45,7 @@ jobs:
           编译已通过，批准通过
           如果有新的提交则取消本次批准
     - name: 收集构建文件
-      uses: actions/upload-artifactv@v4.3.3
+      uses: actions/upload-artifact@v4.3.3
       with:
         name: ${{ steps.get_info.outputs.repository_name }}-${{ steps.get_info.outputs.run_type_en }}-Build-${{ github.run_number}}
         path: staging

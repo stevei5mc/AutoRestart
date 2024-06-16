@@ -1,0 +1,6 @@
+restart_msg_title: "§e即将重启"
+restart_msg_subtitle: "§e本分支服将在 §6{seconds} §e秒后重启"
+restrat_msg_tip: "§e本分支服将在 §6{seconds} §e秒后重启"
+kick_player_msg: |-
+  §e服务器重启中
+  稍后再会，休息一会吧

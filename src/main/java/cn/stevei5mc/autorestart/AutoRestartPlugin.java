@@ -13,7 +13,8 @@ public class AutoRestartPlugin extends PluginBase {
     private static final int restartTime = 2; // 设置重启前的延迟时间（单位：分钟）
 
     public void onLoad() {
-        this.saveDefaultConfig();
+        saveDefaultConfig();
+        saveLanguageFile();
     }
 
     public void onEnable() {
@@ -83,5 +84,13 @@ public class AutoRestartPlugin extends PluginBase {
         packet.y = player.getFloorY();
         packet.z = player.getFloorZ();
         player.dataPacket(packet);
+    }
+
+    private void saveLanguageFile() {
+        String[] langList = new String[]{"zh_CN", "zh_TW","en_US"};
+        for(String lang: langList){
+            saveResource("language/"+lang+".yml", "language/"+lang+".yml",false);
+            getLogger().info("已加载语言文件 "+lang+".yml");
+        }
     }
 }

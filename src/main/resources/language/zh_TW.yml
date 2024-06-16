@@ -1,0 +1,6 @@
+restart_msg_title: "§e即將重啓"
+restart_msg_subtitle: "§e本分支服將在 §6{seconds} §e秒後重啓"
+restrat_msg_tip: "§e本分支服將在 §6{seconds} §e秒後重啓"
+kick_player_msg: |-
+  §e服務器重啓中
+  稍後再會，休息一會吧

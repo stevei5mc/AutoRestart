@@ -1,0 +1,6 @@
+restart_msg_title: "§eServer Restarting"
+restart_msg_subtitle: "§eThe server restart in §6{seconds} §eseconds"
+restrat_msg_tip: "§eThe server restart in §6{seconds} §eseconds"
+kick_player_msg: |-
+  Server restarting
+  See you later, take a break
