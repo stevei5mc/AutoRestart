@@ -10,7 +10,7 @@ import cn.nukkit.network.protocol.PlaySoundPacket;
 import java.util.concurrent.TimeUnit;
 
 public class AutoRestartPlugin extends PluginBase {
-    private static final int restartTime = 2; // 设置重启前的延迟时间（单位：分钟）
+    private int restartTime = 2; // 设置重启前的延迟时间（单位：分钟）
 
     public void onLoad() {
         saveDefaultConfig();
@@ -19,8 +19,9 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void onEnable() {
         Config config = this.getConfig();
+        restartTime = config.getInt("restart_time");// 设置重启前的延迟时间（单位：分钟）
         scheduleRestart();// 当插件被启用时，计划自动重启任务
-        getLogger().info("自动重启插件已启用，将在 " + restartTime + " 分钟后重启服务器。");
+        getLogger().info("自动重启插件已启用，将在 §a" + restartTime + " §f分钟后重启服务器。");
         getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
         getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
         if (config.getBoolean("debug")) {
@@ -38,7 +39,8 @@ public class AutoRestartPlugin extends PluginBase {
             public void onRun(int currentTick) {
                 timeLeft--;// 每秒减少时间
                 getLogger().info("the server restart in "+ timeLeft);
-                if (timeLeft <= 30) {
+                int tipTime = config.getInt("tips_time");
+                if (timeLeft <= tipTime) {
                     for (Player player : getServer().getOnlinePlayers().values()) {
                         String title = "§c即将重启";
                         String subtitle = "§e本分支服即将在 §6{seconds} §e秒后重启"; 

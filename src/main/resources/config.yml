@@ -1,7 +1,7 @@
 #重启时间(分钟 min)
 restart_time: 180
 #提示时间(秒 s)
-tips_time: 0
+tips_time: 30
 #是否在重启前把玩家踢出
 kick_player: true
 #调试模式(开启后到时间只会给出相对应的提示并不会执行对应的操作)
