@@ -8,6 +8,8 @@ import cn.nukkit.level.Sound;
 import cn.nukkit.network.protocol.PlaySoundPacket;
 
 import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
+import java.util.Optional;
 
 public class AutoRestartPlugin extends PluginBase {
     private int restartTime = 2; // 设置重启前的延迟时间（单位：分钟）
@@ -51,7 +53,17 @@ public class AutoRestartPlugin extends PluginBase {
                             player.sendTip(subtitle.replace("{seconds}",String.valueOf(timeLeft)));
                         }
                         if (config.getBoolean("play_sound")) {
-                            playSound(player, Sound.RANDOM_TOAST, 1.0F);
+                            //copy https://github.com/glorydark/CustomForm/blob/main/src/main/java/glorydark/nukkit/customform/scriptForms/data/SoundData.java
+                            // 读取配置中的音效名
+                            String soundName = config.getString("sound.name");
+                            // 获取音效对象
+                            Optional<Sound> find = Arrays.stream(Sound.values()).filter(get -> get.getSound().equals(soundName)).findAny();
+                            Sound sound = find.orElse(null);
+                            // 检查音效是否存在
+                            if (sound != null) {
+                                // 播放音效给玩家
+                                player.getLevel().addSound(player.getLocation(), sound);
+                            }
                         }
                     }
                 }
@@ -70,22 +82,6 @@ public class AutoRestartPlugin extends PluginBase {
                 }
             }
         }, 20, true); // 每20tick运行一次 20tick=1s
-    }
-
-    /**
-     * 播放音效
-     * @author LYEmerald
-     * https://github.com/LYEmerald/Festival/blob/ae6ade65253859ac8cb03f85d5b8e6be4a09fc16/src/main/java/net/endlight/festival/utils/Utils.java#L42
-    */
-    public static void playSound(Player player, Sound sound,Float pitch) {
-        PlaySoundPacket packet = new PlaySoundPacket();
-        packet.name = sound.getSound();
-        packet.volume = 1.0F;
-        packet.pitch = pitch;
-        packet.x = player.getFloorX();
-        packet.y = player.getFloorY();
-        packet.z = player.getFloorZ();
-        player.dataPacket(packet);
     }
 
     private void saveLanguageFile() {
