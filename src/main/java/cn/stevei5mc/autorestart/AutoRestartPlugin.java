@@ -21,7 +21,7 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void onEnable() {
         Config config = this.getConfig();
-        restartTime = config.getInt("restart_time");// 设置重启前的延迟时间（单位：分钟）
+        restartTime = config.getInt("restart_time", 2);// 设置重启前的延迟时间（单位：分钟）
         scheduleRestart();// 当插件被启用时，计划自动重启任务
         getLogger().info("自动重启插件已启用，将在 §a" + restartTime + " §f分钟后重启服务器。");
         getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
@@ -41,23 +41,23 @@ public class AutoRestartPlugin extends PluginBase {
             public void onRun(int currentTick) {
                 timeLeft--;// 每秒减少时间
                 getLogger().info("the server restart in "+ timeLeft);
-                int tipTime = config.getInt("tips_time");
+                int tipTime = config.getInt("tips_time", 30);
                 if (timeLeft <= tipTime) {
                     for (Player player : getServer().getOnlinePlayers().values()) {
                         String title = "§c即将重启";
                         String subtitle = "§e本分支服即将在 §6{seconds} §e秒后重启"; 
-                        if (config.getBoolean("show_title")) {
+                        if (config.getBoolean("show_title",true)) {
                             player.sendTitle(title.replace("{seconds}",String.valueOf(timeLeft)), subtitle.replace("{seconds}",String.valueOf(timeLeft)), 0, 20, 0);
                         }
-                        if (config.getBoolean("show_tip")) {
+                        if (config.getBoolean("show_tip",true)) {
                             player.sendTip(subtitle.replace("{seconds}",String.valueOf(timeLeft)));
                         }
-                        if (config.getBoolean("play_sound")) {
+                        if (config.getBoolean("play_sound",true)) {
                             //copy https://github.com/glorydark/CustomForm/blob/main/src/main/java/glorydark/nukkit/customform/scriptForms/data/SoundData.java
                             // 读取配置中音效的设置
-                            String soundName = config.getString("sound.name");
-                            float volume = (float) config.getDouble("sound.volume");
-                            float pitch = (float) config.getDouble("sound.pitch");
+                            String soundName = config.getString("sound.name","random.toast");
+                            float volume = (float) config.getDouble("sound.volume",1.0);
+                            float pitch = (float) config.getDouble("sound.pitch",1.0);
                             // 获取音效对象
                             Optional<Sound> find = Arrays.stream(Sound.values()).filter(get -> get.getSound().equals(soundName)).findAny();
                             Sound sound = find.orElse(null);
@@ -72,7 +72,7 @@ public class AutoRestartPlugin extends PluginBase {
                 // 如果时间到了，重启服务器
                 if (timeLeft <= 0) {
                     this.cancel();
-                    if (config.getBoolean("kick_player")) {
+                    if (config.getBoolean("kick_player",true)) {
                         for (Player player : getServer().getOnlinePlayers().values()) {
                             player.kick("§e服务器正在重启\n稍后再会", false);
                         }
