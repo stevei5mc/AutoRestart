@@ -26,9 +26,6 @@ public class AutoRestartPlugin extends PluginBase {
         getLogger().info("自动重启插件已启用，将在 §a" + restartTime + " §f分钟后重启服务器。");
         getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
         getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
-        if (config.getBoolean("debug")) {
-            getLogger().info("debug 模式已开启");
-        }
     }
 
     private void scheduleRestart() {
@@ -78,9 +75,7 @@ public class AutoRestartPlugin extends PluginBase {
                         }
                     }
                     getLogger().info("自动重启服务器...");
-                    if (!config.getBoolean("debug")) {
-                        getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
-                    }
+                    getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
                 }
             }
         }, 20, true); // 每20tick运行一次 20tick=1s
