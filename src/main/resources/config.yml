@@ -17,4 +17,3 @@ sound: # 可选，使用时除personal均为必选项。
   name: "random.toast"
   volume: 1.0
   pitch: 1.0
-  personal: true

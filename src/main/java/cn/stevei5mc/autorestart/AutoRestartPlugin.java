@@ -54,15 +54,17 @@ public class AutoRestartPlugin extends PluginBase {
                         }
                         if (config.getBoolean("play_sound")) {
                             //copy https://github.com/glorydark/CustomForm/blob/main/src/main/java/glorydark/nukkit/customform/scriptForms/data/SoundData.java
-                            // 读取配置中的音效名
+                            // 读取配置中音效的设置
                             String soundName = config.getString("sound.name");
+                            float volume = (float) config.getDouble("sound.volume");
+                            float pitch = (float) config.getDouble("sound.pitch");
                             // 获取音效对象
                             Optional<Sound> find = Arrays.stream(Sound.values()).filter(get -> get.getSound().equals(soundName)).findAny();
                             Sound sound = find.orElse(null);
                             // 检查音效是否存在
                             if (sound != null) {
                                 // 播放音效给玩家
-                                player.getLevel().addSound(player.getLocation(), sound);
+                                player.getLevel().addSound(player.getLocation(), sound, volume, pitch);
                             }
                         }
                     }
