@@ -1,3 +1,5 @@
+#默认语言
+default_language: zh_CN
 #重启时间(分钟 min)
 restart_time: 180
 #提示时间(秒 s)
