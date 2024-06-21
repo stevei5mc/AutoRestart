@@ -110,7 +110,7 @@ public class AutoRestartPlugin extends PluginBase {
         }
         for (String language : languages) {
             Config languageConfig = new Config(Config.PROPERTIES);
-            languageConfig.load(this.getResource("language/" + language + ".properties"));
+            languageConfig.load(this.getDataFolder() + "/language/" + language + ".properties");
             this.languageMap.put(language, new Language(languageConfig));
         }
         this.getLogger().info(this.getLang().translateString("plugin_language"));
@@ -126,7 +126,6 @@ public class AutoRestartPlugin extends PluginBase {
             String playerLanguage = player.getLoginChainData().getLanguageCode();
             if (!this.languageMap.containsKey(playerLanguage)) {
                 playerLanguage = this.defaultLanguage;
-                getLogger().info("zhcn");
             }
             return this.languageMap.get(playerLanguage);
         }
