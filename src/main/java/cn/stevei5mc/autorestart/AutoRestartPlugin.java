@@ -7,6 +7,7 @@ import cn.nukkit.Player;
 import cn.nukkit.level.Sound;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
+import cn.stevei5mc.autorestart.command.AutoRestartCommand;
 
 import java.util.*;
 
@@ -15,13 +16,19 @@ public class AutoRestartPlugin extends PluginBase {
     private Language language;
     private String defaultLanguage;
     private final HashMap<String, Language> languageMap = new HashMap<>();
+    private static AutoRestartPlugin instance;
     private Config config;
 
     public Config getConfig() {
         return this.config;
     }
 
+    public static AutoRestartPlugin getInstance() {
+        return instance;
+    }
+
     public void onLoad() {
+        instance = this;
         saveDefaultConfig();
         saveLanguageFile();
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
@@ -29,6 +36,7 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void onEnable() {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
+            this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
             restartTime = config.getInt("restart_time", 2);// 设置重启前的延迟时间（单位：分钟）
             loadLanguage();
             scheduleRestart();// 当插件被启用时，计划自动重启任务
@@ -37,7 +45,7 @@ public class AutoRestartPlugin extends PluginBase {
             getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
         } else {
             //不存在作为卸载该插件
-            this.getLogger().warning("§c未检测到前置插件§aTips§c，请安装§aMemoriesOfTime-GameCore§c再试!!!");
+            this.getLogger().warning("§c未检测到前置插件§aMemoriesOfTime-GameCore§c，请安装后再试!!!");
             this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/GameCore/");
             this.onDisable();
         }
@@ -130,5 +138,9 @@ public class AutoRestartPlugin extends PluginBase {
             return this.languageMap.get(playerLanguage);
         }
         return this.languageMap.get(this.defaultLanguage);
+    }
+
+    public void reload() {
+        this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
     }
 }
