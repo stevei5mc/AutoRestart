@@ -7,7 +7,10 @@
 ![GitHub issues](https://img.shields.io/github/issues/stevei5mc/AutoRestart?style=plastic&color=linkGreen)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/stevei5mc/AutoRestart?style=plastic)  
 ## **插件介绍**
-- **敬请期待**
+### 功能介绍
+1. **支持多语言（根据玩家客户端的语言进行匹配）**
+2. **支持播放音效提醒玩家（暂时只支持mc原有的）**
+3. **支持取消自动重启任务**
 ## **使用方法**
 1. **将插件放进`plugins`文件夹，并确保安装[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)插件后重启服务器**  
 2. **启动(重启)服务器并调整好配置(如何配置请看插件介绍)**
