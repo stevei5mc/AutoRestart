@@ -26,7 +26,7 @@ public class Reload extends BaseSubCommand {
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         this.main.reload();
-        sender.sendMessage(main.getLang(sender).translateString("msg_command_reload_success"));
+        sender.sendMessage(main.getLang(sender).translateString("reload_success"));
         return true;
     }
 

@@ -26,7 +26,7 @@ public class Cancel extends BaseSubCommand {
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         this.main.cancelTask();
-        sender.sendMessage(main.getLang(sender).translateString("msg_command_cancel_success"));
+        sender.sendMessage(main.getLang(sender).translateString("restart_task_cancel"));
         return true;
     }
 
