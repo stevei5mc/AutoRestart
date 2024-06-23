@@ -8,6 +8,7 @@ import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.AutoRestartCommand;
 import cn.stevei5mc.autorestart.tasks.AutoRestartTask;
+import cn.stevei5mc.autorestart.tasks.DispatchRestartTask;
 import cn.nukkit.scheduler.TaskHandler;
 
 import java.util.*;
@@ -19,7 +20,7 @@ public class AutoRestartPlugin extends PluginBase {
     private List<String> languages = Arrays.asList("zh_CN", "zh_TW","en_US");
     private static AutoRestartPlugin instance;
     private Config config;
-    private int autoTaskId;
+    private int taskId;
 
     public Config getConfig() {
         return this.config;
@@ -41,7 +42,7 @@ public class AutoRestartPlugin extends PluginBase {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
             TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new AutoRestartTask(), 20, true); // 每20tick执行一次 20tick=1s
-            autoTaskId = taskHandler.getTaskId();
+            taskId = taskHandler.getTaskId();
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
                 getLogger().info(this.getLang().translateString("server_msg_restart_time", config.getInt("restart_time", 2)));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
@@ -100,6 +101,12 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void cancelTask() {
-        getServer().getScheduler().cancelTask(autoTaskId);
+        getServer().getScheduler().cancelTask(taskId);
+    }
+
+    public void dispatchRestart() {
+        cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
+        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new DispatchRestartTask(), 20, true); // 每20tick执行一次 20tick=1s
+        taskId = taskHandler.getTaskId();
     }
 }
