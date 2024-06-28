@@ -3,6 +3,7 @@ package cn.stevei5mc.autorestart.command.sub;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.BaseSubCommand;
+import cn.nukkit.Player;
 
 public class DispatchRestart extends BaseSubCommand {
 
@@ -22,8 +23,12 @@ public class DispatchRestart extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
+        int i = main.getConfig().getInt("tips_time", 30);
         this.main.dispatchRestart();
-        sender.sendMessage(main.getLang(sender).translateString("restart_task_dispatch_restart", main.getConfig().getInt("tips_time", 30)));
+        main.getLogger().info((main.getLang(sender).translateString("restart_task_dispatch_restart", i)));
+        for (Player player : main.getServer().getOnlinePlayers().values()) {
+            player.sendMessage(main.getLang(player).translateString("restart_task_dispatch_restart", i));
+        }
         return true;
     }
 
