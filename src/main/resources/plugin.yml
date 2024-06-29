@@ -14,9 +14,6 @@ permissions:
   autorestart.admin.cancel:
     description: "NewTipsVariables取消重启任务权限"
     default: op
-  autorestart.admin.rerun:
-    description: "NewTipsVariables重新运行重启任务权限"
-    default: op
-  autorestart.admin.dispatchrestart:
+  autorestart.admin.restart:
     description: "NewTipsVariables手动重启权限"
     default: op

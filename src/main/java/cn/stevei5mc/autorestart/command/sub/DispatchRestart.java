@@ -13,7 +13,7 @@ public class DispatchRestart extends BaseSubCommand {
 
     @Override
     public boolean canUser(CommandSender sender) {
-        return sender.hasPermission("autorestart.admin.dispatchrestart");
+        return sender.hasPermission("autorestart.admin.restart");
     }
 
     @Override
