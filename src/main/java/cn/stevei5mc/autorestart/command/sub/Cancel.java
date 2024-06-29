@@ -27,7 +27,7 @@ public class Cancel extends BaseSubCommand {
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         this.main.cancelTask();
-        main.getLogger().info((main.getLang(sender).translateString("restart_task_cancel")));
+        main.getLogger().info((main.getLang().translateString("restart_task_cancel")));
         for (Player player : main.getServer().getOnlinePlayers().values()) {
             player.sendMessage(main.getLang(player).translateString("restart_task_cancel"));
         }

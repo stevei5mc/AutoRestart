@@ -25,7 +25,7 @@ public class DispatchRestart extends BaseSubCommand {
     public boolean execute(CommandSender sender, String label, String[] args) {
         int i = main.getConfig().getInt("tips_time", 30);
         this.main.dispatchRestart();
-        main.getLogger().info((main.getLang(sender).translateString("restart_task_dispatch_restart", i)));
+        main.getLogger().info((main.getLang().translateString("restart_task_dispatch_restart", i)));
         for (Player player : main.getServer().getOnlinePlayers().values()) {
             player.sendMessage(main.getLang(player).translateString("restart_task_dispatch_restart", i));
         }
