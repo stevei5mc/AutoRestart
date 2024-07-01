@@ -26,6 +26,8 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir staging && cp target/*.jar staging
+        cp ./script/server_script/Windows/*.bat staging
+        cp ./script/server_script/Linux/*.sh staging
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
