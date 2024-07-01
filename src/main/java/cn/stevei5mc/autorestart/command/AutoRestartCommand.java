@@ -8,7 +8,7 @@ import cn.stevei5mc.autorestart.command.sub.Cancel;
 import cn.stevei5mc.autorestart.command.sub.DispatchRestart;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
-//import cn.stevei5mc.autorestart.utils.FormHelper;
+import cn.stevei5mc.autorestart.GUI;
 
 public class AutoRestartCommand extends BaseCommand {
     protected AutoRestartPlugin main = AutoRestartPlugin.getInstance();
@@ -30,9 +30,9 @@ public class AutoRestartCommand extends BaseCommand {
         sender.sendMessage(cmdname+"restart "+lang.translateString("command_help_dispatch_restart"));
     }
 
-    /* @Override
+    @Override
     public void sendUI(Player player) {
-        FormHelper.sendMain(player);
-    } */
+        GUI.sendMain(player);
+    }
 
 }

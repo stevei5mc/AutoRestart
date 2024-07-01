@@ -53,11 +53,11 @@ public abstract class BaseCommand extends Command {
                     this.sendHelp(sender);
                 }
             }else {
-                /* if (sender.isPlayer()) {
+                if (sender.isPlayer()) {
                     this.sendUI((Player) sender);
-                }else { */
+                }else {
                     this.sendHelp(sender);
-                // }
+                }
             }
             return true;
         }
@@ -75,7 +75,7 @@ public abstract class BaseCommand extends Command {
      * 发送UI
      * @param player 玩家
      */
-    //public abstract void sendUI(Player player);
+    public abstract void sendUI(Player player);
 
     protected void addSubCommand(BaseSubCommand cmd) {
         this.subCommand.add(cmd);
