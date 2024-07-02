@@ -3,11 +3,11 @@ package cn.stevei5mc.autorestart;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.nukkit.Player;
 import cn.nukkit.level.Sound;
-
 import java.util.*;
 
 public class Utils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+    public static boolean taskState = false;
 
     /**
      * 在指定时间内发送服务器需要重启的消息及播放音效 
