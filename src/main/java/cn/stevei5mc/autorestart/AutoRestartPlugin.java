@@ -7,8 +7,7 @@ import cn.nukkit.utils.Config;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.AutoRestartCommand;
-import cn.stevei5mc.autorestart.tasks.AutoRestartTask;
-import cn.stevei5mc.autorestart.tasks.DispatchRestartTask;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
 import cn.nukkit.scheduler.TaskHandler;
 import cn.stevei5mc.autorestart.Utils;
 import java.util.*;
@@ -41,7 +40,7 @@ public class AutoRestartPlugin extends PluginBase {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
-            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new AutoRestartTask(), 20, true); // 每20tick执行一次 20tick=1s
+            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",config.getInt("restart_time", 2)), 20, true); // 每20tick执行一次 20tick=1s
             taskId = taskHandler.getTaskId();
             Utils.taskState = true;
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
@@ -108,7 +107,7 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void dispatchRestart() {
         cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
-        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new DispatchRestartTask(), 20, true); // 每20tick执行一次 20tick=1s
+        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("seconds",config.getInt("tips_time", 30)), 20, true); // 每20tick执行一次 20tick=1s
         taskId = taskHandler.getTaskId();
         Utils.taskState = true;
     }
