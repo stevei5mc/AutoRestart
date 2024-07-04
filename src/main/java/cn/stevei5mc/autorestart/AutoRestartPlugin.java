@@ -1,66 +1,114 @@
 package cn.stevei5mc.autorestart;
 
 import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.scheduler.Task;
-import cn.nukkit.utils.Config;
 import cn.nukkit.Player;
-
-import java.util.concurrent.TimeUnit;
+import cn.nukkit.Server;
+import cn.nukkit.utils.Config;
+import cn.lanink.gamecore.utils.Language;
+import cn.nukkit.command.CommandSender;
+import cn.stevei5mc.autorestart.command.AutoRestartCommand;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
+import cn.nukkit.scheduler.TaskHandler;
+import cn.stevei5mc.autorestart.Utils;
+import java.util.*;
 
 public class AutoRestartPlugin extends PluginBase {
-    private static final int restartTime = 2; // 设置重启前的延迟时间（单位：分钟）
+    private Language language;
+    private String defaultLanguage;
+    private final HashMap<String, Language> languageMap = new HashMap<>();
+    private List<String> languages = Arrays.asList("zh_CN", "zh_TW","en_US");
+    private static AutoRestartPlugin instance;
+    private Config config;
+    private int taskId;
+
+    public Config getConfig() {
+        return this.config;
+    }
+
+    public static AutoRestartPlugin getInstance() {
+        return instance;
+    }
 
     public void onLoad() {
-        this.saveDefaultConfig();
+        instance = this;
+        saveDefaultConfig();
+        saveLanguageFile();
+        this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
     }
 
     public void onEnable() {
-        Config config = this.getConfig();
-        scheduleRestart();// 当插件被启用时，计划自动重启任务
-        getLogger().info("自动重启插件已启用，将在 " + restartTime + " 分钟后重启服务器。");
-        getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
-        getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
-        if (config.getBoolean("debug")) {
-            getLogger().info("debug 模式已开启");
+        if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
+            loadLanguage();
+            this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
+            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",config.getInt("restart_time", 2)), 20, true); // 每20tick执行一次 20tick=1s
+            taskId = taskHandler.getTaskId();
+            Utils.taskState = true;
+            Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
+                getLogger().info(this.getLang().translateString("server_msg_restart_time", config.getInt("restart_time", 2)));
+                getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
+                getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
+            },20);
+        } else {
+            //不存在作为卸载该插件
+            this.getLogger().warning("§c未检测到前置插件§aMemoriesOfTime-GameCore§c，请安装后再试!!!");
+            this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/GameCore/");
+            this.onDisable();
         }
     }
 
-    private void scheduleRestart() {
-        Config config = this.getConfig();
-        // 使用 Nukkit 的定时任务系统来计划重启
-        getServer().getScheduler().scheduleRepeatingTask(this, new Task() {
-            int timeLeft = restartTime * 60; // 将分钟转换为秒
+    public void onDisable() {
+        this.getLogger().info("已停止运行，感谢你的使用");
+    }
 
-            @Override
-            public void onRun(int currentTick) {
-                timeLeft--;// 每秒减少时间
-                getLogger().info("the server restart in "+ timeLeft);
-                if (timeLeft <= 30) {
-                    for (Player player : getServer().getOnlinePlayers().values()) {
-                        String title = "§c即将重启";
-                        String subtitle = "§e本分支服即将在 §6{seconds} §e秒后重启"; 
-                        if (config.getBoolean("show_title")) {
-                            player.sendTitle(title.replace("{seconds}",String.valueOf(timeLeft)), subtitle.replace("{seconds}",String.valueOf(timeLeft)), 0, 20, 0);
-                        }
-                        if (config.getBoolean("show_tip")) {
-                            player.sendTip(subtitle.replace("{seconds}",String.valueOf(timeLeft)));
-                        }
-                    }
-                }
-                // 如果时间到了，重启服务器
-                if (timeLeft <= 0) {
-                    this.cancel();
-                    if (config.getBoolean("kick_player")) {
-                        for (Player player : getServer().getOnlinePlayers().values()) {
-                            player.kick("§e服务器正在重启\n稍后再会", false);
-                        }
-                    }
-                    getLogger().info("自动重启服务器...");
-                    if (!config.getBoolean("debug")) {
-                        getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
-                    }
-                }
+    private void saveLanguageFile() {
+        for(String lang: languages){
+            saveResource("language/"+lang+".properties",false);
+        }
+    }
+    //使用https://github.com/MemoriesOfTime/CrystalWars/blob/master/src/main/java/cn/lanink/crystalwars/CrystalWars.java
+    private void loadLanguage() {
+        this.defaultLanguage = this.config.getString("default_language", "zh_CN");
+        if (!languages.contains(this.defaultLanguage)) {
+            this.getLogger().error("Language" + this.defaultLanguage + "Not supported, will load Chinese!");
+            this.defaultLanguage = "zh_CN";
+        }
+        for (String language : languages) {
+            Config languageConfig = new Config(Config.PROPERTIES);
+            languageConfig.load(this.getDataFolder() + "/language/" + language + ".properties");
+            this.languageMap.put(language, new Language(languageConfig));
+        }
+        this.getLogger().info(this.getLang().translateString("plugin_language"));
+    }
+    //同上
+    public Language getLang() {
+        return this.getLang(null);
+    }
+    //同上
+    public Language getLang(CommandSender sender) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            String playerLanguage = player.getLoginChainData().getLanguageCode();
+            if (!this.languageMap.containsKey(playerLanguage)) {
+                playerLanguage = this.defaultLanguage;
             }
-        }, 20, true); // 每20tick运行一次 20tick=1s
+            return this.languageMap.get(playerLanguage);
+        }
+        return this.languageMap.get(this.defaultLanguage);
+    }
+
+    public void reload() {
+        this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
+    }
+
+    public void cancelTask() {
+        getServer().getScheduler().cancelTask(taskId);
+        Utils.taskState = false;
+    }
+
+    public void dispatchRestart() {
+        cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
+        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("seconds",config.getInt("tips_time", 30)), 20, true); // 每20tick执行一次 20tick=1s
+        taskId = taskHandler.getTaskId();
+        Utils.taskState = true;
     }
 }

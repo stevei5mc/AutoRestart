@@ -3,3 +3,17 @@ main: cn.stevei5mc.autorestart.AutoRestartPlugin
 version: '1.0.0-SNAPSHOT'
 author: stevei5mc
 api: ["1.0.14"]
+
+permissions:
+  autorestart.admin:
+    description: "NewTipsVariables插件主权限"
+    default: op
+  autorestart.admin.reload:
+    description: "NewTipsVariables插件重载权限"
+    default: op
+  autorestart.admin.cancel:
+    description: "NewTipsVariables取消重启任务权限"
+    default: op
+  autorestart.admin.restart:
+    description: "NewTipsVariables手动重启权限"
+    default: op
