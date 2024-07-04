@@ -9,13 +9,16 @@ public class RestartTask extends Task {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     private static int time2 =30;
     
+    /**
+     * 初始化一些东西
+     * @param type 时间单位(默认为秒)
+     * @param time1 时间范围
+    */
     public RestartTask(String type,int time1) {
         if (type == "min") {
             time2 = time1 * 60; // 将分钟转换为秒
         } else {
-            if (time1 != 0) {
-                time2 = time1;
-            }
+            time2 = time1;
         }
     }
 

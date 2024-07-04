@@ -40,11 +40,16 @@ public class AutoRestartPlugin extends PluginBase {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
-            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",config.getInt("restart_time", 2)), 20, true); // 每20tick执行一次 20tick=1s
+            int ia = 2;
+            int ib = config.getInt("restart_time", 2);
+            if (ib != 0) {
+                ib = ia;
+            }
+            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",ia), 20, true); // 每20tick执行一次 20tick=1s
             taskId = taskHandler.getTaskId();
             Utils.taskState = true;
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
-                getLogger().info(this.getLang().translateString("server_msg_restart_time", config.getInt("restart_time", 2)));
+                getLogger().info(this.getLang().translateString("server_msg_restart_time", ia));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
                 getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
             },20);
@@ -105,10 +110,14 @@ public class AutoRestartPlugin extends PluginBase {
         Utils.taskState = false;
     }
 
-    public void dispatchRestart() {
+    public void dispatchRestart(int ia) {
         cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
-        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("seconds",config.getInt("tips_time", 30)), 20, true); // 每20tick执行一次 20tick=1s
+        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("seconds",ia), 20, true); // 每20tick执行一次 20tick=1s
         taskId = taskHandler.getTaskId();
         Utils.taskState = true;
+    }
+
+    public void errorSetting() {
+        this.getLogger().info(this.getLang().translateString("plugin_language"));
     }
 }

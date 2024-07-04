@@ -23,11 +23,15 @@ public class DispatchRestart extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        int i = main.getConfig().getInt("tips_time", 30);
-        this.main.dispatchRestart();
-        main.getLogger().info((main.getLang().translateString("restart_task_dispatch_restart", i)));
+        int ia = 30;
+        int ib = main.getConfig().getInt("tips_time", 30);
+        if (ib != 0) {
+            ib = ia;
+        }
+        this.main.dispatchRestart(ia);
+        main.getLogger().info((main.getLang().translateString("restart_task_dispatch_restart", ia)));
         for (Player player : main.getServer().getOnlinePlayers().values()) {
-            player.sendMessage(main.getLang(player).translateString("restart_task_dispatch_restart", i));
+            player.sendMessage(main.getLang(player).translateString("restart_task_dispatch_restart", ia));
         }
         return true;
     }
