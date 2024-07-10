@@ -13,7 +13,7 @@
 3. **支持取消自动重启任务**
 4. **支持手动运行重启任务（手动重启的时间为配置文件中的提示时间）**
 ### **命令与权限**
-|命令|权限节点|权限介绍|默认权限|
+|命令|权限节点|命令/权限介绍|默认权限|
 |:-:|:-:|:-:|:-:|
 |/autorestart|autorestart.admin|主命令|OP|
 |/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
