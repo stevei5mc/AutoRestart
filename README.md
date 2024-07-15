@@ -43,7 +43,7 @@ sound:
 ```
 ### **支持的语言**
 
-- [ x ] en_US   English (United States)
+- [x] en_US   English (United States)
 - [ ] en_GB   English (United Kingdom)
 - [ ] de_DE   Deutsch (Deutschland)
 - [ ] es_ES   Español (España)
@@ -56,8 +56,8 @@ sound:
 - [ ] pt_BR   Português (Brasil)
 - [ ] pt_PT   Português (Portugal)
 - [ ] ru_RU   Русский (Россия)
-- [ x ] zh_CN   中文(简体)
-- [ x ] zh_TW   中文(繁體)
+- [x] zh_CN   中文(简体)
+- [x] zh_TW   中文(繁體)
 - [ ] nl_NL   Nederlands (Nederland)
 - [ ] bg_BG   Български (България)
 - [ ] cs_CZ   Čeština (Česko)
