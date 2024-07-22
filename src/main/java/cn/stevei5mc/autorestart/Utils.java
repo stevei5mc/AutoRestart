@@ -2,6 +2,7 @@ package cn.stevei5mc.autorestart;
 
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.level.Sound;
 import java.util.*;
 
@@ -23,7 +24,7 @@ public class Utils {
             }
             if (main.getConfig().getBoolean("play_sound",true)) {
                 //参考和使用部分代码 https://github.com/glorydark/CustomForm/blob/main/src/main/java/glorydark/nukkit/customform/scriptForms/data/SoundData.java
-                // 读取配置中音效的设置
+                //读取配置中音效的设置
                 String soundName = main.getConfig().getString("sound.name","random.toast");
                 float volume = (float) main.getConfig().getDouble("sound.volume",1.0);
                 float pitch = (float) main.getConfig().getDouble("sound.pitch",1.0);
@@ -37,16 +38,43 @@ public class Utils {
         }
     }
 
-    /**
-     * 踢出玩家及关闭服务器
-    */
+    
+    // 踢出玩家及关闭服务器
     public static void shutdownServer() {
         main.cancelTask();
+        if (main.getConfig().getBoolean("runcommand",false)) {
+            Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
+                runCommand();
+                kickOnlinePlayers();
+                main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
+            }, 0);
+        }
+    }
+
+    //在重启前执行命令
+    public static void runCommand() {
+        if (main.getConfig().getBoolean("runcommand",true)) {
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                ArrayList<String> commands;
+                commands = new ArrayList<>(main.getConfig().getStringList("commands"));
+                for (String s : commands) {
+                    String[] cmd = s.split("&");
+                    if ((cmd.length > 1) && ("con".equals(cmd[1]))) {
+                        main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0].replace("@p", player.getName()));
+                    }else {
+                        main.getServer().dispatchCommand(player, cmd[0].replace("@p", player.getName()));
+                    }
+                }
+            }
+        }
+    }
+
+    //踢出在线玩家
+    public static void kickOnlinePlayers() {
         if (main.getConfig().getBoolean("kick_player",true)) {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.kick((main.getLang(player).translateString("kick_player_msg")), false);
             }
         }
-        main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
     }
 }
