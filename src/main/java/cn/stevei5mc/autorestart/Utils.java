@@ -42,13 +42,11 @@ public class Utils {
     // 踢出玩家及关闭服务器
     public static void shutdownServer() {
         main.cancelTask();
-        if (main.getConfig().getBoolean("runcommand",false)) {
-            Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
-                runCommand();
-                kickOnlinePlayers();
-                main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
-            }, 0);
-        }
+        Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
+            runCommand();
+            kickOnlinePlayers();
+            main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
+        }, 0);
     }
 
     //在重启前执行命令
