@@ -1,0 +1,46 @@
+plugin_language: language code en_US
+
+command_help_reload: §ereload config
+command_help_cancel: §ecancel restart task
+command_help_dispatch_restart: §eManual restart
+
+command_in_game_run: §cPlease use this command within the game!
+command_not_permission: §cYou not permission use the command!
+
+form_title: Auto Rstart plugin
+form_button_restart_cancel: cancel restart task
+form_button_reload: reload config
+form_button_dispatch_restart: Manual restart
+form_button_on_player: No online player
+form_button_confirm_true: Yes
+form_button_confirm_false: back
+
+form_confirm_restart_title: Run restart task
+form_confirm_restart_description_task: |-
+    Do you want to perform this restart task?
+    Task type: %1%
+form_confirm_restart_description_time: The server will restart after %1% %2%
+
+form_confirm_cancel_title: Cancel restart task
+form_confirm_cancel_description_task:  |-
+    Do you want to cancel this restart task?
+    Task type: %1%
+form_confirm_cancel_description_time: Server restart remaining %1% %2%
+
+kick_player_msg: §eServer restarting, See you later
+
+reload_success: §areload config success！
+
+restart_msg_title: §cServer Restarting
+restart_msg_subtitle: §eThe server restart in §6%1% §e%2%
+restrat_msg_tip: §eThe server restart in §6%1% §e%2%
+
+restart_task_cancel: §aThe restart task has been cancel
+restart_task_restart: §fThe server will restart in §a%1%§f %2%
+
+restart_task_type_time: Scheduled restart
+restart_task_type_no_player: No online player
+restart_task_type_manual_restart: Manual restart
+
+time_unit_minutes: minutes
+time_unit_seconds: seconds

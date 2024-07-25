@@ -49,7 +49,7 @@ public class AutoRestartPlugin extends PluginBase {
             taskId = taskHandler.getTaskId();
             Utils.taskState = true;
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
-                getLogger().info(this.getLang().translateString("server_msg_restart_time", ia));
+                getLogger().info(this.getLang().translateString("restart_task_restart", ia, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
                 getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
             },20);
@@ -67,7 +67,7 @@ public class AutoRestartPlugin extends PluginBase {
 
     private void saveLanguageFile() {
         for(String lang: languages){
-            saveResource("language/"+lang+".properties",false);
+            saveResource("language/"+lang+".yml",false);
         }
     }
     //使用https://github.com/MemoriesOfTime/CrystalWars/blob/master/src/main/java/cn/lanink/crystalwars/CrystalWars.java
@@ -78,8 +78,8 @@ public class AutoRestartPlugin extends PluginBase {
             this.defaultLanguage = "zh_CN";
         }
         for (String language : languages) {
-            Config languageConfig = new Config(Config.PROPERTIES);
-            languageConfig.load(this.getDataFolder() + "/language/" + language + ".properties");
+            Config languageConfig = new Config(Config.YAML);
+            languageConfig.load(this.getDataFolder() + "/language/" + language + ".yml");
             this.languageMap.put(language, new Language(languageConfig));
         }
         this.getLogger().info(this.getLang().translateString("plugin_language"));

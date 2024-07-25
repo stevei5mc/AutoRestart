@@ -29,9 +29,9 @@ public class DispatchRestart extends BaseSubCommand {
             ib = ia;
         }
         this.main.dispatchRestart(ia);
-        main.getLogger().info((main.getLang().translateString("restart_task_dispatch_restart", ia)));
+        main.getLogger().info((main.getLang().translateString("restart_task_restart", ia, main.getLang().translateString("time_unit_seconds"))));
         for (Player player : main.getServer().getOnlinePlayers().values()) {
-            player.sendMessage(main.getLang(player).translateString("restart_task_dispatch_restart", ia));
+            player.sendMessage(main.getLang(player).translateString("restart_task_restart", ia, main.getLang(player).translateString("time_unit_seconds")));
         }
         return true;
     }
