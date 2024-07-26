@@ -40,16 +40,12 @@ public class AutoRestartPlugin extends PluginBase {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
-            int ia = 2;
-            int ib = config.getInt("restart_time", 2);
-            if (ib != 0) {
-                ib = ia;
-            }
-            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",ia), 20, true); // 每20tick执行一次 20tick=1s
+            int i = Utils.getRestartUseTime();
+            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",i), 20, true); // 每20tick执行一次 20tick=1s
             taskId = taskHandler.getTaskId();
             Utils.taskState = true;
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
-                getLogger().info(this.getLang().translateString("restart_task_restart", ia, getLang().translateString("time_unit_minutes")));
+                getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
                 getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
             },20);

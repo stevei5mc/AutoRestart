@@ -12,7 +12,7 @@ form_button_restart_cancel: cancel restart task
 form_button_reload: reload config
 form_button_dispatch_restart: Manual restart
 form_button_on_player: No online player
-form_button_confirm_true: Yes
+form_button_confirm_true: "Yes"
 form_button_confirm_false: back
 
 form_confirm_restart_title: Run restart task
