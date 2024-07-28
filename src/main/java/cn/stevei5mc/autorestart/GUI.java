@@ -10,6 +10,7 @@ import cn.nukkit.Server;
 import cn.nukkit.math.Vector3;
 import org.jetbrains.annotations.NotNull;
 import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
 
 /**
  * 菜单（这个参考了rsnpc的写法）
@@ -26,8 +27,22 @@ public class GUI {
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
         if (Utils.taskState) {
             if (player.hasPermission("autorestart.admin.cancel")) {
-                simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel"))
-                    .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart cancel"))
+                simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
+                    String postscript = "";
+                    String type = "";
+                    if (Utils.taskType == 1) {
+                        type = lang.translateString("restart_task_type_time");
+                        postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,lang.translateString("time_unit_seconds"));
+                    }
+                    AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
+                        lang.translateString("form_confirm_cancel_title"),
+                        lang.translateString("form_confirm_cancel_description_task", type)+postscript,
+                        lang.translateString("form_button_confirm_true"),
+                        lang.translateString("form_button_confirm_false"));
+                        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart cancel"));
+                        modal.onClickedFalse(cp2 -> sendMain(cp2));
+                        cp.showFormWindow(modal);
+                    })
                 );
             }
         } else {

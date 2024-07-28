@@ -7,7 +7,7 @@ import cn.stevei5mc.autorestart.Utils;
 
 public class RestartTask extends Task {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    private static int time2 =30;
+    public static int time2 =30;
     
     /**
      * 初始化一些东西

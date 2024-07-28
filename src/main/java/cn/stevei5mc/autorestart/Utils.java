@@ -8,7 +8,8 @@ import java.util.*;
 
 public class Utils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static boolean taskState = false;
+    public static boolean taskState = false;//任务状态，默认为 false
+    public static int taskType = 0;//任务类型，默认编号为 0
 
     /**
      * 在指定时间内发送服务器需要重启的消息及播放音效 
