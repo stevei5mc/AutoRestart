@@ -32,8 +32,8 @@ public class AutoRestartPlugin extends PluginBase {
     public void onLoad() {
         instance = this;
         saveDefaultConfig();
-        saveLanguageFile();
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
+        saveLanguageFile();
     }
 
     public void onEnable() {
@@ -44,7 +44,7 @@ public class AutoRestartPlugin extends PluginBase {
             TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",i), 20, true); // 每20tick执行一次 20tick=1s
             taskId = taskHandler.getTaskId();
             Utils.taskState = true;
-            Utils.taskType = 1;//自动重启任务编号 1
+            Utils.taskType = 1;//自动重启任务编号1
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
@@ -113,7 +113,7 @@ public class AutoRestartPlugin extends PluginBase {
         TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("seconds",ia), 20, true); // 每20tick执行一次 20tick=1s
         taskId = taskHandler.getTaskId();
         Utils.taskState = true;
-        Utils.taskType = 2;//手动重启任务编号 1
+        Utils.taskType = 2;//手动重启任务编号2
     }
 
     public void errorSetting() {

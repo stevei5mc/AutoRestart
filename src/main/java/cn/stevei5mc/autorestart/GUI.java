@@ -25,6 +25,8 @@ public class GUI {
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
+        String trueButton = lang.translateString("form_button_confirm_true");
+        String falseButton = lang.translateString("form_button_confirm_false");
         if (Utils.taskState) {
             if (player.hasPermission("autorestart.admin.cancel")) {
                 simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
@@ -37,8 +39,7 @@ public class GUI {
                     AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                         lang.translateString("form_confirm_cancel_title"),
                         lang.translateString("form_confirm_cancel_description_task", type)+postscript,
-                        lang.translateString("form_button_confirm_true"),
-                        lang.translateString("form_button_confirm_false"));
+                        trueButton,falseButton);
                         modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart cancel"));
                         modal.onClickedFalse(cp2 -> sendMain(cp2));
                         cp.showFormWindow(modal);
@@ -53,8 +54,7 @@ public class GUI {
                         lang.translateString("form_confirm_restart_title"),
                         lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_manual_restart"))+"\n"+
                         lang.translateString("form_confirm_restart_description_time", i,lang.translateString("time_unit_seconds")),
-                        lang.translateString("form_button_confirm_true"),
-                        lang.translateString("form_button_confirm_false"));
+                        trueButton,falseButton);
                         modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart"));
                         modal.onClickedFalse(cp2 -> sendMain(cp2));
                         cp.showFormWindow(modal);
