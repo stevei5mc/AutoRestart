@@ -32,9 +32,19 @@ public class GUI {
                 simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
                     String postscript = "";
                     String type = "";
-                    if (Utils.taskType == 1) {
-                        type = lang.translateString("restart_task_type_time");
-                        postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,lang.translateString("time_unit_seconds"));
+                    switch (Utils.taskType) {
+                        case 1:
+                            type = lang.translateString("restart_task_type_time");
+                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,lang.translateString("time_unit_seconds"));
+                            break;
+                        case 2:
+                            type = lang.translateString("restart_task_type_manual_restart");
+                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,lang.translateString("time_unit_seconds"));
+                            break;
+                        default:
+                            type = "§cUnknown type§r";
+                            postscript = "";
+                            break;
                     }
                     AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                         lang.translateString("form_confirm_cancel_title"),
