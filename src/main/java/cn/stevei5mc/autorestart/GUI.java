@@ -21,12 +21,12 @@ public class GUI {
         throw new RuntimeException("Error");
     }
 
-    //主菜单
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
         String trueButton = lang.translateString("form_button_confirm_true");
         String falseButton = lang.translateString("form_button_confirm_false");
+        String unitSeconds = lang.translateString("time_unit_seconds");
         if (Utils.taskState) {
             if (player.hasPermission("autorestart.admin.cancel")) {
                 simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
@@ -35,12 +35,15 @@ public class GUI {
                     switch (Utils.taskType) {
                         case 1:
                             type = lang.translateString("restart_task_type_time");
-                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,lang.translateString("time_unit_seconds"));
+                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,unitSeconds);
                             break;
                         case 2:
                             type = lang.translateString("restart_task_type_manual_restart");
-                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,lang.translateString("time_unit_seconds"));
+                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,unitSeconds);
                             break;
+                        case 3:
+                            type = lang.translateString("restart_task_type_no_player");
+                            postscript = "";
                         default:
                             type = "§cUnknown type§r";
                             postscript = "";
@@ -58,12 +61,12 @@ public class GUI {
             }
         } else {
             if (player.hasPermission("autorestart.admin.restart")) {
-                simple.addButton(new ResponseElementButton(lang.translateString("form_button_dispatch_restart")).onClicked(cp -> {
+                simple.addButton(new ResponseElementButton(lang.translateString("form_button_manual_restart")).onClicked(cp -> {
                     int i = Utils.getRestartTipTime();
                     AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                         lang.translateString("form_confirm_restart_title"),
                         lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_manual_restart"))+"\n"+
-                        lang.translateString("form_confirm_restart_description_time", i,lang.translateString("time_unit_seconds")),
+                        lang.translateString("form_confirm_restart_description_time", i,unitSeconds),
                         trueButton,falseButton);
                         modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart"));
                         modal.onClickedFalse(cp2 -> sendMain(cp2));

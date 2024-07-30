@@ -2,7 +2,7 @@ plugin_language: language code en_US
 
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task
-command_help_dispatch_restart: §eManual restart
+command_help_restart: §eRun restart task. Type:<manual|no-layer>
 
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!
@@ -10,7 +10,7 @@ command_not_permission: §cYou not permission use the command!
 form_title: Auto Rstart plugin
 form_button_restart_cancel: cancel restart task
 form_button_reload: reload config
-form_button_dispatch_restart: Manual restart
+form_button_manual_restart: Manual restart
 form_button_on_player: No online player
 form_button_confirm_true: "Yes"
 form_button_confirm_false: back

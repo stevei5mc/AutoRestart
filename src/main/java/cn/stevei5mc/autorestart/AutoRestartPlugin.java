@@ -41,10 +41,7 @@ public class AutoRestartPlugin extends PluginBase {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
             int i = Utils.getRestartUseTime();
-            TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("min",i), 20, true); // 每20tick执行一次 20tick=1s
-            taskId = taskHandler.getTaskId();
-            Utils.taskState = true;
-            Utils.taskType = 1;//自动重启任务编号1
+            runRestartTask("min",i,1,20);
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
@@ -108,12 +105,19 @@ public class AutoRestartPlugin extends PluginBase {
         Utils.taskType = 0;//重置任务编号
     }
 
-    public void dispatchRestart(int ia) {
+    /**
+     * 运行重启任务
+     * @param unit 重启任务的时间单位
+     * @param time1 重启需要的时间
+     * @param type 重启任务类型
+     * @param time2 重启任务的运行时间(tick) 20tick=1s
+    */
+    public void runRestartTask(String unit,int time1,int type,int time2) {
         cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
-        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask("seconds",ia), 20, true); // 每20tick执行一次 20tick=1s
+        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask(unit,time1), time2, true);
         taskId = taskHandler.getTaskId();
         Utils.taskState = true;
-        Utils.taskType = 2;//手动重启任务编号2
+        Utils.taskType = type;
     }
 
     public void errorSetting() {

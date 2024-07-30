@@ -2,7 +2,7 @@ plugin_language: language code zh_TW
 
 command_help_reload: §e重載配寘
 command_help_cancel: §e取消重啟任務
-command_help_dispatch_restart: §e手動重啓
+command_help_restart: §e§e運行重啓任務。 類型：<manual|no-player>
 
 command_not_permission: §c你沒有許可權使用此命令！
 command_in_game_run: §c請在遊戲內使用此命令！
@@ -10,7 +10,7 @@ command_in_game_run: §c請在遊戲內使用此命令！
 form_title: Auto Rstart plugin
 form_button_restart_cancel: 取消重啟任務
 form_button_reload: 重載配寘
-form_button_dispatch_restart: 手動重啓
+form_button_manual_restart: 手動重啓
 form_button_on_player: 無線上玩家時重啓
 form_button_confirm_true: 確認
 form_button_confirm_false: 返回

@@ -15,10 +15,13 @@
 ### **命令与权限**
 |命令|权限节点|命令/权限介绍|默认权限|
 |:-:|:-:|:-:|:-:|
-|/autorestart|autorestart.admin|主命令|OP|
+|/autorestart|autorestart.admin|主命令、打开GUI|OP|
 |/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
 |/autorestart cancel|autorestart.admin.cancel|取消重启任务|OP|
-|/autorestart restart|autorestart.admin.restart|手动重启|OP|
+|/autorestart restart <manual/no-player>|autorestart.admin.restart|运行重启任务|OP|
+- **任务类型介绍：**
+- **manual 手动重启时间为配置文件中`tips_time`设定的时间**
+- **no-player 在服务器没有玩家在线的时自动候重启服务器**
 ### **配置文件介绍**
 ```yml
 #默认语言

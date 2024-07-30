@@ -55,7 +55,7 @@ public class Utils {
 
     //在重启前执行命令
     public static void runCommand() {
-        if (main.getConfig().getBoolean("runcommand",true)) {
+        if (main.getConfig().getBoolean("runcommand",true) && taskType <= 2) {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 ArrayList<String> commands;
                 commands = new ArrayList<>(main.getConfig().getStringList("commands"));
@@ -73,7 +73,7 @@ public class Utils {
 
     //踢出在线玩家
     public static void kickOnlinePlayers() {
-        if (main.getConfig().getBoolean("kick_player",true)) {
+        if (main.getConfig().getBoolean("kick_player",true) && taskType <= 2) {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.kick((main.getLang(player).translateString("kick_player_msg")), false);
             }
