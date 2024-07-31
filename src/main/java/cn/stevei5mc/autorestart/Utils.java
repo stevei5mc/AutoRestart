@@ -4,12 +4,15 @@ import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.level.Sound;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
+import cn.nukkit.scheduler.TaskHandler;
 import java.util.*;
 
 public class Utils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     public static boolean taskState = false;//任务状态，默认为 false
     public static int taskType = 0;//任务类型，默认编号为 0
+    private static int taskId;
 
     /**
      * 在指定时间内发送服务器需要重启的消息及播放音效 
@@ -45,7 +48,7 @@ public class Utils {
     
     // 踢出玩家及关闭服务器
     public static void shutdownServer() {
-        main.cancelTask();
+        cancelTask();
         Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
             runCommand();
             kickOnlinePlayers();
@@ -54,7 +57,7 @@ public class Utils {
     }
 
     //在重启前执行命令
-    public static void runCommand() {
+    private static void runCommand() {
         if (main.getConfig().getBoolean("runcommand",true) && taskType <= 2) {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 ArrayList<String> commands;
@@ -72,7 +75,7 @@ public class Utils {
     }
 
     //踢出在线玩家
-    public static void kickOnlinePlayers() {
+    private static void kickOnlinePlayers() {
         if (main.getConfig().getBoolean("kick_player",true) && taskType <= 2) {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.kick((main.getLang(player).translateString("kick_player_msg")), false);
@@ -104,5 +107,26 @@ public class Utils {
             time = i;
         }
         return time;
+    }
+
+    /**
+     * 运行重启任务
+     * @param unit 重启任务的时间单位
+     * @param restartTime 重启需要的时间
+     * @param type 重启任务类型
+     * @param runTick 重启任务的运行时间(tick) 20tick=1s
+    */
+    public static void runRestartTask(String unit,int restartTime,int type,int runTick) {
+        cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(unit,restartTime), runTick, true);
+        taskId = taskHandler.getTaskId();
+        taskState = true;
+        taskType = type;
+    }
+
+    public static void cancelTask() {
+        main.getServer().getScheduler().cancelTask(taskId);
+        taskState = false;
+        taskType = 0;//重置任务编号
     }
 }

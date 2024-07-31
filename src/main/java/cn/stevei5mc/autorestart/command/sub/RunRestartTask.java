@@ -30,7 +30,7 @@ public class RunRestartTask extends BaseSubCommand {
             switch (s) {
                 case "manual":
                     int i = Utils.getRestartTipTime();
-                    main.runRestartTask("seconds",i,2,20);
+                    Utils.runRestartTask("seconds",i,2,20);
                     main.getLogger().info((main.getLang().translateString("restart_task_restart", i, main.getLang().translateString("time_unit_seconds"))));
                     for (Player player : main.getServer().getOnlinePlayers().values()) {
                         player.sendMessage(main.getLang(player).translateString("restart_task_restart", i, main.getLang(player).translateString("time_unit_seconds")));

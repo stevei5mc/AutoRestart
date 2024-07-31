@@ -7,8 +7,6 @@ import cn.nukkit.utils.Config;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.AutoRestartCommand;
-import cn.stevei5mc.autorestart.tasks.RestartTask;
-import cn.nukkit.scheduler.TaskHandler;
 import cn.stevei5mc.autorestart.Utils;
 import java.util.*;
 
@@ -19,7 +17,6 @@ public class AutoRestartPlugin extends PluginBase {
     private List<String> languages = Arrays.asList("zh_CN", "zh_TW","en_US");
     private static AutoRestartPlugin instance;
     private Config config;
-    private int taskId;
 
     public Config getConfig() {
         return this.config;
@@ -41,7 +38,7 @@ public class AutoRestartPlugin extends PluginBase {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
             int i = Utils.getRestartUseTime();
-            runRestartTask("min",i,1,20);
+            Utils.runRestartTask("min",i,1,20);
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
@@ -97,27 +94,6 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void reload() {
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
-    }
-
-    public void cancelTask() {
-        getServer().getScheduler().cancelTask(taskId);
-        Utils.taskState = false;
-        Utils.taskType = 0;//重置任务编号
-    }
-
-    /**
-     * 运行重启任务
-     * @param unit 重启任务的时间单位
-     * @param time1 重启需要的时间
-     * @param type 重启任务类型
-     * @param time2 重启任务的运行时间(tick) 20tick=1s
-    */
-    public void runRestartTask(String unit,int time1,int type,int time2) {
-        cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
-        TaskHandler taskHandler = getServer().getScheduler().scheduleRepeatingTask(this, new RestartTask(unit,time1), time2, true);
-        taskId = taskHandler.getTaskId();
-        Utils.taskState = true;
-        Utils.taskType = type;
     }
 
     public void errorSetting() {

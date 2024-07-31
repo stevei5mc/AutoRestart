@@ -68,7 +68,7 @@ public class GUI {
                         lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_manual_restart"))+"\n"+
                         lang.translateString("form_confirm_restart_description_time", i,unitSeconds),
                         trueButton,falseButton);
-                        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart"));
+                        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart manual"));
                         modal.onClickedFalse(cp2 -> sendMain(cp2));
                         cp.showFormWindow(modal);
                 }));

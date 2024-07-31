@@ -18,7 +18,8 @@
 |/autorestart|autorestart.admin|主命令、打开GUI|OP|
 |/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
 |/autorestart cancel|autorestart.admin.cancel|取消重启任务|OP|
-|/autorestart restart <manual/no-player>|autorestart.admin.restart|运行重启任务|OP|
+|/autorestart restart manual|autorestart.admin.restart|手动重启服务器|OP|
+|/autorestart restart no-player|autorestart.admin.restart|在服务器没有玩家在线时自动重启服务器|OP|
 - **任务类型介绍：**
 - **manual 手动重启时间为配置文件中`tips_time`设定的时间**
 - **no-player 在服务器没有玩家在线的时自动候重启服务器**

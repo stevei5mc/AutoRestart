@@ -11,14 +11,16 @@ public class RestartTask extends Task {
     
     /**
      * 初始化一些东西
-     * @param type 时间单位(默认为秒)
+     * @param unit 时间单位(默认为秒)
      * @param time1 时间范围
     */
-    public RestartTask(String type,int time1) {
-        if (type == "min") {
+    public RestartTask(String unit,int time1) {
+        if (unit == "min") {
             time2 = time1 * 60; // 将分钟转换为秒
-        } else {
+        } else if (unit == "seconds") {
             time2 = time1;
+        } else {
+            time2 = 30;//如果重启任务的时间单位不是 min/seconds 就让服务器在30s候重启
         }
     }
 
