@@ -109,6 +109,16 @@ public class Utils {
         return time;
     }
 
+
+    /**
+     * 运行重启任务
+     * @param type 重启任务类型
+     * @param runTick 重启任务的运行时间(tick) 20tick=1s
+    */
+    public static void runRestartTask(int type,int runTick) {
+        runRestartTask("",0,type,runTick);
+    }
+
     /**
      * 运行重启任务
      * @param unit 重启任务的时间单位

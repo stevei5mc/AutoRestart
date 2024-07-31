@@ -4,6 +4,7 @@ import cn.nukkit.scheduler.Task;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.Utils;
+import cn.nukkit.Server;
 
 public class RestartTask extends Task {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
@@ -26,14 +27,20 @@ public class RestartTask extends Task {
 
     @Override
     public void onRun(int currentTick) {
-        int tipTime = main.getConfig().getInt("tips_time", 30);
-        if (time2 <= tipTime) {
-            Utils.sendRestartMsg(time2);
+        int t = Utils.taskType;
+        if (t <= 2) {
+            int tipTime = main.getConfig().getInt("tips_time", 30);
+            if (time2 <= tipTime) {
+                Utils.sendRestartMsg(time2);
+            }
+            // 如果时间到了，重启服务器
+            if (time2 <= 0) {
+                Utils.shutdownServer();
+            }
+            time2--;// 每秒减少时间
         }
-        // 如果时间到了，重启服务器
-        if (time2 <= 0) {
+        if (t == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
             Utils.shutdownServer();
         }
-        time2--;// 每秒减少时间
     }
 }

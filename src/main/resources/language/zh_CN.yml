@@ -2,7 +2,7 @@ plugin_language: language code zh_CN
 
 command_help_reload: §e重载配置
 command_help_cancel: §e取消重启任务
-command_help_restart: §e运行重启任务。 类型：<manual|no-player>
+command_help_restart: §e运行重启任务。 类型：<manual|no-players>
 
 command_not_permission: §c你没有权限使用此命令！
 command_in_game_run: §c请在游戏内使用此命令！
@@ -37,6 +37,7 @@ restrat_msg_tip: §e本分支服将在 §6%1% §e%2%后重启
 
 restart_task_cancel: §a重启任务已取消
 restart_task_restart: §f服务器将于 §a%1%§f %2%后重启
+restart_task_run: §a重启任务开始运行。类型： %1%
 
 restart_task_type_time: 定时重启
 restart_task_type_no_player: 无在线玩家时重启

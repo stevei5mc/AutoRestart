@@ -36,7 +36,12 @@ public class RunRestartTask extends BaseSubCommand {
                         player.sendMessage(main.getLang(player).translateString("restart_task_restart", i, main.getLang(player).translateString("time_unit_seconds")));
                     }
                     return true;
-                case "no-player":                
+                case "no-players":  
+                    Utils.runRestartTask(3,100);
+                    main.getLogger().info((main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
+                    for (Player player : main.getServer().getOnlinePlayers().values()) {
+                        player.sendMessage(main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
+                    }
                     return true;
                 default:
                     return false;
@@ -49,7 +54,7 @@ public class RunRestartTask extends BaseSubCommand {
     @Override
     public CommandParameter[] getParameters() {
         return new CommandParameter[]{
-            new CommandParameter("manual|no-player", "task type"),
+            new CommandParameter("manual|no-players", "task type"),
         };
     }
 }

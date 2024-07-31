@@ -2,7 +2,7 @@ plugin_language: language code en_US
 
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task
-command_help_restart: §eRun restart task. Type:<manual|no-layer>
+command_help_restart: §eRun restart task. Type:<manual|no-layers>
 
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!
@@ -37,6 +37,7 @@ restrat_msg_tip: §eThe server restart in §6%1% §e%2%
 
 restart_task_cancel: §aThe restart task has been cancel
 restart_task_restart: §fThe server will restart in §a%1%§f %2%
+restart_task_run: "§aRestart the task to start running. Type: %1%"
 
 restart_task_type_time: Scheduled restart
 restart_task_type_no_player: No online player
