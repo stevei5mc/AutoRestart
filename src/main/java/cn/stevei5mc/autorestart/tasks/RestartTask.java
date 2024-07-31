@@ -26,7 +26,6 @@ public class RestartTask extends Task {
 
     @Override
     public void onRun(int currentTick) {
-        time2--;// 每秒减少时间
         int tipTime = main.getConfig().getInt("tips_time", 30);
         if (time2 <= tipTime) {
             Utils.sendRestartMsg(time2);
@@ -35,5 +34,6 @@ public class RestartTask extends Task {
         if (time2 <= 0) {
             Utils.shutdownServer();
         }
+        time2--;// 每秒减少时间
     }
 }
