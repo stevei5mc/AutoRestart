@@ -38,7 +38,7 @@ public class AutoRestartPlugin extends PluginBase {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
             int i = Utils.getRestartUseTime();
-            Utils.runRestartTask("min",i,1,20);
+            Utils.runRestartTask(i,1);
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");

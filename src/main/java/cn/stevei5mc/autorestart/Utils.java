@@ -113,22 +113,28 @@ public class Utils {
     /**
      * 运行重启任务
      * @param type 重启任务类型
-     * @param runTick 重启任务的运行时间(tick) 20tick=1s
     */
-    public static void runRestartTask(int type,int runTick) {
-        runRestartTask("",0,type,runTick);
+    public static void runRestartTask(int type) {
+        runRestartTask(0,type);
     }
 
     /**
      * 运行重启任务
-     * @param unit 重启任务的时间单位
      * @param restartTime 重启需要的时间
      * @param type 重启任务类型
-     * @param runTick 重启任务的运行时间(tick) 20tick=1s
     */
-    public static void runRestartTask(String unit,int restartTime,int type,int runTick) {
+    public static void runRestartTask(int restartTime,int type) {
         cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(unit,restartTime), runTick, true);
+        int runTick = 20;
+        switch (type) {
+            case 3:
+                runTick = 100;
+                break;
+            default:
+                runTick = 20;
+                break;
+        }       
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(type,restartTime), runTick, true);
         taskId = taskHandler.getTaskId();
         taskState = true;
         taskType = type;
