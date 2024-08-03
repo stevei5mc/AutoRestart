@@ -6,6 +6,7 @@ command_help_restart: §e运行重启任务。 类型：<manual|no-players>
 
 command_not_permission: §c你没有权限使用此命令！
 command_in_game_run: §c请在游戏内使用此命令！
+command_unknown: §c未知的命令或参数，请检查后再试！
 
 form_title: Auto Rstart plugin
 form_button_restart_cancel: 取消重启任务

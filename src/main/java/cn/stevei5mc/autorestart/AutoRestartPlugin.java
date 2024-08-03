@@ -95,8 +95,4 @@ public class AutoRestartPlugin extends PluginBase {
     public void reload() {
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
     }
-
-    public void errorSetting() {
-        this.getLogger().info(this.getLang().translateString("plugin_language"));
-    }
 }

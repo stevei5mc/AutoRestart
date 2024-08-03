@@ -27,7 +27,7 @@ public class AutoRestartCommand extends BaseCommand {
         sender.sendMessage("§b=== AutoRestart Command List ===");
         sender.sendMessage(cmdname+"reload "+lang.translateString("command_help_reload"));
         sender.sendMessage(cmdname+"cancel "+lang.translateString("command_help_cancel"));
-        sender.sendMessage(cmdname+"restart <manual|no-player> "+lang.translateString("command_help_dispatch_restart"));
+        sender.sendMessage(cmdname+"restart <manual|no-player> "+lang.translateString("command_help_restart"));
     }
 
     @Override

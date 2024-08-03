@@ -45,9 +45,11 @@ public class RunRestartTask extends BaseSubCommand {
                     }
                     return true;
                 default:
+                    sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
                     return false;
             }
         }else{
+            sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
             return false;
         }
     }

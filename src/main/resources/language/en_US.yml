@@ -6,6 +6,7 @@ command_help_restart: §eRun restart task. Type:<manual|no-layers>
 
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!
+command_unknown: §cUnknown command or parameter, please check and try again!
 
 form_title: Auto Rstart plugin
 form_button_restart_cancel: cancel restart task
