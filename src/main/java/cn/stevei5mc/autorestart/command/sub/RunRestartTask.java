@@ -56,8 +56,12 @@ public class RunRestartTask extends BaseSubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
+        LinkedList<String> list = new LinkedList<String>();
+        list.add("manual");
+        list.add("no-players");
+        String[] list2 = list.toArray(new String[0]);
         return new CommandParameter[]{
-            new CommandParameter("task type", "manual|no-players"),
+            new CommandParameter("task type", list2),
         };
     }
 }
