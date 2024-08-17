@@ -31,10 +31,6 @@ public class RunRestartTask extends BaseSubCommand {
                 case "manual":
                     int i = Utils.getRestartTipTime();
                     Utils.runRestartTask(i,2);
-                    main.getLogger().info((main.getLang().translateString("restart_task_restart", i, main.getLang().translateString("time_unit_seconds"))));
-                    for (Player player : main.getServer().getOnlinePlayers().values()) {
-                        player.sendMessage(main.getLang(player).translateString("restart_task_restart", i, main.getLang(player).translateString("time_unit_seconds")));
-                    }
                     return true;
                 case "no-players":  
                     Utils.runRestartTask(3);

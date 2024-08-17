@@ -48,6 +48,12 @@ sound:
   name: "random.toast"
   volume: 1.0
   pitch: 1.0
+#重启前执行的命令(&con为控制台执行 @p 代表玩家名)
+runcommand: true
+commands:
+  - "say hello world&con"
+  - "help"
+  - "say hello @p&con"
 ```
 ### **支持的语言**
 - **顺序按照支持的顺序排序**

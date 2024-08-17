@@ -127,14 +127,17 @@ public class Utils {
         cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
         int runTick = 20;
         int time = 30;
+        String unit = "time_unit_seconds";
         switch (type) {
             case 1:
                 time = restartTime * 60;
                 runTick = 20;
+                unit = "time_unit_minutes";
                 break;
             case 2:
                 time = restartTime;
                 runTick = 20;
+                unit = "time_unit_seconds";
                 break;
             case 3:
                 time = 0;
@@ -149,6 +152,12 @@ public class Utils {
         taskId = taskHandler.getTaskId();
         taskState = true;
         taskType = type;
+        if (type <= 2) { 
+            main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                player.sendMessage(main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
+            }
+        }
     }
 
     public static void cancelTask() {
