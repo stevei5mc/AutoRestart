@@ -1,0 +1,48 @@
+plugin_language: language code zh_TW
+
+command_help_reload: §e重載配寘
+command_help_cancel: §e取消重啟任務
+command_help_restart: §e§e運行重啓任務。 類型：<manual|no-players>
+
+command_not_permission: §c你沒有許可權使用此命令！
+command_in_game_run: §c請在遊戲內使用此命令！
+command_unknown: §c未知的命令或參數，請檢查後再試！
+
+form_title: Auto Rstart plugin
+form_button_restart_cancel: 取消重啟任務
+form_button_reload: 重載配寘
+form_button_manual_restart: 手動重啓
+form_button_on_player: 無線上玩家時重啓
+form_button_confirm_true: 確認
+form_button_confirm_false: 返回
+
+form_confirm_restart_title: 運行重啓任務
+form_confirm_restart_description_task:  |-
+    是否執行本次重啓任務？
+    任務類型： %1%
+form_confirm_restart_description_time: 伺服器將在 %1% %2%後重啓
+
+form_confirm_cancel_title: 取消重啓任務
+form_confirm_cancel_description_task:  |-
+    是否取消本次重啓任務？
+    任務類型： %1%
+form_confirm_cancel_description_time: 伺服器重啓剩餘 %1% %2%
+
+kick_player_msg: §e伺服器重啓中 稍後再會
+
+reload_success: §a已重載配寘！
+
+restart_msg_title: §c即將重啓
+restart_msg_subtitle: §e伺服器將在 §6%1% §e%2%後重啓
+restrat_msg_tip: §e伺服器將在 §6%1% §e%2%後重啓
+
+restart_task_cancel: §a重啟任務已取消
+restart_task_restart: §f伺服器將在 §6%1% §e%2%後重啓
+restart_task_run: §a重啓任務開始運行。 類型：%1%
+
+restart_task_type_time: 定時重啓
+restart_task_type_no_player: 無線上玩家時重啓
+restart_task_type_manual_restart: 手動重啓
+
+time_unit_minutes: 分钟
+time_unit_seconds: 秒
