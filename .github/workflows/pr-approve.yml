@@ -35,12 +35,16 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir staging && cp target/*.jar staging
+    - name: 获取资源
+      run:
         cp ./script/server_script/Windows/*.bat staging
         cp ./script/server_script/Linux/*.sh staging
+        cp ./脚本使用说明.txt staging
     - name: 批准PR
       uses: hmarr/auto-approve-action@v4.0.0
       with:
         pull-request-number: ${{ inputs.PR_ID }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         review-message: |
           编译已通过，批准通过
           如果有新的提交则取消本次批准
