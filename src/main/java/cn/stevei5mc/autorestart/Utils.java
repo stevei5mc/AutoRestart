@@ -165,4 +165,22 @@ public class Utils {
         taskState = false;
         taskType = 0;//重置任务编号
     }
+
+    /**
+     * 获取剩余时间
+     * @param player player
+     * @return remainder
+    */
+    public static String getRemainder(Player player) {
+        int time = RestartTask.time2;
+        int hours = time / 3600;
+        int minutes = (time % 3600) / 60;
+        int seconds = time % 60;
+
+        String hourUnit = main.getLang(player).translateString("time_unit_hour");
+        String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
+        String secondUnit = main.getLang(player).translateString("time_unit_seconds");
+        String remainder = main.getLang(player).translateString("variable_remainder",hours,hourUnit,minutes,minuteUnit,seconds,secondUnit);
+        return remainder;
+    }
 }

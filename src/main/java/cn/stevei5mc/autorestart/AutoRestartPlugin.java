@@ -8,6 +8,8 @@ import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.AutoRestartCommand;
 import cn.stevei5mc.autorestart.Utils;
+import tip.utils.Api;
+import cn.stevei5mc.autorestart.TipsVar;
 import java.util.*;
 
 public class AutoRestartPlugin extends PluginBase {
@@ -40,6 +42,12 @@ public class AutoRestartPlugin extends PluginBase {
             int i = Utils.getRestartUseTime();
             Utils.runRestartTask(i,1);
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
+                if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
+                    Api.registerVariables("TipsVar",TipsVar.class);
+                } else {
+                    this.getLogger().warning("§c未检测到前置插件§aTips§c，请安装后再试!!!");
+                    this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/GameCore/");
+                }
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
                 getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");

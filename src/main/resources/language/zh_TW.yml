@@ -44,5 +44,8 @@ restart_task_type_time: 定時重啓
 restart_task_type_no_player: 無線上玩家時重啓
 restart_task_type_manual_restart: 手動重啓
 
+time_unit_hour: 小時
 time_unit_minutes: 分钟
 time_unit_seconds: 秒
+
+variable_remainder: "%1% %2% : %3% %4% : %5% %6%"
