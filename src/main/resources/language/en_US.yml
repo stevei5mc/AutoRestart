@@ -48,4 +48,4 @@ time_unit_hour: hour
 time_unit_minutes: minutes
 time_unit_seconds: seconds
 
-variable_remainder: "%1% %2% : %3% %4% : %5% %6%"
+variable_remainder: "%1%"

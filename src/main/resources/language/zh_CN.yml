@@ -48,4 +48,4 @@ time_unit_hour: 小时
 time_unit_minutes: 分钟
 time_unit_seconds: 秒
 
-variable_remainder: "%1% %2% : %3% %4% : %5% %6%"
+variable_remainder: "%1%"
