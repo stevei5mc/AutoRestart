@@ -35,11 +35,11 @@ public class GUI {
                     switch (Utils.taskType) {
                         case 1:
                             type = lang.translateString("restart_task_type_time");
-                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,unitSeconds);
+                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",Utils.getRemainder(player));
                             break;
                         case 2:
                             type = lang.translateString("restart_task_type_manual_restart");
-                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",RestartTask.time2,unitSeconds);
+                            postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",Utils.getRemainder(player));
                             break;
                         case 3:
                             type = lang.translateString("restart_task_type_no_player");

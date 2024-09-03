@@ -26,7 +26,7 @@ form_confirm_cancel_title: Cancel restart task
 form_confirm_cancel_description_task:  |-
     Do you want to cancel this restart task?
     Task type: %1%
-form_confirm_cancel_description_time: Server restart remaining %1% %2%
+form_confirm_cancel_description_time: Server restart remaining %1%
 
 kick_player_msg: §eServer restarting, See you later
 

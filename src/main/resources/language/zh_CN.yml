@@ -26,7 +26,7 @@ form_confirm_cancel_title: 取消重启任务
 form_confirm_cancel_description_task:  |-
     是否取消本次重启任务？
     任务类型： %1%
-form_confirm_cancel_description_time: 服务器重启剩余 %1% %2%
+form_confirm_cancel_description_time: 服务器重启剩余 %1%
 
 kick_player_msg: §e服务器重启中 稍后再会
 
