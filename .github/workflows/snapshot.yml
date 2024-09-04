@@ -23,9 +23,18 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir staging && cp target/*.jar staging
-        cp ./script/server_script/Windows/*.bat staging
-        cp ./script/server_script/Linux/*.sh staging
-        cp ./脚本使用说明.txt staging
+    - name: 获取资源
+        pwd
+        mkdir staging/Windows
+        mkdir staging/Linux
+        cp ./script/server_script/Windows/*.bat staging/Windows
+        cp ./script/server_script/Linux/*.sh staging/Linux
+        cp ./脚本使用说明.txt staging/Windows
+        cp ./脚本使用说明.txt staging/Linux
+        zip -r Windows-script.zip ./staging/Windows/*
+        zip -r Linux-script.zip ./staging/Linux/*
+        rm -rf ./staging/Windows/*
+        rm -rf ./staging/Linux/*
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
