@@ -24,6 +24,7 @@ jobs:
         mvn -B package --file pom.xml
         mkdir staging && cp target/*.jar staging
     - name: 获取资源
+      run:  
         pwd
         mkdir staging/Windows
         mkdir staging/Linux
