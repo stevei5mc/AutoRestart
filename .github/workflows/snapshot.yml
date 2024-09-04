@@ -23,22 +23,23 @@ jobs:
       run: |
         mvn -B package --file pom.xml
         mkdir staging && cp target/*.jar staging
-    - name: 获取资源
-      run: |-
+    - name: 准备资源
+      run: |
         pwd
-        mkdir staging/Windows
-        mkdir staging/Linux
-        cp ./script/server_script/Windows/*.bat staging/Windows
-        cp ./script/server_script/Linux/*.sh staging/Linux
-        cp ./脚本使用说明.txt staging/Windows
-        cp ./脚本使用说明.txt staging/Linux
-        zip -r ./staging/Windows-script.zip ./staging/Windows/*
-        zip -r ./staging/Linux-script.zip ./staging/Linux/*
-        rm -rf ./staging/Windows/*
-        rm -rf ./staging/Linux/*
-        ls -ls staging
+        cp ./script/server_script/Windows/*.bat staging
+        cp ./script/server_script/Linux/*.sh staging
+        cp ./脚本使用说明.txt staging
+        cd ./staging
+        zip -r Windows-script.zip ./*.bat ./*.txt
+        zip -r Linux-script.zip ./*.sh ./*.txt
+        ls -ls
+        cd ../
+        mkdir github_artifact
+        cp ./staging/*.zip github_artifact
+        cp ./staging/*.jar github_artifact
+        ls -ls
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
         name: ${{ steps.get_info.outputs.repository_name }}-SNAPSHOT-Build-${{ github.run_number}}
-        path: staging
+        path: github_artifact
