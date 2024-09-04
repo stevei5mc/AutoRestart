@@ -32,10 +32,11 @@ jobs:
         cp ./script/server_script/Linux/*.sh staging/Linux
         cp ./脚本使用说明.txt staging/Windows
         cp ./脚本使用说明.txt staging/Linux
-        zip -r Windows-script.zip ./staging/Windows/*
-        zip -r Linux-script.zip ./staging/Linux/*
+        zip -r ./staging/Windows-script.zip ./staging/Windows/*
+        zip -r ./staging/Linux-script.zip ./staging/Linux/*
         rm -rf ./staging/Windows/*
         rm -rf ./staging/Linux/*
+        ls -ls staging
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
