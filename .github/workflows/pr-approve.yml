@@ -44,12 +44,12 @@ jobs:
         cd ./staging
         zip -r Windows-script.zip ./*.bat
         zip -r Linux-script.zip ./*.sh
-        ls -ls
+        ls -la
         cd ../
         mkdir github_artifact
         cp ./staging/*.zip github_artifact
         cp ./staging/*.jar github_artifact
-        ls -ls
+        ls -la
     - name: 批准PR
       uses: hmarr/auto-approve-action@v4.0.0
       with:

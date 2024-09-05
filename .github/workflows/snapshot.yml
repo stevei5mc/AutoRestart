@@ -32,12 +32,12 @@ jobs:
         cd ./staging
         zip -r Windows-script.zip ./*.bat
         zip -r Linux-script.zip ./*.sh
-        ls -ls
+        ls -la
         cd ../
         mkdir github_artifact
         cp ./staging/*.zip github_artifact
         cp ./staging/*.jar github_artifact
-        ls -ls
+        ls -la
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
