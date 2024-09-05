@@ -25,15 +25,27 @@ jobs:
     - name: 构建
       run: |
         mvn -B package --file pom.xml
-        mkdir staging && cp target/*.jar staging
+        mkdir staging
+        cp target/*.jar staging
+    - name: 准备资源
+      run: |
+        pwd
         cp ./script/server_script/Windows/*.bat staging
         cp ./script/server_script/Linux/*.sh staging
-        cp ./脚本使用说明.txt staging
+        cd ./staging
+        zip -r Windows-script.zip ./*.bat
+        zip -r Linux-script.zip ./*.sh
+        ls -ls
+        cd ../
+        mkdir github_artifact
+        cp ./staging/*.zip github_artifact
+        cp ./staging/*.jar github_artifact
+        ls -ls
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
         name: ${{ steps.get_info.outputs.repository_name }}-Release-${{ steps.get_info.outputs.VERSION }}
-        path: staging 
+        path: github_artifact 
     - name: 发布新版本
       uses: ncipollo/release-action@v1.14.0
       with:
@@ -42,13 +54,12 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         bodyFile: ./docs/changelogs/${{ steps.get_info.outputs.VERSION }}.md
         artifacts: ./staging/*.*
-    # 这个暂时没有用
+    #这个暂时没有用
     # - name: 发布至minebbs
-    #   uses: HuoHuas001/Minebbs-Auto-Release@v1.0.6
+    #   uses: engsr6982/upload-minebbs@v1.2.0
     #   with: 
-    #     resources: '1'
-    #     token: ${{ secrets.MINEBBSKEY }}
-    #     title: ${{ steps.get_info.outputs.VERSION }}
-    #     new_version: ${{ steps.get_info.outputs.VERSION }}
-    #     description_file: ./docs/changelogs/${{ steps.get_info.outputs.VERSION }}.md
-    #     file_url: 'https://github.com/${{ github.repository }}/releases/latest'
+    #     minebbs_token: ${{ secrets.MINEBBS_TOKEN }}
+    #     resource_id: "12345"
+    #     upload_file: ./github_artifact/*.*
+    #     update_title: ${{ steps.get_info.outputs.VERSION }}
+    #     update_version: ${{ steps.get_info.outputs.VERSION }}

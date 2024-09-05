@@ -22,16 +22,16 @@ jobs:
     - name: 构建
       run: |
         mvn -B package --file pom.xml
-        mkdir staging && cp target/*.jar staging
+        mkdir staging
+        cp target/*.jar staging
     - name: 准备资源
       run: |
         pwd
         cp ./script/server_script/Windows/*.bat staging
         cp ./script/server_script/Linux/*.sh staging
-        cp ./脚本使用说明.txt staging
         cd ./staging
-        zip -r Windows-script.zip ./*.bat ./*.txt
-        zip -r Linux-script.zip ./*.sh ./*.txt
+        zip -r Windows-script.zip ./*.bat
+        zip -r Linux-script.zip ./*.sh
         ls -ls
         cd ../
         mkdir github_artifact
