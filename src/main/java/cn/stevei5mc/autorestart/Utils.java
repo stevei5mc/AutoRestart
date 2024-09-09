@@ -50,37 +50,27 @@ public class Utils {
     public static void shutdownServer() {
         cancelTask();
         Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
-            runCommand();
-            kickOnlinePlayers();
-            main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
-        }, 0);
-    }
-
-    //在重启前执行命令
-    private static void runCommand() {
-        if (main.getConfig().getBoolean("runcommand",true) && taskType <= 2) {
-            for (Player player : main.getServer().getOnlinePlayers().values()) {
-                ArrayList<String> commands;
-                commands = new ArrayList<>(main.getConfig().getStringList("commands"));
-                for (String s : commands) {
-                    String[] cmd = s.split("&");
-                    if ((cmd.length > 1) && ("con".equals(cmd[1]))) {
-                        main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0].replace("@p", player.getName()));
-                    }else {
-                        main.getServer().dispatchCommand(player, cmd[0].replace("@p", player.getName()));
+            if (main.getConfig().getBoolean("runcommand",true) && taskType <= 2) {
+                for (Player player : main.getServer().getOnlinePlayers().values()) {
+                    ArrayList<String> commands;
+                    commands = new ArrayList<>(main.getConfig().getStringList("commands"));
+                    for (String s : commands) {
+                        String[] cmd = s.split("&");
+                        if ((cmd.length > 1) && ("con".equals(cmd[1]))) {
+                            main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0].replace("@p", player.getName()));
+                        }else {
+                            main.getServer().dispatchCommand(player, cmd[0].replace("@p", player.getName()));
+                        }
                     }
                 }
             }
-        }
-    }
-
-    //踢出在线玩家
-    private static void kickOnlinePlayers() {
-        if (main.getConfig().getBoolean("kick_player",true) && taskType <= 2) {
-            for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.kick((main.getLang(player).translateString("kick_player_msg")), false);
+            if (main.getConfig().getBoolean("kick_player",true) && taskType <= 2) {
+                for (Player player : main.getServer().getOnlinePlayers().values()) {
+                    player.kick((main.getLang(player).translateString("kick_player_msg")), false);
+                }
             }
-        }
+            main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
+        }, 0);
     }
 
     /**
@@ -124,7 +114,7 @@ public class Utils {
      * @param type 重启任务类型
     */
     public static void runRestartTask(int restartTime,int type) {
-        cancelTask();//不管定时重启任务在不在运行都取消一遍再运行手动的任务，以防出现一些奇怪的问题
+        cancelTask();//不管重启任务在不在运行都取消一遍再运行任务，以防出现一些奇怪的问题
         int runTick = 20;
         int time = 30;
         String unit = "time_unit_seconds";
@@ -164,5 +154,32 @@ public class Utils {
         main.getServer().getScheduler().cancelTask(taskId);
         taskState = false;
         taskType = 0;//重置任务编号
+    }
+
+    /**
+     * 获取剩余时间
+     * @param player player
+     * @return remainder
+    */
+    public static String getRemainder(Player player) {
+        int time = RestartTask.time2;
+        int hours = time / 3600;
+        int minutes = (time % 3600) / 60;
+        int seconds = time % 60;
+
+        String hourUnit = main.getLang(player).translateString("time_unit_hour");
+        String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
+        String secondUnit = main.getLang(player).translateString("time_unit_seconds");
+        String timee = "";
+
+        if (hours > 0) {
+            timee = String.valueOf(hours) + hourUnit + String.valueOf(minutes) + minuteUnit + String.valueOf(seconds) + secondUnit;
+        } else if (minutes > 0) {
+            timee = String.valueOf(minutes) + minuteUnit + String.valueOf(seconds) + secondUnit;
+        } else {
+            timee = String.valueOf(seconds) + secondUnit;
+        }
+        String remainder = main.getLang(player).translateString("variable_remainder",timee);
+        return remainder;
     }
 }

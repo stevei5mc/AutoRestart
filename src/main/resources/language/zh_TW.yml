@@ -26,7 +26,7 @@ form_confirm_cancel_title: 取消重啓任務
 form_confirm_cancel_description_task:  |-
     是否取消本次重啓任務？
     任務類型： %1%
-form_confirm_cancel_description_time: 伺服器重啓剩餘 %1% %2%
+form_confirm_cancel_description_time: 伺服器重啓剩餘 %1%
 
 kick_player_msg: §e伺服器重啓中 稍後再會
 
@@ -44,5 +44,8 @@ restart_task_type_time: 定時重啓
 restart_task_type_no_player: 無線上玩家時重啓
 restart_task_type_manual_restart: 手動重啓
 
+time_unit_hour: 小時
 time_unit_minutes: 分钟
 time_unit_seconds: 秒
+
+variable_remainder: "%1%"
