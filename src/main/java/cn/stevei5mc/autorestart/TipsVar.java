@@ -10,7 +10,9 @@ public class TipsVar extends BaseVariable {
     }
 
     public void strReplace() {
-        var();
+        if (player != null && player.isOnline()) {
+            var();
+        }
     }
 
     public void var() {
