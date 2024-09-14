@@ -17,3 +17,9 @@ permissions:
   autorestart.admin.restart:
     description: "手动重启权限"
     default: op
+  autorestart.admin.vote.veto:
+    description: "一票否决权"
+    default: op
+  autorestart.user.vote:
+    description: "投票权限"
+    default: true

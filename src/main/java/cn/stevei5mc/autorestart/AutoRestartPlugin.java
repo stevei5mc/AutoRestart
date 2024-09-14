@@ -6,7 +6,7 @@ import cn.nukkit.Server;
 import cn.nukkit.utils.Config;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
-import cn.stevei5mc.autorestart.command.AutoRestartCommand;
+import cn.stevei5mc.autorestart.command.admin.AdminMain;
 import cn.stevei5mc.autorestart.Utils;
 import tip.utils.Api;
 import cn.stevei5mc.autorestart.TipsVar;
@@ -40,7 +40,7 @@ public class AutoRestartPlugin extends PluginBase {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             tips = false;
             loadLanguage();
-            this.getServer().getCommandMap().register("", new AutoRestartCommand());//注册命令
+            this.getServer().getCommandMap().register("", new AdminMain());//注册命令
             int i = Utils.getRestartUseTime();
             Utils.runRestartTask(i,1);
             if (this.getServer().getPluginManager().getPlugin("Tips") != null) {

@@ -1,21 +1,23 @@
-package cn.stevei5mc.autorestart.command.sub;
+package cn.stevei5mc.autorestart.command.admin;
 
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
+import cn.nukkit.Player;
+import cn.stevei5mc.autorestart.Utils;
 
 /**
  * @author LT_Name
  */
-public class Reload extends BaseSubCommand {
+public class Cancel extends BaseSubCommand {
 
-    public Reload(String name) {
+    public Cancel(String name) {
         super(name);
     }
 
     @Override
     public boolean canUser(CommandSender sender) {
-        return sender.hasPermission("autorestart.admin.reload");
+        return sender.hasPermission("autorestart.admin.cancel");
     }
 
     @Override
@@ -25,8 +27,11 @@ public class Reload extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        this.main.reload();
-        sender.sendMessage(main.getLang(sender).translateString("reload_success"));
+        Utils.cancelTask();
+        main.getLogger().info((main.getLang().translateString("restart_task_cancel")));
+        for (Player player : main.getServer().getOnlinePlayers().values()) {
+            player.sendMessage(main.getLang(player).translateString("restart_task_cancel"));
+        }
         return true;
     }
 
