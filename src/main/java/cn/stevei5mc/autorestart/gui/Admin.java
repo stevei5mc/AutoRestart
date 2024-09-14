@@ -1,4 +1,4 @@
-package cn.stevei5mc.autorestart;
+package cn.stevei5mc.autorestart.gui;
 
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.lanink.gamecore.form.element.ResponseElementButton;
@@ -12,12 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import cn.stevei5mc.autorestart.Utils;
 import cn.stevei5mc.autorestart.tasks.RestartTask;
 
-/**
- * 菜单（这个参考了rsnpc的写法）
- */
-public class GUI {
+public class Admin {
 
-    private GUI() {
+    private Admin() {
         throw new RuntimeException("Error");
     }
 

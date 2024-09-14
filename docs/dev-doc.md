@@ -39,10 +39,12 @@
     }
 ```
 #### **讲解**
-```java
-    Utils.runRestartTask(); // 运行重启任务
-    Utils.getRestartUseTime(); // 获取重启任务的重启时间
-    Utils.getRestartTipTime(); // 获取提示时间（在还剩多少秒的时候通知玩家）
-    Utils.cancelTask(); // 取消重启任务
+```
+Utils
+    - runRestartTask 运行重启任务
+    - getRestartUseTime 获取重启任务的重启时间
+    - getRestartTipTime 获取提示时间（在还剩多少秒的时候通知玩
+    - cancelTask 取消重启任务
+    - getRemainder 获取剩余时间
 ```
 ---

@@ -1,4 +1,4 @@
-package cn.stevei5mc.autorestart.command;
+package cn.stevei5mc.autorestart.command.base;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
@@ -96,5 +96,4 @@ public abstract class BaseCommand extends Command {
             this.commandParameters.put(subCommand.getName(),parameters.toArray(new CommandParameter[0]));
         }
     }
-
 }

@@ -2,13 +2,13 @@ package cn.stevei5mc.autorestart.command;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
-import cn.stevei5mc.autorestart.command.BaseCommand;
+import cn.stevei5mc.autorestart.command.base.BaseCommand;
 import cn.stevei5mc.autorestart.command.sub.Reload;
 import cn.stevei5mc.autorestart.command.sub.Cancel;
 import cn.stevei5mc.autorestart.command.sub.RunRestartTask;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
-import cn.stevei5mc.autorestart.GUI;
+import cn.stevei5mc.autorestart.gui.Admin;
 
 public class AutoRestartCommand extends BaseCommand {
     protected AutoRestartPlugin main = AutoRestartPlugin.getInstance();
@@ -32,7 +32,7 @@ public class AutoRestartCommand extends BaseCommand {
 
     @Override
     public void sendUI(Player player) {
-        GUI.sendMain(player);
+        Admin.sendMain(player);
     }
 
 }

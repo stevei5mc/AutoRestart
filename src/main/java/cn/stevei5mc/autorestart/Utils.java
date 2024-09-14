@@ -20,14 +20,15 @@ public class Utils {
     */
     public static void sendRestartMsg(int seconds) {
         for (Player player : main.getServer().getOnlinePlayers().values()) {
+            String unit = main.getLang(player).translateString("time_unit_seconds");
             if (main.getConfig().getBoolean("show_title",true)) {
                 player.sendTitle(
-                    (main.getLang(player).translateString("restart_msg_title", seconds, main.getLang(player).translateString("time_unit_seconds"))), 
-                    (main.getLang(player).translateString("restart_msg_subtitle", seconds, main.getLang(player).translateString("time_unit_seconds"))),
+                    (main.getLang(player).translateString("restart_msg_title", seconds, unit)), 
+                    (main.getLang(player).translateString("restart_msg_subtitle", seconds, unit)),
                 0, 20, 0);
             }
             if (main.getConfig().getBoolean("show_tip",true)) {
-                player.sendTip(main.getLang(player).translateString("restrat_msg_tip", seconds, main.getLang(player).translateString("time_unit_seconds")));
+                player.sendTip(main.getLang(player).translateString("restrat_msg_tip", seconds, unit));
             }
             if (main.getConfig().getBoolean("play_sound",true)) {
                 //参考和使用部分代码 https://github.com/glorydark/CustomForm/blob/main/src/main/java/glorydark/nukkit/customform/scriptForms/data/SoundData.java
@@ -166,12 +167,10 @@ public class Utils {
         int hours = time / 3600;
         int minutes = (time % 3600) / 60;
         int seconds = time % 60;
-
         String hourUnit = main.getLang(player).translateString("time_unit_hour");
         String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
         String secondUnit = main.getLang(player).translateString("time_unit_seconds");
         String timee = "";
-
         if (hours > 0) {
             timee = String.valueOf(hours) + hourUnit + String.valueOf(minutes) + minuteUnit + String.valueOf(seconds) + secondUnit;
         } else if (minutes > 0) {
