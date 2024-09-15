@@ -71,7 +71,6 @@ public class Admin {
                         cp.showFormWindow(modal);
                 }));
                 simple.addButton(new ResponseElementButton(lang.translateString("form_button_on_player")).onClicked(cp -> {
-                    int i = Utils.getRestartTipTime();
                     AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                         lang.translateString("form_confirm_restart_title"),
                         lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_no_player")),

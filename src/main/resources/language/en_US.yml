@@ -49,3 +49,10 @@ time_unit_minutes: minutes
 time_unit_seconds: seconds
 
 variable_remainder: "%1%"
+
+vote_restart_form_title: "Vote restart system"
+vote_restart_form_description_confirm: "Do you initiate a vote restart? The restart task requires the approval of %1% of players."
+vote_restart_form_description_vote: "You are participating in the voting restart, please cast your valuable vote for this voting restart."
+vote_restart_form_button_approval: "approval"
+vote_restart_form_button_oppose: "oppose"
+vote_restart_form_button_veto: "One ticket veto"

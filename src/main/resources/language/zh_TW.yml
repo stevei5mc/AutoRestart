@@ -49,3 +49,10 @@ time_unit_minutes: 分钟
 time_unit_seconds: 秒
 
 variable_remainder: "%1%"
+
+vote_restart_form_title: "投票重啓系統"
+vote_restart_form_description_confirm: "你是否發起投票重啓？ 需要 %1% 名玩家贊成才會執行重啓任務。"
+vote_restart_form_description_vote: "你正在參與投票重啓，請你為本次投票重啓投出寶貴的一票。"
+vote_restart_form_button_approval: "贊成"
+vote_restart_form_button_oppose: "反對"
+vote_restart_form_button_veto: "一票否决"
