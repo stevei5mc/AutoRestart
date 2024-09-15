@@ -24,7 +24,7 @@ public class AdminMain extends BaseCommand {
     public void sendHelp(CommandSender sender) {
         Language lang = main.getLang(sender);
         String cmdname = "§a/autorestart ";
-        sender.sendMessage("§b=== AutoRestart Command List ===");
+        sender.sendMessage("§b=== AutoRestart admin command list ===");
         sender.sendMessage(cmdname+"reload "+lang.translateString("command_help_reload"));
         sender.sendMessage(cmdname+"cancel "+lang.translateString("command_help_cancel"));
         sender.sendMessage(cmdname+"restart <manual|no-player> "+lang.translateString("command_help_restart"));
@@ -34,5 +34,4 @@ public class AdminMain extends BaseCommand {
     public void sendUI(Player player) {
         Admin.sendMain(player);
     }
-
 }

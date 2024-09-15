@@ -7,10 +7,8 @@ import cn.lanink.gamecore.form.windows.AdvancedFormWindowModal;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.math.Vector3;
 import org.jetbrains.annotations.NotNull;
 import cn.stevei5mc.autorestart.Utils;
-import cn.stevei5mc.autorestart.tasks.RestartTask;
 
 public class Vote {
 
@@ -28,6 +26,7 @@ public class Vote {
         );
         modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart no-players"));
         modal.onClickedFalse(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart no-players"));
+        player.showFormWindow(modal);
     }
 
     public static void voteGui(@NotNull Player player) {
@@ -44,5 +43,6 @@ public class Vote {
                 .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart reload"))
             ); 
         }
+        player.showFormWindow(simple);
     }
 }

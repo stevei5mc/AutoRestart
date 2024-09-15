@@ -12,6 +12,7 @@ import java.util.*;
 public class Utils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     public static boolean taskState = false;//任务状态，默认为 false
+    public static boolean voteTaskState = false;
     public static int taskType = 0;//任务类型，默认编号为 0
     private static int taskId;
     private static int voteTaskId;
@@ -48,7 +49,6 @@ public class Utils {
         }
     }
 
-    
     // 踢出玩家及关闭服务器
     public static void shutdownServer() {
         cancelTask();
@@ -101,7 +101,6 @@ public class Utils {
         }
         return time;
     }
-
 
     /**
      * 运行重启任务
