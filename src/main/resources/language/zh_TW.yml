@@ -13,8 +13,9 @@ form_button_restart_cancel: 取消重啟任務
 form_button_reload: 重載配寘
 form_button_manual_restart: 手動重啓
 form_button_on_player: 無線上玩家時重啓
-form_button_confirm_true: 確認
-form_button_confirm_false: 返回
+form_button_confirm: 確認
+form_button_back: 返回
+form_button_close: 关闭
 
 form_confirm_restart_title: 運行重啓任務
 form_confirm_restart_description_task:  |-
@@ -56,3 +57,7 @@ vote_restart_form_description_vote: "你正在參與投票重啓，請你為本�
 vote_restart_form_button_approval: "贊成"
 vote_restart_form_button_oppose: "反對"
 vote_restart_form_button_veto: "一票否决"
+vote_restart_msg_success: "§a投票結束，已達到 §b%1%§a 票，滿足 §b%2%§a 票，即將進行重啓"
+vote_restart_msg_failed: "§c投票結束，已達到§b%1%§c票，未滿足§b%2%§c 票，無法進行重啓"
+vote_restart_msg_not_initiate: "§c玩家人數不足 §b%1%§c，無法啟動投票程式，請等待足够的人數再試！"
+vote_restart_msg_is_initiate: "§c投票程式正在運行，你無法再次發起！"

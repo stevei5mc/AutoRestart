@@ -13,8 +13,9 @@ form_button_restart_cancel: cancel restart task
 form_button_reload: reload config
 form_button_manual_restart: Manual restart
 form_button_on_player: No online player
-form_button_confirm_true: "Yes"
-form_button_confirm_false: back
+form_button_confirm: confirm
+form_button_back: back
+form_button_close: close
 
 form_confirm_restart_title: Run restart task
 form_confirm_restart_description_task: |-
@@ -56,3 +57,7 @@ vote_restart_form_description_vote: "You are participating in the voting restart
 vote_restart_form_button_approval: "approval"
 vote_restart_form_button_oppose: "oppose"
 vote_restart_form_button_veto: "One ticket veto"
+vote_restart_msg_success: "§aThe voting for has ended, reaching §b%1%§a of votes and meeting §b%2%§a of votes. A restart is about to begin"
+vote_restart_msg_failed: "§cThe voting for has ended, reaching §b%1%§c of votes, but not meeting §b%2%§c of votes, and cannot be restarted"
+vote_restart_msg_not_initiate: "§cThe number of players is less than §b%1%§c, unable to start the voting process. Please wait for enough players to try again!"
+vote_restart_msg_is_initiate: "§cThe voting program is running and you cannot initiate it again!"
