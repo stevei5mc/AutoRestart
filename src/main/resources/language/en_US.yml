@@ -61,3 +61,4 @@ vote_restart_msg_success: "§aThe voting for has ended, reaching §b%1%§a of vo
 vote_restart_msg_failed: "§cThe voting for has ended, reaching §b%1%§c of votes, but not meeting §b%2%§c of votes, and cannot be restarted"
 vote_restart_msg_not_initiate: "§cThe number of players is less than §b%1%§c, unable to start the voting process. Please wait for enough players to try again!"
 vote_restart_msg_is_initiate: "§cThe voting program is running and you cannot initiate it again!"
+vote_restart_msg_in_initiate: "§b%1%§a initiated a vote restart request. Please enter §b%2%§a to participate in the vote, or enter §b%3%§a to vote in favor and §b%4%§a to vote against (the admin has one veto power!)"

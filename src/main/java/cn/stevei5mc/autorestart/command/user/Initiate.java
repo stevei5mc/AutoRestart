@@ -25,7 +25,18 @@ public class Initiate extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        return true;
+        if (Utils.voteTaskState) {
+            sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_is_initiate"));
+            return true;
+        } else {
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", sender, "/voterestart",
+                "/voterestart vote approval","/voterestart vote oppose"));
+            }
+            main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", sender, "/voterestart",
+            "/voterestart vote approval","/voterestart vote oppose"));
+            return true; 
+        }
     }
 
     @Override

@@ -19,8 +19,8 @@ public class Admin {
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
-        String trueButton = lang.translateString("form_button_confirm_true");
-        String falseButton = lang.translateString("form_button_confirm_false");
+        String trueButton = lang.translateString("form_button_confirm");
+        String falseButton = lang.translateString("form_button_back");
         String unitSeconds = lang.translateString("time_unit_seconds");
         if (Utils.taskState) {
             if (player.hasPermission("autorestart.admin.cancel")) {

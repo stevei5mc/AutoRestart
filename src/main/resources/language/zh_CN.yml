@@ -61,3 +61,4 @@ vote_restart_msg_success: "§a投票结束，已达到 §b%1%§a 票，满足 §
 vote_restart_msg_failed: "§c投票结束，已达到 §b%1%§c 票，未满足 §b%2%§c 票，无法进行重启"
 vote_restart_msg_not_initiate: "§c玩家人数不足 §b%1%§c，无法启动投票程序，请等待足够的人数再试！"
 vote_restart_msg_is_initiate: "§c投票程序正在运行，你无法再次发起！"
+vote_restart_msg_in_initiate: "§b%1%§a 发起了投票重启请求，请输入 §b%2%§a 参与投票，或输入 §b%3%§a 投赞成票，§b%4%§a 投反对票（管理员拥有一票否决权！）"

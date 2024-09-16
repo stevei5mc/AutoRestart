@@ -21,11 +21,10 @@ public class Vote {
         AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
             lang.translateString("form_confirm_restart_title"),
             lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_no_player")),
-            lang.translateString("form_button_confirm_true"),
-            lang.translateString("form_button_confirm_false")
+            lang.translateString("form_button_confirm"),
+            lang.translateString("form_button_close")
         );
-        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart no-players"));
-        modal.onClickedFalse(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart restart no-players"));
+        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "voterestart initiate"));
         player.showFormWindow(modal);
     }
 
