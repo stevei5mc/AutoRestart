@@ -19,12 +19,12 @@ public class Vote {
     public static void initiateVote(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
-            lang.translateString("form_confirm_restart_title"),
-            lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_no_player")),
+            lang.translateString("vote_restart_form_title"),
+            lang.translateString("vote_restart_form_description_confirm"),
             lang.translateString("form_button_confirm"),
             lang.translateString("form_button_close")
         );
-        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "voterestart initiate"));
+        modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "voterestart initiate"));//确认按钮，关闭按钮无需如何代码
         player.showFormWindow(modal);
     }
 
