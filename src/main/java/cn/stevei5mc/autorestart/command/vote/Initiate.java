@@ -1,4 +1,4 @@
-package cn.stevei5mc.autorestart.command.user;
+package cn.stevei5mc.autorestart.command.vote;
 
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;

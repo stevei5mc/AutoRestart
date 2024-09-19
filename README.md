@@ -8,10 +8,10 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/stevei5mc/AutoRestart?style=plastic)
 ## **插件介绍**
 ### **功能介绍**
-1. **支持多语言（根据玩家客户端的语言进行匹配）**
-2. **支持播放音效提醒玩家（暂时只支持mc原有的）**
-3. **支持取消自动重启任务**
-4. **支持多种重启任务(查看任务类型获取现在支持的重启任务)，更多类型敬请期待**
+- [x] **多语言（根据玩家客户端的语言进行匹配）**
+- [x] **播放音效提醒玩家（暂时只支持mc原有的）**
+- [x] **取消自动重启任务**
+- [ ] **暂停任务 （敬请期待）**
 ### **任务类型**
 - [x] **定时重启**
 - [x] **手动重启（手动重启的时间为配置文件中的提示时间）**
@@ -19,15 +19,17 @@
 - [ ] **投票重启 （敬请期待）**
 ### **命令与权限**
 |命令|权限节点|命令/权限介绍|默认权限|
-|:-:|:-:|:-:|:-:|
+|:-:|:-:|:-|:-:|
 |/autorestart|autorestart.admin|主命令、打开GUI|OP|
 |/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
 |/autorestart cancel|autorestart.admin.cancel|取消重启任务|OP|
 |/autorestart restart manual|autorestart.admin.restart|手动重启服务器|OP|
 |/autorestart restart no-player|autorestart.admin.restart|在服务器没有玩家在线时自动重启服务器|OP|
-- **任务类型介绍：**
-- **manual 手动重启时间为配置文件中`tips_time`设定的时间**
-- **no-player 在服务器没有玩家在线的时自动候重启服务器**
+|/voterestart|autorestart.user.vote|主命令、打开GUI|player|
+|/voterestart initiate|autorestart.user.vote|发起投票|player|
+|/voterestart vote approval|autorestart.user.vote|投出赞成票|player|
+|/voterestart vote oppose|autorestart.user.vote|投出反对票|player|
+|/voterestart vote veto|autorestart.admin.vote.veto|使用一票否决|OP|
 ### **配置文件介绍**
 ```yml
 #默认语言

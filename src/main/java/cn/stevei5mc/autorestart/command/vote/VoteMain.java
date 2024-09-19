@@ -1,18 +1,18 @@
-package cn.stevei5mc.autorestart.command.user;
+package cn.stevei5mc.autorestart.command.vote;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.base.BaseCommand;
-import cn.stevei5mc.autorestart.command.user.Initiate;
-import cn.stevei5mc.autorestart.command.user.VoteCmd;
+import cn.stevei5mc.autorestart.command.vote.Initiate;
+import cn.stevei5mc.autorestart.command.vote.VoteCmd;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.Utils;
 import cn.stevei5mc.autorestart.gui.Vote;
 
-public class UserMain extends BaseCommand {
+public class VoteMain extends BaseCommand {
     protected AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public UserMain() {
+    public VoteMain() {
         super("voterestart", "AutoRestart Command");
         this.setPermission("autorestart.user.vote");
         this.addSubCommand(new Initiate("initiate"));
@@ -30,10 +30,10 @@ public class UserMain extends BaseCommand {
 
     @Override
     public void sendUI(Player player) {
-        if (Utils.voteTaskState) {
+        /* if (Utils.voteTaskState) { */
             Vote.voteGui(player);
-        } else {
+/*         } else {
             Vote.initiateVote(player);  
-        }
+        } */
     }
 }

@@ -31,15 +31,15 @@ public class Vote {
     public static void voteGui(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("vote_restart_form_title"));
-        simple.addButton(new ResponseElementButton(lang.translateString("vote_restart_form_button_approval"))
-            .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart reload"))
+        simple.addButton(new ResponseElementButton(lang.translateString("form_button_approval"))
+            .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote approval"))
         );
-        simple.addButton(new ResponseElementButton(lang.translateString("vote_restart_form_button_oppose"))
-            .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart reload"))
+        simple.addButton(new ResponseElementButton(lang.translateString("form_button_oppose"))
+            .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote oppose"))
         );
         if (player.hasPermission("autorestart.admin.vote.veto")) {
-            simple.addButton(new ResponseElementButton(lang.translateString("vote_restart_form_button_veto"))
-                .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart reload"))
+            simple.addButton(new ResponseElementButton(lang.translateString("form_button_veto"))
+                .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote veto"))
             ); 
         }
         player.showFormWindow(simple);

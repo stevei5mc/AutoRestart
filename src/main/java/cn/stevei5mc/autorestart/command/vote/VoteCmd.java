@@ -1,4 +1,4 @@
-package cn.stevei5mc.autorestart.command.user;
+package cn.stevei5mc.autorestart.command.vote;
 
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
@@ -28,15 +28,15 @@ public class VoteCmd extends BaseSubCommand {
         if (args.length == 2) {
             String s = args[1];
             switch (s) {
-                case "manual":
-                    int i = Utils.getRestartTipTime();
-                    Utils.runRestartTask(i,2);
+                case "approval":
+                    sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_approval")));
                     return true;
-                case "no-players":  
-                    Utils.runRestartTask(3);
-                    main.getLogger().info((main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
-                    for (Player player : main.getServer().getOnlinePlayers().values()) {
-                        player.sendMessage(main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
+                case "oppose":  
+                    sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
+                    return true;
+                case "veto":
+                    if (sender.hasPermission("autorestart.admin.vote.veto")) {
+                        sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_veto")));
                     }
                     return true;
                 default:
@@ -51,12 +51,13 @@ public class VoteCmd extends BaseSubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
-        LinkedList<String> list = new LinkedList<String>();
-        list.add("manual");
-        list.add("no-players");
-        String[] list2 = list.toArray(new String[0]);
+        LinkedList<String> vote = new LinkedList<String>();
+        vote.add("approval");
+        vote.add("oppose");
+        vote.add("veto");
+        String[] vote2 = vote.toArray(new String[0]);
         return new CommandParameter[]{
-            new CommandParameter("task type", list2),
+            new CommandParameter("type", vote2),
         };
     }
 }
