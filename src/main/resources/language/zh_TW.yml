@@ -9,6 +9,7 @@ command_in_game_run: §c請在遊戲內使用此命令！
 command_unknown: §c未知的命令或參數，請檢查後再試！
 
 form_title: Auto Rstart plugin
+
 form_button_restart_cancel: 取消重啟任務
 form_button_reload: 重載配寘
 form_button_manual_restart: 手動重啓
@@ -16,13 +17,10 @@ form_button_on_player: 無線上玩家時重啓
 form_button_confirm: 確認
 form_button_back: 返回
 form_button_close: 关闭
-form_button_approval: |-
-    贊成
-    %1% 票
-form_button_oppose: |-
-    反對
-    %1% 票
+form_button_approval: 贊成
+form_button_oppose: 反對
 form_button_veto: "一票否决"
+form_button_abstention: "棄權"
 
 form_confirm_restart_title: 運行重啓任務
 form_confirm_restart_description_task:  |-
@@ -60,10 +58,16 @@ variable_remainder: "%1%"
 
 vote_restart_form_title: "投票重啓系統"
 vote_restart_form_description_confirm: "你是否發起投票重啓？ 需要 %1% 名玩家贊成才會執行重啓任務。"
-vote_restart_form_description_vote: "你正在參與投票重啓，請你為本次投票重啓投出寶貴的一票。"
+vote_restart_form_description_vote: |-
+    你正在參與投票重啓，請你為本次投票重啓投出寶貴的一票。
+    投票狀態：
+    贊成票：%1%
+    反對票：%2%
+    棄權票：%3%
 
 vote_restart_msg_success: "§a投票結束，已達到 §b%1%§a 票，滿足 §b%2%§a 票，即將進行重啓"
 vote_restart_msg_failed_end: "§c投票結束，已達到§b%1%§c票，未滿足§b%2%§c 票，無法進行重啓"
+vote_restart_msg_failed_veto: "§c管理員使用了一票否决權，本次投票結束"
 vote_restart_msg_not_initiate: "§c玩家人數不足 §b%1%§c，無法啟動投票程式，請等待足够的人數再試！"
 vote_restart_msg_is_initiate: "§c投票程式正在運行，你無法再次發起！"
 vote_restart_msg_in_initiate: "§b%1%§a 發起了投票重啓請求，請輸入 §b%2%§a 參與投票，或輸入 §b%3%§a 投贊成票，§b%4%§a 投反對票（管理員擁有一票否决權！）"
@@ -73,3 +77,4 @@ vote_msg_vote: "§a你投出了 %1%"
 vote_type_approval: "贊成票"
 vote_type_oppose: "反對"
 vote_type_veto: "一票否决"
+vote_type_abstention: "棄權"

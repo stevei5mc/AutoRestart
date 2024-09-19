@@ -30,10 +30,10 @@ public class VoteMain extends BaseCommand {
 
     @Override
     public void sendUI(Player player) {
-        /* if (Utils.voteTaskState) { */
+        if (Utils.voteTaskState) {
             Vote.voteGui(player);
-/*         } else {
+        } else {
             Vote.initiateVote(player);  
-        } */
+        }
     }
 }

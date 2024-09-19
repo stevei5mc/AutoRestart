@@ -57,7 +57,7 @@ public class VoteCmd extends BaseSubCommand {
         vote.add("veto");
         String[] vote2 = vote.toArray(new String[0]);
         return new CommandParameter[]{
-            new CommandParameter("type", vote2),
+            new CommandParameter("vote type", vote2),
         };
     }
 }
