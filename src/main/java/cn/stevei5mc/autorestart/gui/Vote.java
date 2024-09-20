@@ -31,6 +31,7 @@ public class Vote {
     public static void voteGui(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("vote_restart_form_title"));
+        simple.setContent(lang.translateString("vote_restart_form_description_vote",0,0,0)+ "\n\n");
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_approval"))
             .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote approval"))
         );
@@ -42,6 +43,9 @@ public class Vote {
                 .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote veto"))
             ); 
         }
+        simple.addButton(new ResponseElementButton(lang.translateString("form_button_abstention"))
+        .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote abstention"))
+        );
         player.showFormWindow(simple);
     }
 }

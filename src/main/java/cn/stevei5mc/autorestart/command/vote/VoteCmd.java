@@ -34,6 +34,9 @@ public class VoteCmd extends BaseSubCommand {
                 case "oppose":  
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
                     return true;
+                case "abstention":
+                    sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_abstention")));
+                    return true;
                 case "veto":
                     if (sender.hasPermission("autorestart.admin.vote.veto")) {
                         sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_veto")));
@@ -54,6 +57,7 @@ public class VoteCmd extends BaseSubCommand {
         LinkedList<String> vote = new LinkedList<String>();
         vote.add("approval");
         vote.add("oppose");
+        vote.add("abstention");
         vote.add("veto");
         String[] vote2 = vote.toArray(new String[0]);
         return new CommandParameter[]{

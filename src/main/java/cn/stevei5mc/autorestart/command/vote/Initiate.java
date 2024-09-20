@@ -34,14 +34,12 @@ public class Initiate extends BaseSubCommand {
                 Player player = (Player) sender;
                 vote = player.getName();
             } else {
-                vote = "Server";
+                vote = "§d[§cServer§d]";
             }
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", vote, "/voterestart",
-                "/voterestart vote approval","/voterestart vote oppose"));
+                player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", vote, "/voterestart"));
             }
-            main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", vote, "/voterestart",
-            "/voterestart vote approval","/voterestart vote oppose"));
+            main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", vote, "/voterestart"));
             return true; 
         }
     }
