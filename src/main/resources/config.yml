@@ -24,4 +24,4 @@ commands:
   - "help"
   - "say hello @p&con"
 vote_start_player: 3
-vote_time: 55
+vote_time: 5

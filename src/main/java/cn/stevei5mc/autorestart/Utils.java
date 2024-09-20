@@ -183,7 +183,7 @@ public class Utils {
         return remainder;
     }
 
-    public static void voteTask() {
+    public static void runVoteTask() {
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(), 20, true);
         voteTaskId = taskHandler.getTaskId();
     }

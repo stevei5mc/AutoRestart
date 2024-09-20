@@ -24,6 +24,7 @@ public class RestartTask extends Task {
             }
             time2--;// 每秒减少时间
         }
+        //这段代码是给任务ID为3的任务来使用的
         if (t == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
             Utils.shutdownServer();
         }

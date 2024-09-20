@@ -4,7 +4,9 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.nukkit.Player;
+import cn.nukkit.Server; 
 import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
 import java.util.*;
 
 public class Initiate extends BaseSubCommand {
@@ -28,7 +30,6 @@ public class Initiate extends BaseSubCommand {
         String vote = "";
         if (Utils.voteTaskState) {
             sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_is_initiate"));
-            return true;
         } else {
             if (sender.isPlayer()) {
                 Player player = (Player) sender;
@@ -36,12 +37,28 @@ public class Initiate extends BaseSubCommand {
             } else {
                 vote = "§d[§cServer§d]";
             }
-            for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", vote, "/voterestart"));
+            int startPlayer = main.getConfig().getInt("vote_start_player",3);
+            int voteTime = main.getConfig().getInt("vote_time",5);
+            //这里为了防止有人把时间设置为0或>5
+            if (voteTime == 0 || voteTime > 5) {
+                voteTime = 5;
             }
-            main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", vote, "/voterestart"));
-            return true; 
+            //这里写死最低发起投票人数为3，在配置文件中定义低于3也会按照3来判断
+            if (startPlayer < 3) {
+                startPlayer = 3;
+            }
+            int time = voteTime * 60;
+            if (Server.getInstance().getOnlinePlayers().size() >= startPlayer && time > RestartTask.time2) {
+                Utils.runVoteTask();
+                for (Player player : main.getServer().getOnlinePlayers().values()) {
+                    player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", vote, "/voterestart"));
+                }
+                main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", vote, "/voterestart"));
+            } else {
+                sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_not_initiate"));
+            }
         }
+        return true; 
     }
 
     @Override

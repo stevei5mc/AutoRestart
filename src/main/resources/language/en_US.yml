@@ -57,7 +57,10 @@ time_unit_seconds: seconds
 variable_remainder: "%1%"
 
 vote_restart_form_title: "Vote restart system"
-vote_restart_form_description_confirm: "Do you initiate a vote restart? The restart task requires the approval of %1% of players."
+vote_restart_form_description_confirm: |-
+    Do you initiate a vote restart?
+    The restart task requires the approval of %1% of players.
+    At the same time, %2% of players need to be online and have sufficient time to run the voting program
 vote_restart_form_description_vote: |
     You are participating in the voting restart, please cast your valuable vote for this voting restart.
     Voting status:
@@ -72,7 +75,7 @@ vote_restart_msg_not_initiate: "§cThe number of players is less than §b%1%§c,
 vote_restart_msg_is_initiate: "§cThe voting program is running and you cannot initiate it again!"
 vote_restart_msg_in_initiate: "§b%1%§a initiated a vote restart request. Please enter §b%2%§a to participate in the vote(the admin has one veto power!)"
 
-vote_msg_vote: "§a你投出了 %1%"
+vote_msg_vote: "§aYou vote %1%"
 
 vote_type_approval: "approva vote"
 vote_type_oppose: "oppose vote"
