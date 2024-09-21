@@ -28,17 +28,26 @@ public class VoteCmd extends BaseSubCommand {
     public boolean execute(CommandSender sender, String label, String[] args) {
         if (args.length == 2) {
             String s = args[1];
+            String vote = "";
+            if (sender.isPlayer()) {
+                Player player = (Player) sender;
+                vote = player.getName();
+                if (VoteTask.votePlayer.contains(vote) && s != "veto") {
+                    sender.sendMessage(main.getLang(sender).translateString("vote_msg_failed_repeat"));
+                    return false;
+                }
+            }
             switch (s) {
                 case "approval":
-                    VoteTask.approval = VoteTask.approval + 1;
+                    VoteTask.approval++;
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_approval")));
                     break;
                 case "oppose":
-                    VoteTask.oppose = VoteTask.oppose + 1;
+                    VoteTask.oppose++;
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
                     break;
                 case "abstention":
-                    VoteTask.abstention = VoteTask.abstention + 1;
+                    VoteTask.abstention++;
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_abstention")));
                     break;
                 case "veto":
@@ -50,10 +59,14 @@ public class VoteCmd extends BaseSubCommand {
                     sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
                     break;
             }
+            if (sender.isPlayer()) {
+                VoteTask.votePlayer.add(vote);
+            }
+            return true;
         }else{
             sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
+            return false;
         }
-        return true;
     }
 
     @Override

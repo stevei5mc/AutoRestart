@@ -12,6 +12,7 @@ import java.util.*;
 public class RestartTask extends Task {
     public static int time2 =30;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+    public static int t = Utils.taskType;
 
     public RestartTask(int time1) {
         time2 = time1;
@@ -19,7 +20,6 @@ public class RestartTask extends Task {
 
     @Override
     public void onRun(int currentTick) {
-        int t = Utils.taskType;
         if (t <= 2) {
             if (time2 <= Utils.getRestartTipTime()) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
