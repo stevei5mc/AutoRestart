@@ -3,6 +3,8 @@ plugin_language: language code en_US
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task
 command_help_restart: §eRun restart task.
+command_help_vote_initiate: §eInitiate voting
+command_help_vote_vote: §eParticipate in voting
 
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!
@@ -79,5 +81,4 @@ vote_msg_vote: "§aYou vote %1%"
 
 vote_type_approval: "approva vote"
 vote_type_oppose: "oppose vote"
-vote_type_veto: "One ticket veto"
 vote_type_abstention: "abstention"

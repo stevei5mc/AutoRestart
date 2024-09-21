@@ -186,5 +186,14 @@ public class Utils {
     public static void runVoteTask() {
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(), 20, true);
         voteTaskId = taskHandler.getTaskId();
+        voteTaskState = true;
+    }
+
+    public static void cancelVoteTask() {
+        main.getServer().getScheduler().cancelTask(voteTaskId);
+        voteTaskState = false;
+        for (Player player : main.getServer().getOnlinePlayers().values()) {
+            player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+        }
     }
 }

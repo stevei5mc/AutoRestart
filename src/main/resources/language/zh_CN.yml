@@ -3,6 +3,8 @@ plugin_language: language code zh_CN
 command_help_reload: §e重载配置
 command_help_cancel: §e取消重启任务
 command_help_restart: §e运行重启任务
+command_help_vote_initiate: §e发起投票
+command_help_vote_vote: §e参与投票
 
 command_not_permission: §c你没有权限使用此命令！
 command_in_game_run: §c请在游戏内使用此命令！
@@ -79,5 +81,4 @@ vote_msg_vote: "§a你投出了 %1%"
 
 vote_type_approval: "赞成票"
 vote_type_oppose: "反对票"
-vote_type_veto: "一票否决"
 vote_type_abstention: "弃权票"

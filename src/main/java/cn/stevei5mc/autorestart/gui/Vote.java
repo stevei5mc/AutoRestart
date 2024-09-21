@@ -44,7 +44,7 @@ public class Vote {
             ); 
         }
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_abstention"))
-        .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote abstention"))
+            .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote abstention"))
         );
         player.showFormWindow(simple);
     }

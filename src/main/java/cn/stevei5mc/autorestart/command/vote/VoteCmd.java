@@ -39,7 +39,7 @@ public class VoteCmd extends BaseSubCommand {
                     return true;
                 case "veto":
                     if (sender.hasPermission("autorestart.admin.vote.veto")) {
-                        sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_veto")));
+                        Utils.cancelVoteTask();
                     }
                     return true;
                 default:

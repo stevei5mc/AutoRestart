@@ -24,8 +24,8 @@ public class VoteMain extends BaseCommand {
         Language lang = main.getLang(sender);
         String cmdname = "§a/voterestart ";
         sender.sendMessage("§b=== AutoRestart vote command list ===");
-        sender.sendMessage(cmdname+"initiate ");
-        sender.sendMessage(cmdname+"vote ");
+        sender.sendMessage(cmdname+"initiate "+main.getLang(sender).translateString("command_help_vote_initiate"));
+        sender.sendMessage(cmdname+"vote <approval|oppose|abstention|veto> "+main.getLang(sender).translateString("command_help_vote_vote"));
     }
 
     @Override
