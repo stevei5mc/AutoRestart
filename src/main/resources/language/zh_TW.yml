@@ -78,6 +78,7 @@ vote_restart_msg_is_initiate: "§c投票程式正在運行，你無法再次發�
 vote_restart_msg_in_initiate: "§b%1%§a 發起了投票重啓請求，請輸入 §b%2%§a 參與投票（管理員擁有一票否决權！）"
 
 vote_msg_vote: "§a你投出了 %1%"
+vote_msg_failed_repeat: "§c你已經投票了，不能再次投票！"
 
 vote_type_approval: "贊成票"
 vote_type_oppose: "反對票"

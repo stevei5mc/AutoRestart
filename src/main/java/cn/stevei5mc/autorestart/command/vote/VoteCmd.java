@@ -3,8 +3,9 @@ package cn.stevei5mc.autorestart.command.vote;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
-import cn.nukkit.Player;
+import cn.stevei5mc.autorestart.tasks.VoteTask;
 import cn.stevei5mc.autorestart.Utils;
+import cn.nukkit.Player;
 import java.util.*;
 
 public class VoteCmd extends BaseSubCommand {
@@ -29,27 +30,30 @@ public class VoteCmd extends BaseSubCommand {
             String s = args[1];
             switch (s) {
                 case "approval":
+                    VoteTask.approval = VoteTask.approval + 1;
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_approval")));
-                    return true;
-                case "oppose":  
+                    break;
+                case "oppose":
+                    VoteTask.oppose = VoteTask.oppose + 1;
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
-                    return true;
+                    break;
                 case "abstention":
+                    VoteTask.abstention = VoteTask.abstention + 1;
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_abstention")));
-                    return true;
+                    break;
                 case "veto":
                     if (sender.hasPermission("autorestart.admin.vote.veto")) {
                         Utils.cancelVoteTask();
                     }
-                    return true;
+                    break;
                 default:
                     sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
-                    return false;
+                    break;
             }
         }else{
             sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
-            return false;
         }
+        return true;
     }
 
     @Override

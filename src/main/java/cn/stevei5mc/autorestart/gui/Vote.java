@@ -1,6 +1,8 @@
 package cn.stevei5mc.autorestart.gui;
 
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
+import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.tasks.VoteTask;
 import cn.lanink.gamecore.form.element.ResponseElementButton;
 import cn.lanink.gamecore.form.windows.AdvancedFormWindowSimple;
 import cn.lanink.gamecore.form.windows.AdvancedFormWindowModal;
@@ -8,7 +10,6 @@ import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import org.jetbrains.annotations.NotNull;
-import cn.stevei5mc.autorestart.Utils;
 
 public class Vote {
 
@@ -31,7 +32,8 @@ public class Vote {
     public static void voteGui(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("vote_restart_form_title"));
-        simple.setContent(lang.translateString("vote_restart_form_description_vote",0,0,0)+ "\n\n");
+        simple.setContent(lang.translateString("vote_restart_form_description_vote",
+        VoteTask.approval,VoteTask.oppose,VoteTask.abstention));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_approval"))
             .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote approval"))
         );

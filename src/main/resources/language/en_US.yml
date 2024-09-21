@@ -78,7 +78,8 @@ vote_restart_msg_is_initiate: "§cThe voting program is running and you cannot i
 vote_restart_msg_in_initiate: "§b%1%§a initiated a vote restart request. Please enter §b%2%§a to participate in the vote(the admin has one veto power!)"
 
 vote_msg_vote: "§aYou vote %1%"
+vote_msg_failed_repeat: "§cYou have already voted, you cannot vote again!"
 
 vote_type_approval: "approva vote"
 vote_type_oppose: "oppose vote"
-vote_type_abstention: "abstention"
+vote_type_abstention: "abstention vote"
