@@ -26,7 +26,7 @@ public class Vote {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
             lang.translateString("vote_restart_form_title"),
-            lang.translateString("vote_restart_form_description_confirm",startPlayer,0),
+            lang.translateString("vote_restart_form_description_confirm",startPlayer,VoteTask.approvalVotes),
             lang.translateString("form_button_confirm"),
             lang.translateString("form_button_close")
         );

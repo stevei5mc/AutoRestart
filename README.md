@@ -63,9 +63,11 @@ commands:
 - [x] zh_CN   中文(简体)
 - [x] zh_TW   中文(繁體)
 - [x] en_US   English (United States)
+
 ## **使用方法**
 ### **注意事项**
 - **自动重启还需要脚本的配合才能实现相关脚本在[Actions](https://github.com/stevei5mc/NewTipsVariables/actions)编译完成后会一并给出，你也可以到对应[GITHUB 仓库](https://github.com/stevei5mc/McStartServer)获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases)中也可以获取得到但只会在版本发布后才会有相关脚本(Windows用.bat后缀的脚本，Linux请用.sh后缀的脚本，另外每种系统的脚本都有两种根据你的需求选择)，如果你已经有了相关脚本则可以忽略**
+- **本插件的重启时间会受服务器TPS导致重启时间不会按现实的时间进行而是按照服务器TPS的计算的时间进行的**
 
 ### **脚本使用说明**
 - **此内容使用于配套的启动脚本，可配置项已在下方列出**

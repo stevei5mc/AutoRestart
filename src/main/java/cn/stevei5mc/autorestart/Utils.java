@@ -123,8 +123,8 @@ public class Utils {
         return remainder;
     }
 
-    public static void runVoteTask(int time) {
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time), 20, true);
+    public static void runVoteTask(int time,String vote) {
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,vote), 20, true);
         voteTaskId = taskHandler.getTaskId();
         voteTaskState = true;
     }
@@ -132,8 +132,5 @@ public class Utils {
     public static void cancelVoteTask() {
         main.getServer().getScheduler().cancelTask(voteTaskId);
         voteTaskState = false;
-        for (Player player : main.getServer().getOnlinePlayers().values()) {
-            player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_veto"));
-        }
     }
 }

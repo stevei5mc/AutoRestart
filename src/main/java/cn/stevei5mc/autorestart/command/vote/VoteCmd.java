@@ -53,6 +53,9 @@ public class VoteCmd extends BaseSubCommand {
                 case "veto":
                     if (sender.hasPermission("autorestart.admin.vote.veto")) {
                         Utils.cancelVoteTask();
+                        for (Player player : main.getServer().getOnlinePlayers().values()) {
+                            player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+                        }
                     }
                     break;
                 default:
