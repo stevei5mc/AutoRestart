@@ -18,10 +18,15 @@ public class Vote {
     }
 
     public static void initiateVote(@NotNull Player player) {
+        AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+        int startPlayer = main.getConfig().getInt("vote_start_player",3);
+        if (startPlayer < 3) {
+            startPlayer = 3;
+        }
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
             lang.translateString("vote_restart_form_title"),
-            lang.translateString("vote_restart_form_description_confirm"),
+            lang.translateString("vote_restart_form_description_confirm",startPlayer,0),
             lang.translateString("form_button_confirm"),
             lang.translateString("form_button_close")
         );

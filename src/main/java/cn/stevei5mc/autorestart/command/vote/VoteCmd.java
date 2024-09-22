@@ -32,7 +32,7 @@ public class VoteCmd extends BaseSubCommand {
             if (sender.isPlayer()) {
                 Player player = (Player) sender;
                 vote = player.getName();
-                if (VoteTask.votePlayer.contains(vote) && s != "veto") {
+                if (VoteTask.votePlayer.contains(vote) && !args[1].equals("veto")) {
                     sender.sendMessage(main.getLang(sender).translateString("vote_msg_failed_repeat"));
                     return false;
                 }
