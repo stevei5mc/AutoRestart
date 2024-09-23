@@ -34,7 +34,10 @@ public class AutoRestartPlugin extends PluginBase {
         instance = this;
         saveDefaultConfig();
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
-        saveLanguageFile();
+        for(String lang: languages){
+            saveResource("language/"+lang+".yml",false);
+        }
+        updataConfig();
     }
 
     public void onEnable() {
@@ -70,11 +73,6 @@ public class AutoRestartPlugin extends PluginBase {
         this.getLogger().info("已停止运行，感谢你的使用");
     }
 
-    private void saveLanguageFile() {
-        for(String lang: languages){
-            saveResource("language/"+lang+".yml",false);
-        }
-    }
     //使用(有改动)https://github.com/MemoriesOfTime/CrystalWars/blob/master/src/main/java/cn/lanink/crystalwars/CrystalWars.java
     private void loadLanguage() {
         this.defaultLanguage = this.config.getString("default_language", "zh_CN");
@@ -108,5 +106,25 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void reload() {
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
+    }
+
+    public void updataConfig() {
+        int ver = config.getInt("version", 1);
+        if (ver < 2) {
+            config.set("version", 2);
+            if (!config.exists("vote_start_player")) {
+                config.set("vote_start_player",3);
+            }
+            if (!config.exists("vote_time")) {
+                config.set("vote_time",5);
+            }
+            if (!config.exists("runcommand")) {
+                config.set("runcommand",true);
+            }
+            if (!config.exists("commands")) {
+                config.set("commands",Arrays.asList("help", "say hello \"@p\"&con"));
+            }
+            config.save();
+        }
     }
 }
