@@ -30,6 +30,7 @@
 |/voterestart vote approval|autorestart.user.vote|投出赞成票|player|
 |/voterestart vote oppose|autorestart.user.vote|投出反对票|player|
 |/voterestart vote veto|autorestart.admin.vote.veto|使用一票否决|OP|
+||autorestart.admin.vote.force|在调试模式中强制发起投票|OP|
 ### **配置文件介绍**
 ```yml
 #配置文件版本（勿动!!!）

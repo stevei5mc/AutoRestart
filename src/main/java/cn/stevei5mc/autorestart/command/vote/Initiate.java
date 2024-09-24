@@ -48,7 +48,9 @@ public class Initiate extends BaseSubCommand {
                 startPlayer = 3;
             }
             int time = voteTime * 60;
-            if (Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2) {
+            boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2;
+            boolean debugCondition = main.getConfig().getBoolean("debug",false) && sender.hasPermission("autorestart.admin.vote.force");
+            if (normalCondition || debugCondition) {
                 Utils.runVoteTask(time,vote);
             } else {
                 sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_not_initiate"));

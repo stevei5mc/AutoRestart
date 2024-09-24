@@ -20,6 +20,9 @@ permissions:
   autorestart.admin.vote.veto:
     description: "一票否决权"
     default: op
+  autorestart.admin.vote.force:
+    description: "在调试模式中强制发起投票"
+    default: op
   autorestart.user.vote:
     description: "投票权限"
     default: true
