@@ -61,12 +61,11 @@ variable_remainder: "%1%"
 vote_restart_form_title: "Vote restart system"
 vote_restart_form_description_confirm: |-
     Do you initiate a vote restart?
-    The restart task requires the approval of %1% of players.
-    At the same time, %2% of players need to be online and have sufficient time to run the voting program
+    At the same time, %1% of players need to be online and have sufficient time to run the voting program
 vote_restart_form_description_vote: |
     You are participating in the voting restart, please cast your valuable vote for this voting restart.
     Voting status:
-    Approval votes: %1%
+    Approval votes: %1%  Need for votes: %4%
     Opposing votes: %2%
     Abstention votes: %3%
 

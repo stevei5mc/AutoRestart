@@ -61,12 +61,11 @@ variable_remainder: "%1%"
 vote_restart_form_title: "投票重启系统"
 vote_restart_form_description_confirm: |-
     你是否发起投票重启？
-    需要 %1% 名玩家赞成才会执行重启任务。
-    同时需要 %2% 玩家在线和有充足的时间才会运行投票程序
+    同时需要 %1% 玩家在线和有充足的时间才会运行投票程序
 vote_restart_form_description_vote: |-
     你正在参与投票重启，请你为本次投票重启投出宝贵的一票。
     投票状态：
-    赞成票：%1%
+    赞成票：%1%  需要票数: %4%
     反对票：%2%
     弃权票：%3%
 

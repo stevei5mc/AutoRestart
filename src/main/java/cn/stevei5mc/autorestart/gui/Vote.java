@@ -26,7 +26,7 @@ public class Vote {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
             lang.translateString("vote_restart_form_title"),
-            lang.translateString("vote_restart_form_description_confirm",startPlayer,VoteTask.approvalVotes),
+            lang.translateString("vote_restart_form_description_confirm",startPlayer),
             lang.translateString("form_button_confirm"),
             lang.translateString("form_button_close")
         );
@@ -38,17 +38,18 @@ public class Vote {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("vote_restart_form_title"));
         simple.setContent(lang.translateString("vote_restart_form_description_vote",
-        VoteTask.approval,VoteTask.oppose,VoteTask.abstention));
+        VoteTask.approval,VoteTask.oppose,VoteTask.abstention,VoteTask.approvalVotes));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_approval"))
             .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote approval"))
-        );
-        simple.addButton(new ResponseElementButton(lang.translateString("form_button_oppose"))
-            .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote oppose"))
         );
         if (player.hasPermission("autorestart.admin.vote.veto")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_veto"))
                 .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote veto"))
             ); 
+        } else {
+            simple.addButton(new ResponseElementButton(lang.translateString("form_button_oppose"))
+                .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote oppose"))
+            );
         }
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_abstention"))
             .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "voterestart vote abstention"))

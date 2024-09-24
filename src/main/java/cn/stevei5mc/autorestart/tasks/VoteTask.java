@@ -35,12 +35,12 @@ public class VoteTask extends Task {
     @Override
     public void onRun(int currentTick) {
         if (msgTime == time2) {
-            msgTime = msgTime - 60;
-            if (msgTime != 0) {
+            if (msgTime > 0) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", voter, "/voterestart"));
                 }
                 main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", voter, "/voterestart"));
+                msgTime = msgTime - 60;
             }
         }
         if (time2 <= 0) {
