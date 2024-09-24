@@ -62,6 +62,8 @@ commands:
 vote_start_player: 3
 #投票的时间限制（最高只能为5）
 vote_time: 5
+#调试模式
+debug: false
 ```
 ### **支持的语言**
 - **顺序按照支持的顺序排序**
@@ -124,8 +126,8 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 |2|将本插件放进`plugins`文件夹，并确保安装前置插件[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)后启动服务器 <br> 安装前置插件[Tips](https://motci.cn/job/Tips/)可让变量`{restart-remainder}`生效（这是可选的）|
 |3|如果不使用默认配置则修改好配置文件后重启服务器让新的配置生效（由于自动重启任务的配置读取是在服务器启动阶段进行的，所以无法通过重载配置文件的操作让新的配置完全生效只能通过重启服务器来让新的配置生效）|
 ## **效果预览**
-|![1](docs/image/1.jpg)|![2](docs/image/2.jpg)|
-|-|-|
-|![3](docs/image/3.jpg)|![4](docs/image/4.jpg)|
-|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
+|![1](docs/image/1.jpg)|![2](docs/image/2.jpg)|![3](docs/image/3.jpg)|
+|-|-|-|
+|![4](docs/image/4.jpg)|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
+|![7](docs/image/7.jpg)|![8](docs/image/8.jpg)|![9](docs/image/9.jpg)|
 ## **[开发文档](docs/dev-doc.md)**

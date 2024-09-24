@@ -28,3 +28,5 @@ commands:
 vote_start_player: 3
 #投票的时间限制（最高只能为5）
 vote_time: 5
+#调试模式
+debug: false

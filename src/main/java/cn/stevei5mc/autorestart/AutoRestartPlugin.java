@@ -124,6 +124,9 @@ public class AutoRestartPlugin extends PluginBase {
             if (!config.exists("commands")) {
                 config.set("commands",Arrays.asList("help", "say hello \"@p\"&con"));
             }
+            if (!config.exists("debug")) {
+                config.set("debug",false);
+            }
             config.save();
         }
     }
