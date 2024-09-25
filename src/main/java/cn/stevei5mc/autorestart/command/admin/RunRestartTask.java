@@ -31,7 +31,7 @@ public class RunRestartTask extends BaseSubCommand {
             switch (s) {
                 case "manual":
                     int i = BaseUtils.getRestartTipTime();
-                    TasksUtils.runRestartTask(i,2);
+                    TasksUtils.runRestartTask(i,2,2);
                     return true;
                 case "no-players":  
                     TasksUtils.runRestartTask(3,0);

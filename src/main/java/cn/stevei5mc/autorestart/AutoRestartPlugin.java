@@ -48,7 +48,7 @@ public class AutoRestartPlugin extends PluginBase {
             this.getServer().getCommandMap().register("", new AdminMain());//注册命令
             this.getServer().getCommandMap().register("", new VoteMain());
             int i = BaseUtils.getRestartUseTime();
-            TasksUtils.runRestartTask(i,1);
+            TasksUtils.runRestartTask(i,1,1);
             if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
                 tips = true;
                 Api.registerVariables("TipsVar",TipsVar.class);

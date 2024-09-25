@@ -23,7 +23,7 @@ public class Admin {
         String trueButton = lang.translateString("form_button_confirm");
         String falseButton = lang.translateString("form_button_back");
         String unitSeconds = lang.translateString("time_unit_seconds");
-        if (TasksUtils.taskState) {
+        if (TasksUtils.restartTaskState) {
             if (player.hasPermission("autorestart.admin.cancel")) {
                 simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
                     String postscript = "";

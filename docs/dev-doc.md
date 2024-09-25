@@ -40,14 +40,24 @@
 ```
 #### **讲解**
 ```
-Utils
-    - runRestartTask(int type) 运行重启任务
-    - runRestartTask(int restartTime,int type) 运行重启任务
+TasksUtils
+    - runRestartTask(int taskType,int timeUnit) 运行重启任务
+    - runRestartTask(int restartTime,int taskType,int timeUnit) 运行重启任务
+    - runVoteTask(int time,String vote) 发起重启任务
+    - cancelVoteTask() 取消重启任务
+    - cancelRestartTask() 取消重启任务
+    - restartTaskState 重启任务的状态
+    - voteTaskState 投票任务的状态
+BaseUtils
     - getRestartUseTime() 获取重启任务的重启时间
     - getRestartTipTime() 获取提示时间,在还剩多少秒的时候通知玩家
-    - cancelTask() 取消重启任务
     - getRemainder(Player player) 获取剩余时间
-    - runVoteTask() 发起重启任务
-    - cancelVoteTask() 取消重启任务
+RestartTask
+    - time2 获取时间（单位：秒）
+VoteTask
+    - approval 获取赞成票数
+    - oppose 获取反对票数
+    - abstention 获取弃权票数
+    - approvalVotes 获取需要的赞成票数
 ```
 ---

@@ -9,7 +9,7 @@ import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 public class TasksUtils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static boolean taskState = false;//任务状态，默认为 false
+    public static boolean restartTaskState = false;//任务状态，默认为 false
     public static boolean voteTaskState = false;
     public static int restartTaskType = 0;//任务类型，默认编号为 0
     private static int restartTaskId;
@@ -17,7 +17,8 @@ public class TasksUtils {
 
     /**
      * 运行重启任务
-     * @param type 重启任务类型
+     * @param taskType 任务类型
+     * @param timeUnit 时间类型
     */
     public static void runRestartTask(int taskType,int timeUnit) {
         runRestartTask(0,taskType,timeUnit);
@@ -26,7 +27,8 @@ public class TasksUtils {
     /**
      * 运行重启任务
      * @param restartTime 重启需要的时间
-     * @param type 重启任务类型
+     * @param taskType 任务类型
+     * @param timeUnit 时间类型
     */
     public static void runRestartTask(int restartTime,int taskType,int timeUnit) {
         cancelRestartTask();//不管重启任务在不在运行都取消一遍再运行任务，以防出现一些奇怪的问题
@@ -51,7 +53,7 @@ public class TasksUtils {
                 restartTaskType = 0;
                 break;
         }
-        switch (taskType) {
+        switch (timeUnit) {
             case 1:
                 time = restartTime * 60;
                 unit = "time_unit_minutes";
@@ -70,7 +72,7 @@ public class TasksUtils {
         }
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
         restartTaskId = taskHandler.getTaskId();
-        taskState = true;
+        restartTaskState = true;
         if (taskType <= 2) { 
             main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -81,10 +83,15 @@ public class TasksUtils {
 
     public static void cancelRestartTask() {
         main.getServer().getScheduler().cancelTask(restartTaskId);
-        taskState = false;
+        restartTaskState = false;
         restartTaskType = 0;//重置任务编号
     }
 
+    /**
+     * 运行投票任务
+     * @param time 投票任务的时间
+     * @param vote 投票的发起者
+    */
     public static void runVoteTask(int time,String vote) {
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,vote), 20, true);
         voteTaskId = taskHandler.getTaskId();
