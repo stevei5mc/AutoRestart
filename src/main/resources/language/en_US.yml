@@ -2,19 +2,27 @@ plugin_language: language code en_US
 
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task
-command_help_restart: §eRun restart task. Type:<manual|no-layers>
+command_help_restart: §eRun restart task.
+command_help_vote_initiate: §eInitiate voting
+command_help_vote_vote: §eParticipate in voting
 
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!
 command_unknown: §cUnknown command or parameter, please check and try again!
 
 form_title: Auto Rstart plugin
+
 form_button_restart_cancel: cancel restart task
 form_button_reload: reload config
 form_button_manual_restart: Manual restart
 form_button_on_player: No online player
-form_button_confirm_true: "Yes"
-form_button_confirm_false: back
+form_button_confirm: confirm
+form_button_back: back
+form_button_close: close
+form_button_approval: approval
+form_button_oppose: oppose
+form_button_veto: "One ticket veto"
+form_button_abstention: "abstention"
 
 form_confirm_restart_title: Run restart task
 form_confirm_restart_description_task: |-
@@ -49,3 +57,28 @@ time_unit_minutes: minutes
 time_unit_seconds: seconds
 
 variable_remainder: "%1%"
+
+vote_restart_form_title: "Vote restart system"
+vote_restart_form_description_confirm: |-
+    Do you initiate a vote restart?
+    At the same time, %1% of players need to be online and have sufficient time to run the voting program
+vote_restart_form_description_vote: |
+    You are participating in the voting restart, please cast your valuable vote for this voting restart.
+    Voting status:
+    Approval votes: %1%  Need for votes: %4%
+    Opposing votes: %2%
+    Abstention votes: %3%
+
+vote_restart_msg_success: "§aThe voting for has ended, reaching §b%1%§a of votes and meeting §b%2%§a of votes. A restart is about to begin"
+vote_restart_msg_failed_end: "§cThe voting for has ended, reaching §b%1%§c of votes, but not meeting §b%2%§c of votes, and cannot be restarted"
+vote_restart_msg_failed_veto: "§cThe administrator used a veto power, and the voting has ended"
+vote_restart_msg_not_initiate: "§cThe number of players is less than §b%1%§c, unable to start the voting process. Please wait for enough players to try again!"
+vote_restart_msg_is_initiate: "§cThe voting program is running and you cannot initiate it again!"
+vote_restart_msg_in_initiate: "§b%1%§a initiated a vote restart request. Please enter §b%2%§a to participate in the vote(the admin has one veto power!)"
+
+vote_msg_vote: "§aYou vote %1%"
+vote_msg_failed_repeat: "§cYou have already voted, you cannot vote again!"
+
+vote_type_approval: "approva vote"
+vote_type_oppose: "oppose vote"
+vote_type_abstention: "abstention vote"

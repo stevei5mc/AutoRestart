@@ -8,27 +8,33 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/stevei5mc/AutoRestart?style=plastic)
 ## **插件介绍**
 ### **功能介绍**
-1. **支持多语言（根据玩家客户端的语言进行匹配）**
-2. **支持播放音效提醒玩家（暂时只支持mc原有的）**
-3. **支持取消自动重启任务**
-4. **支持多种重启任务(查看任务类型获取现在支持的重启任务)，更多类型敬请期待**
+- [x] **多语言（根据玩家客户端的语言进行匹配）**
+- [x] **播放音效提醒玩家（暂时只支持mc原有的）**
+- [x] **取消自动重启任务**
+- [ ] **暂停任务 （敬请期待）**
 ### **任务类型**
 - [x] **定时重启**
 - [x] **手动重启（手动重启的时间为配置文件中的提示时间）**
 - [x] **服务器无人时自动重启**
+- [ ] **投票重启 （敬请期待）**
 ### **命令与权限**
 |命令|权限节点|命令/权限介绍|默认权限|
-|:-:|:-:|:-:|:-:|
+|:-:|:-:|:-|:-:|
 |/autorestart|autorestart.admin|主命令、打开GUI|OP|
 |/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
 |/autorestart cancel|autorestart.admin.cancel|取消重启任务|OP|
 |/autorestart restart manual|autorestart.admin.restart|手动重启服务器|OP|
 |/autorestart restart no-player|autorestart.admin.restart|在服务器没有玩家在线时自动重启服务器|OP|
-- **任务类型介绍：**
-- **manual 手动重启时间为配置文件中`tips_time`设定的时间**
-- **no-player 在服务器没有玩家在线的时自动候重启服务器**
+|/voterestart|autorestart.user.vote|主命令、打开GUI|player|
+|/voterestart initiate|autorestart.user.vote|发起投票|player|
+|/voterestart vote approval|autorestart.user.vote|投出赞成票|player|
+|/voterestart vote oppose|autorestart.user.vote|投出反对票|player|
+|/voterestart vote veto|autorestart.admin.vote.veto|使用一票否决|OP|
+||autorestart.admin.vote.force|在调试模式中强制发起投票|OP|
 ### **配置文件介绍**
 ```yml
+#配置文件版本（勿动!!!）
+version: 2
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -51,18 +57,25 @@ sound:
 #重启前执行的命令(&con为控制台执行 @p 代表玩家名)
 runcommand: true
 commands:
-  - "say hello world&con"
   - "help"
   - "say hello @p&con"
+#发起重启投票的最低人数（最低只能为3）
+vote_start_player: 3
+#投票的时间限制（最高只能为5）
+vote_time: 5
+#调试模式
+debug: false
 ```
 ### **支持的语言**
 - **顺序按照支持的顺序排序**
 - [x] zh_CN   中文(简体)
 - [x] zh_TW   中文(繁體)
 - [x] en_US   English (United States)
+
 ## **使用方法**
 ### **注意事项**
 - **自动重启还需要脚本的配合才能实现相关脚本在[Actions](https://github.com/stevei5mc/NewTipsVariables/actions)编译完成后会一并给出，你也可以到对应[GITHUB 仓库](https://github.com/stevei5mc/McStartServer)获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases)中也可以获取得到但只会在版本发布后才会有相关脚本(Windows用.bat后缀的脚本，Linux请用.sh后缀的脚本，另外每种系统的脚本都有两种根据你的需求选择)，如果你已经有了相关脚本则可以忽略**
+- **本插件的重启时间会受服务器TPS导致重启时间不会按现实的时间进行而是按照服务器TPS的计算的时间进行的**
 
 ### **脚本使用说明**
 - **此内容使用于配套的启动脚本，可配置项已在下方列出**
@@ -114,8 +127,8 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 |2|将本插件放进`plugins`文件夹，并确保安装前置插件[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)后启动服务器 <br> 安装前置插件[Tips](https://motci.cn/job/Tips/)可让变量`{restart-remainder}`生效（这是可选的）|
 |3|如果不使用默认配置则修改好配置文件后重启服务器让新的配置生效（由于自动重启任务的配置读取是在服务器启动阶段进行的，所以无法通过重载配置文件的操作让新的配置完全生效只能通过重启服务器来让新的配置生效）|
 ## **效果预览**
-|![1](docs/image/1.jpg)|![2](docs/image/2.jpg)|
-|-|-|
-|![3](docs/image/3.jpg)|![4](docs/image/4.jpg)|
-|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
+|![1](docs/image/1.jpg)|![2](docs/image/2.jpg)|![3](docs/image/3.jpg)|
+|-|-|-|
+|![4](docs/image/4.jpg)|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
+|![7](docs/image/7.jpg)|![8](docs/image/8.jpg)|![9](docs/image/9.jpg)|
 ## **[开发文档](docs/dev-doc.md)**

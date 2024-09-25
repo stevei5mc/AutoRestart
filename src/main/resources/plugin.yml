@@ -1,6 +1,6 @@
 name: AutoRestart
 main: cn.stevei5mc.autorestart.AutoRestartPlugin
-version: "1.0.0-beta3"
+version: "1.0.0-beta4"
 author: stevei5mc
 api: ["1.0.14"]
 
@@ -17,3 +17,12 @@ permissions:
   autorestart.admin.restart:
     description: "手动重启权限"
     default: op
+  autorestart.admin.vote.veto:
+    description: "一票否决权"
+    default: op
+  autorestart.admin.vote.force:
+    description: "在调试模式中强制发起投票"
+    default: op
+  autorestart.user.vote:
+    description: "投票权限"
+    default: true

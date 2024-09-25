@@ -1,3 +1,5 @@
+#配置文件版本（勿动!!!）
+version: 2
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -20,6 +22,11 @@ sound:
 #重启前执行的命令(&con为控制台执行 @p 代表玩家名)
 runcommand: true
 commands:
-  - "say hello world&con"
   - "help"
   - "say hello @p&con"
+#发起重启投票的最低人数（最低只能为3）
+vote_start_player: 3
+#投票的时间限制（最高只能为5）
+vote_time: 5
+#调试模式
+debug: false

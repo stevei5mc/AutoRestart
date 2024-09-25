@@ -1,4 +1,4 @@
-package cn.stevei5mc.autorestart;
+package cn.stevei5mc.autorestart.gui;
 
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.lanink.gamecore.form.element.ResponseElementButton;
@@ -7,25 +7,20 @@ import cn.lanink.gamecore.form.windows.AdvancedFormWindowModal;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.math.Vector3;
 import org.jetbrains.annotations.NotNull;
 import cn.stevei5mc.autorestart.Utils;
-import cn.stevei5mc.autorestart.tasks.RestartTask;
 
-/**
- * 菜单（这个参考了rsnpc的写法）
- */
-public class GUI {
+public class Admin {
 
-    private GUI() {
+    private Admin() {
         throw new RuntimeException("Error");
     }
 
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
-        String trueButton = lang.translateString("form_button_confirm_true");
-        String falseButton = lang.translateString("form_button_confirm_false");
+        String trueButton = lang.translateString("form_button_confirm");
+        String falseButton = lang.translateString("form_button_back");
         String unitSeconds = lang.translateString("time_unit_seconds");
         if (Utils.taskState) {
             if (player.hasPermission("autorestart.admin.cancel")) {
@@ -74,7 +69,6 @@ public class GUI {
                         cp.showFormWindow(modal);
                 }));
                 simple.addButton(new ResponseElementButton(lang.translateString("form_button_on_player")).onClicked(cp -> {
-                    int i = Utils.getRestartTipTime();
                     AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                         lang.translateString("form_confirm_restart_title"),
                         lang.translateString("form_confirm_restart_description_task", lang.translateString("restart_task_type_no_player")),

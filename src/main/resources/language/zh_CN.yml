@@ -2,19 +2,27 @@ plugin_language: language code zh_CN
 
 command_help_reload: §e重载配置
 command_help_cancel: §e取消重启任务
-command_help_restart: §e运行重启任务。 类型：<manual|no-players>
+command_help_restart: §e运行重启任务
+command_help_vote_initiate: §e发起投票
+command_help_vote_vote: §e参与投票
 
 command_not_permission: §c你没有权限使用此命令！
 command_in_game_run: §c请在游戏内使用此命令！
 command_unknown: §c未知的命令或参数，请检查后再试！
 
 form_title: Auto Rstart plugin
+
 form_button_restart_cancel: 取消重启任务
 form_button_reload: 重载配置
 form_button_manual_restart: 手动重启
 form_button_on_player: 无在线玩家时重启
-form_button_confirm_true: 确认
-form_button_confirm_false: 返回
+form_button_confirm: 确认
+form_button_back: 返回
+form_button_close: 关闭
+form_button_approval: 赞成
+form_button_oppose: 反对
+form_button_veto: "一票否决"
+form_button_abstention: "弃权"
 
 form_confirm_restart_title: 运行重启任务
 form_confirm_restart_description_task: |-
@@ -49,3 +57,28 @@ time_unit_minutes: 分钟
 time_unit_seconds: 秒
 
 variable_remainder: "%1%"
+
+vote_restart_form_title: "投票重启系统"
+vote_restart_form_description_confirm: |-
+    你是否发起投票重启？
+    同时需要 %1% 玩家在线和有充足的时间才会运行投票程序
+vote_restart_form_description_vote: |-
+    你正在参与投票重启，请你为本次投票重启投出宝贵的一票。
+    投票状态：
+    赞成票：%1%  需要票数: %4%
+    反对票：%2%
+    弃权票：%3%
+
+vote_restart_msg_success: "§a投票结束，已达到 §b%1%§a 票，满足 §b%2%§a 票，即将进行重启"
+vote_restart_msg_failed_end: "§c投票结束，已达到 §b%1%§c 票，未满足 §b%2%§c 票，无法进行重启"
+vote_restart_msg_failed_veto: "§c管理员使用了一票否决权，本次投票结束"
+vote_restart_msg_not_initiate: "§c无法启动投票程序，请检查是否符合发起投票的条件后再试"
+vote_restart_msg_is_initiate: "§c投票程序正在运行，你无法再次发起！"
+vote_restart_msg_in_initiate: "§b%1%§a 发起了投票重启请求，请输入 §b%2%§a 参与投票（管理员拥有一票否决权！）"
+
+vote_msg_vote: "§a你投出了 %1%"
+vote_msg_failed_repeat: "§c你已经投票了，不能再次投票！"
+
+vote_type_approval: "赞成票"
+vote_type_oppose: "反对票"
+vote_type_abstention: "弃权票"

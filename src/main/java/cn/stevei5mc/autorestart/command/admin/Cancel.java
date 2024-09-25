@@ -1,8 +1,8 @@
-package cn.stevei5mc.autorestart.command.sub;
+package cn.stevei5mc.autorestart.command.admin;
 
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
-import cn.stevei5mc.autorestart.command.BaseSubCommand;
+import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.nukkit.Player;
 import cn.stevei5mc.autorestart.Utils;
 
