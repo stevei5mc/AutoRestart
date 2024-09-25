@@ -4,7 +4,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.stevei5mc.autorestart.tasks.VoteTask;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.nukkit.Player;
 import java.util.*;
 
@@ -52,7 +52,7 @@ public class VoteCmd extends BaseSubCommand {
                     break;
                 case "veto":
                     if (sender.hasPermission("autorestart.admin.vote.veto")) {
-                        Utils.cancelVoteTask();
+                        TasksUtils.cancelVoteTask();
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
                             player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_veto"));
                         }

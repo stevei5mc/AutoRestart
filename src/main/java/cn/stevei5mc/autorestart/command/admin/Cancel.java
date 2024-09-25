@@ -4,7 +4,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.nukkit.Player;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
 
 /**
  * @author LT_Name
@@ -27,7 +27,7 @@ public class Cancel extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        Utils.cancelTask();
+        TasksUtils.cancelRestartTask();
         main.getLogger().info((main.getLang().translateString("restart_task_cancel")));
         for (Player player : main.getServer().getOnlinePlayers().values()) {
             player.sendMessage(main.getLang(player).translateString("restart_task_cancel"));

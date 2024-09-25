@@ -2,7 +2,8 @@ package cn.stevei5mc.autorestart.tasks;
 
 import cn.nukkit.scheduler.Task;
 import cn.lanink.gamecore.utils.Language;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.nukkit.Server;
 import cn.nukkit.Player;
@@ -44,10 +45,10 @@ public class VoteTask extends Task {
             }
         }
         if (time2 <= 0) {
-            Utils.cancelVoteTask();
+            TasksUtils.cancelVoteTask();
             if (approval >= approvalVotes) {
-                int i = Utils.getRestartTipTime();
-                Utils.runRestartTask(i,2);
+                int i = BaseUtils.getRestartTipTime();
+                TasksUtils.runRestartTask(i,2);
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getLang(player).translateString("vote_restart_msg_success", approval, approvalVotes));
                 }

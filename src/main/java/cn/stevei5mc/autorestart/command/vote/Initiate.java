@@ -5,7 +5,7 @@ import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.nukkit.Player;
 import cn.nukkit.Server; 
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.tasks.RestartTask;
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class Initiate extends BaseSubCommand {
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         String vote = "";
-        if (Utils.voteTaskState) {
+        if (TasksUtils.voteTaskState) {
             sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_is_initiate"));
         } else {
             if (sender.isPlayer()) {
@@ -51,7 +51,7 @@ public class Initiate extends BaseSubCommand {
             boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2;
             boolean debugCondition = main.getConfig().getBoolean("debug",false) && sender.hasPermission("autorestart.admin.vote.force");
             if (normalCondition || debugCondition) {
-                Utils.runVoteTask(time,vote);
+                TasksUtils.runVoteTask(time,vote);
             } else {
                 sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_not_initiate"));
             }

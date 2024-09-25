@@ -7,7 +7,7 @@ import cn.stevei5mc.autorestart.command.vote.Initiate;
 import cn.stevei5mc.autorestart.command.vote.VoteCmd;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.gui.Vote;
 
 public class VoteMain extends BaseCommand {
@@ -30,7 +30,7 @@ public class VoteMain extends BaseCommand {
 
     @Override
     public void sendUI(Player player) {
-        if (Utils.voteTaskState) {
+        if (TasksUtils.voteTaskState) {
             Vote.voteGui(player);
         } else {
             Vote.initiateVote(player);  

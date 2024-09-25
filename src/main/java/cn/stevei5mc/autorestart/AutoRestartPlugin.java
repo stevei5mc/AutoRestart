@@ -8,7 +8,8 @@ import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.admin.AdminMain;
 import cn.stevei5mc.autorestart.command.vote.VoteMain;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+import cn.stevei5mc.autorestart.utils.BaseUtils;
 import tip.utils.Api;
 import cn.stevei5mc.autorestart.TipsVar;
 import java.util.*;
@@ -46,8 +47,8 @@ public class AutoRestartPlugin extends PluginBase {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AdminMain());//注册命令
             this.getServer().getCommandMap().register("", new VoteMain());
-            int i = Utils.getRestartUseTime();
-            Utils.runRestartTask(i,1);
+            int i = BaseUtils.getRestartUseTime();
+            TasksUtils.runRestartTask(i,1);
             if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
                 tips = true;
                 Api.registerVariables("TipsVar",TipsVar.class);

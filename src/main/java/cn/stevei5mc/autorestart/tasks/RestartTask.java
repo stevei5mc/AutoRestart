@@ -2,7 +2,8 @@ package cn.stevei5mc.autorestart.tasks;
 
 import cn.nukkit.scheduler.Task;
 import cn.lanink.gamecore.utils.Language;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.nukkit.Server;
 import cn.nukkit.Player;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
@@ -12,7 +13,7 @@ import java.util.*;
 public class RestartTask extends Task {
     public static int time2 =30;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static int t = Utils.taskType;
+    public static int t = TasksUtils.restartTaskType;
 
     public RestartTask(int time1) {
         time2 = time1;
@@ -21,7 +22,7 @@ public class RestartTask extends Task {
     @Override
     public void onRun(int currentTick) {
         if (t <= 2) {
-            if (time2 <= Utils.getRestartTipTime()) {
+            if (time2 <= BaseUtils.getRestartTipTime()) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     String unit = main.getLang(player).translateString("time_unit_seconds");
                     if (main.getConfig().getBoolean("show_title",true)) {
@@ -50,9 +51,9 @@ public class RestartTask extends Task {
             }
             // 如果时间到了，重启服务器
             if (time2 <= 0) {
-                Utils.cancelTask();
+                TasksUtils.cancelRestartTask();
                 Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
-                    if (main.getConfig().getBoolean("runcommand",true) && Utils.taskType <= 2) {
+                    if (main.getConfig().getBoolean("runcommand",true) && TasksUtils.restartTaskType <= 2) {
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
                             ArrayList<String> commands;
                             commands = new ArrayList<>(main.getConfig().getStringList("commands"));
@@ -66,7 +67,7 @@ public class RestartTask extends Task {
                             }
                         }
                     }
-                    if (main.getConfig().getBoolean("kick_player",true) && Utils.taskType <= 2) {
+                    if (main.getConfig().getBoolean("kick_player",true) && TasksUtils.restartTaskType <= 2) {
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
                             player.kick((main.getLang(player).translateString("kick_player_msg")), false);
                         }

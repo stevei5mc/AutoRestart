@@ -4,7 +4,8 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.nukkit.Player;
-import cn.stevei5mc.autorestart.Utils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+import cn.stevei5mc.autorestart.utils.BaseUtils;
 import java.util.*;
 
 public class RunRestartTask extends BaseSubCommand {
@@ -29,11 +30,11 @@ public class RunRestartTask extends BaseSubCommand {
             String s = args[1];
             switch (s) {
                 case "manual":
-                    int i = Utils.getRestartTipTime();
-                    Utils.runRestartTask(i,2);
+                    int i = BaseUtils.getRestartTipTime();
+                    TasksUtils.runRestartTask(i,2);
                     return true;
                 case "no-players":  
-                    Utils.runRestartTask(3);
+                    TasksUtils.runRestartTask(3,0);
                     main.getLogger().info((main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
                     for (Player player : main.getServer().getOnlinePlayers().values()) {
                         player.sendMessage(main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
