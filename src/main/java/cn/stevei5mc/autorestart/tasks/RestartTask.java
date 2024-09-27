@@ -13,10 +13,11 @@ import java.util.*;
 public class RestartTask extends Task {
     public static int time2 =30;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static int t = TasksUtils.restartTaskType;
+    public static int t = 0;
 
     public RestartTask(int time1) {
         time2 = time1;
+        t = TasksUtils.restartTaskType;
     }
 
     @Override

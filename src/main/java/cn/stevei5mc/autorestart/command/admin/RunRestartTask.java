@@ -34,7 +34,7 @@ public class RunRestartTask extends BaseSubCommand {
                     TasksUtils.runRestartTask(i,2,2);
                     return true;
                 case "no-players":  
-                    TasksUtils.runRestartTask(3,0);
+                    TasksUtils.runRestartTask(3);
                     main.getLogger().info((main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
                     for (Player player : main.getServer().getOnlinePlayers().values()) {
                         player.sendMessage(main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));

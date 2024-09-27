@@ -9,7 +9,7 @@ import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 public class TasksUtils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static boolean restartTaskState = false;//任务状态，默认为 false
+    public static int restartTaskState = 0;//任务状态，默认为 0
     public static boolean voteTaskState = false;
     public static int restartTaskType = 0;//任务类型，默认编号为 0
     private static int restartTaskId;
@@ -18,10 +18,9 @@ public class TasksUtils {
     /**
      * 运行重启任务
      * @param taskType 任务类型
-     * @param timeUnit 时间类型
     */
-    public static void runRestartTask(int taskType,int timeUnit) {
-        runRestartTask(0,taskType,timeUnit);
+    public static void runRestartTask(int taskType) {
+        runRestartTask(0,taskType,0);
     }
 
     /**
@@ -72,7 +71,7 @@ public class TasksUtils {
         }
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
         restartTaskId = taskHandler.getTaskId();
-        restartTaskState = true;
+        restartTaskState = 1;
         if (taskType <= 2) { 
             main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -83,7 +82,7 @@ public class TasksUtils {
 
     public static void cancelRestartTask() {
         main.getServer().getScheduler().cancelTask(restartTaskId);
-        restartTaskState = false;
+        restartTaskState = 0;
         restartTaskType = 0;//重置任务编号
     }
 

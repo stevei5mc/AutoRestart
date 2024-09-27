@@ -47,8 +47,7 @@ public class VoteTask extends Task {
         if (time2 <= 0) {
             TasksUtils.cancelVoteTask();
             if (approval >= approvalVotes) {
-                int i = BaseUtils.getRestartTipTime();
-                TasksUtils.runRestartTask(i,2);
+                TasksUtils.runRestartTask(BaseUtils.getRestartTipTime(),2,2);
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getLang(player).translateString("vote_restart_msg_success", approval, approvalVotes));
                 }
