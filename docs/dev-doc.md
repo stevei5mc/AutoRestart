@@ -25,28 +25,25 @@
 |1|运行|
 |2|暂停|
 ### **示例代码**
-- **这里给出的仅是示例代码，使用时需要根据需求进行调整**
+- **这里给出的仅是示例代码并不能保证能够运行，在使用时需要根据需求进行调整**
 ---
-#### **运行以分钟为单位的重启任务**
 ```java
+    // 运行以分钟为单位的重启任务**
     public void runRestartTimeMinutes() {
-        Utils.runRestartTask(Utils.getRestartUseTime(),1);
+        Utils.runRestartTask(Utils.getRestartUseTime(),1,1);
     }
-```
-#### **运行以秒为单位的重启任务**
-```java
+
+    //运行以秒为单位的重启任务
     public void runRestartTimeMinutes() {
-        Utils.runRestartTask(Utils.getRestartTipTime(),2);
+        Utils.runRestartTask(Utils.getRestartTipTime(),2,2);
     }
-```
-#### **运行无在线玩家时自动重启的任务**
-```java
+
+    //运行无在线玩家时自动重启的任务
     public void runRestartTimeMinutes() {
         Utils.runRestartTask(3);
     }
-```
-#### **取消重启任务**
-```java
+
+    // 取消重启任务
     public void cancel() {
         Utils.cancelTask();
     }
