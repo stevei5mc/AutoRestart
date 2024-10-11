@@ -110,25 +110,31 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void updataConfig() {
-        int ver = config.getInt("version", 1);
-        if (ver < 2) {
-            config.set("version", 2);
-            if (!config.exists("vote_start_player")) {
-                config.set("vote_start_player",3);
+        int latest = 2;
+        if (config.getInt("version", 1) < latest) {
+            if (config.getInt("version", 1) < 2) {
+                config.set("version", 2);
+                if (!config.exists("vote_start_player")) {
+                    config.set("vote_start_player",3);
+                }
+                if (!config.exists("vote_time")) {
+                    config.set("vote_time",5);
+                }
+                if (!config.exists("runcommand")) {
+                    config.set("runcommand",true);
+                }
+                if (!config.exists("commands")) {
+                    config.set("commands",Arrays.asList("help", "say hello \"@p\"&con"));
+                }
+                if (!config.exists("debug")) {
+                    config.set("debug",false);
+                }
+                config.save();
             }
-            if (!config.exists("vote_time")) {
-                config.set("vote_time",5);
-            }
-            if (!config.exists("runcommand")) {
-                config.set("runcommand",true);
-            }
-            if (!config.exists("commands")) {
-                config.set("commands",Arrays.asList("help", "say hello \"@p\"&con"));
-            }
-            if (!config.exists("debug")) {
-                config.set("debug",false);
-            }
-            config.save();
+            getLogger().info("§a配置文件更新完毕，现在的配置文件版本已经是最新的了");
+        } else if (config.getInt("version", 1) > latest) {
+            getLogger().error("§c配置文件的版本出现异常，将对配置文件进行重置");
+            saveResource("config.yml",true);
         }
     }
 }
