@@ -23,6 +23,8 @@ form_button_approval: approval
 form_button_oppose: oppose
 form_button_veto: "One ticket veto"
 form_button_abstention: "abstention"
+form_button_pause: Pause Task
+form_button_continue: continue run
 
 form_confirm_restart_title: Run restart task
 form_confirm_restart_description_task: |-
@@ -47,6 +49,8 @@ restrat_msg_tip: §eThe server restart in §6%1% §e%2%
 restart_task_cancel: §aThe restart task has been cancel
 restart_task_restart: §fThe server will restart in §a%1%§f %2%
 restart_task_run: "§aRestart the task to start running. Type: %1%"
+restart_task_pause: §aThe restart task has been paused
+restart_task_continue: §aThe restart task has continued to run
 
 restart_task_type_time: Scheduled restart
 restart_task_type_no_player: No online player

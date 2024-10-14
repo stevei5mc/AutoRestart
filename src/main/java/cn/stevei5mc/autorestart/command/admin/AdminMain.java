@@ -3,9 +3,7 @@ package cn.stevei5mc.autorestart.command.admin;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.base.BaseCommand;
-import cn.stevei5mc.autorestart.command.admin.Reload;
-import cn.stevei5mc.autorestart.command.admin.Cancel;
-import cn.stevei5mc.autorestart.command.admin.RunRestartTask;
+import cn.stevei5mc.autorestart.command.admin.*;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.gui.Admin;
@@ -18,6 +16,7 @@ public class AdminMain extends BaseCommand {
         this.addSubCommand(new Reload("reload"));
         this.addSubCommand(new Cancel("cancel"));
         this.addSubCommand(new RunRestartTask("restart"));
+        this.addSubCommand(new Pause("pause"));
     }
 
     @Override

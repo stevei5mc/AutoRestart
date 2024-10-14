@@ -61,10 +61,10 @@ public class TasksUtils {
                 time = restartTime;
                 unit = "time_unit_seconds";
                 break;
-/*             case 3:
-                time = 0;
-                runTick = 100;
-                break; */
+            // case 3:
+            //     time = 0;
+            //     runTick = 100;
+            //     break;
             default:
                 time = 30;
                 break;
@@ -82,8 +82,8 @@ public class TasksUtils {
 
     public static void cancelRestartTask() {
         main.getServer().getScheduler().cancelTask(restartTaskId);
-        restartTaskState = 0;
-        restartTaskType = 0;//重置任务编号
+            restartTaskState = 0;
+            restartTaskType = 0;//重置任务编号
     }
 
     /**
@@ -100,5 +100,15 @@ public class TasksUtils {
     public static void cancelVoteTask() {
         main.getServer().getScheduler().cancelTask(voteTaskId);
         voteTaskState = false;
+    }
+
+    //这里我并没有找到Nukkit有提供暂停任务的方法，所以我自己实现了一个方法
+    public static void pauseRestartTask() {
+        restartTaskState = 2;
+        main.getServer().getScheduler().cancelTask(restartTaskId);
+    }
+
+    public static void continueRunRestartTask() {
+        runRestartTask(RestartTask.time2,restartTaskType,2);
     }
 }

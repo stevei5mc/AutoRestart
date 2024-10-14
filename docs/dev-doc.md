@@ -56,6 +56,8 @@ TasksUtils
     - runVoteTask(int time,String vote) 发起重启任务
     - cancelVoteTask() 取消重启任务
     - cancelRestartTask() 取消重启任务
+    - pauseRestartTask() 暂停任务
+    - continueRunRestartTask() 继续运行任务
     - restartTaskState 重启任务的状态
     - voteTaskState 投票任务的状态
 BaseUtils

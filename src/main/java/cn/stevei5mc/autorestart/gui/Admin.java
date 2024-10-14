@@ -55,6 +55,16 @@ public class Admin {
                 })
             );
         }
+        if (TasksUtils.restartTaskState == 1 && player.hasPermission("autorestart.admin.pause")) {
+            simple.addButton(new ResponseElementButton(lang.translateString("form_button_pause"))
+                .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart pause"))
+            ); 
+        }
+        if (TasksUtils.restartTaskState == 2 && player.hasPermission("autorestart.admin.pause")) {
+            simple.addButton(new ResponseElementButton(lang.translateString("form_button_continue"))
+                .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart pause"))
+            ); 
+        }
         if (TasksUtils.restartTaskState == 0 && player.hasPermission("autorestart.admin.restart")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_manual_restart")).onClicked(cp -> {
                 int i = BaseUtils.getRestartTipTime();

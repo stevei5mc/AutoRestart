@@ -23,6 +23,7 @@
 |/autorestart|autorestart.admin|主命令、打开GUI|OP|
 |/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
 |/autorestart cancel|autorestart.admin.cancel|取消重启任务|OP|
+|/autorestart pause|autorestart.admin.pause|取消重启任务|OP|
 |/autorestart restart manual|autorestart.admin.restart|手动重启服务器|OP|
 |/autorestart restart no-player|autorestart.admin.restart|在服务器没有玩家在线时自动重启服务器|OP|
 |/voterestart|autorestart.user.vote|主命令、打开GUI|player|

@@ -23,6 +23,8 @@ form_button_approval: 赞成
 form_button_oppose: 反对
 form_button_veto: "一票否决"
 form_button_abstention: "弃权"
+form_button_pause: 暂停任务
+form_button_continue: 继续运行
 
 form_confirm_restart_title: 运行重启任务
 form_confirm_restart_description_task: |-
@@ -47,6 +49,8 @@ restrat_msg_tip: §e本分支服将在 §6%1% §e%2%后重启
 restart_task_cancel: §a重启任务已取消
 restart_task_restart: §f服务器将于 §a%1%§f %2%后重启
 restart_task_run: §a重启任务开始运行。类型： %1%
+restart_task_pause: §a重启任务已暂停
+restart_task_continue: §a重启任务已继续运行
 
 restart_task_type_time: 定时重启
 restart_task_type_no_player: 无在线玩家时重启
