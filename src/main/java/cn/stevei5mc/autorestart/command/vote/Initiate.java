@@ -31,28 +31,8 @@ public class Initiate extends BaseSubCommand {
         if (TasksUtils.voteTaskState) {
             sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_is_initiate"));
         } else {
-            if (sender.isPlayer()) {
-                Player player = (Player) sender;
-                vote = player.getName();
-            }
-            int startPlayer = main.getConfig().getInt("vote_start_player",3);
-            int voteTime = main.getConfig().getInt("vote_time",5);
-            //这里为了防止有人把时间设置为0或>5
-            if (voteTime == 0 || voteTime > 5) {
-                voteTime = 5;
-            }
-            //这里写死最低发起投票人数为3，在配置文件中定义低于3也会按照3来判断
-            if (startPlayer < 3) {
-                startPlayer = 3;
-            }
-            int time = voteTime * 60;
-            boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && TasksUtils.restartTaskState != 2;
-            boolean debugCondition = main.getConfig().getBoolean("debug",false) && sender.hasPermission("autorestart.admin.vote.force");
-            if (normalCondition || debugCondition) {
-                TasksUtils.runVoteTask(time,vote);
-            } else {
-                sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_not_initiate"));
-            }
+            Player player = (Player) sender;
+            TasksUtils.runVoteTask(player);
         }
         return true; 
     }

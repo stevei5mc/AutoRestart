@@ -53,7 +53,7 @@
 TasksUtils
     - runRestartTask(int taskType) 运行重启任务
     - runRestartTask(int restartTime,int taskType,int timeUnit) 运行重启任务
-    - runVoteTask(int time,String vote) 发起重启任务
+    - runVoteTask(Player vote) 发起投票重启任务
     - cancelVoteTask() 取消重启任务
     - cancelRestartTask() 取消重启任务
     - pauseRestartTask() 暂停任务

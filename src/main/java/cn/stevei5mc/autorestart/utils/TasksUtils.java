@@ -88,13 +88,31 @@ public class TasksUtils {
 
     /**
      * 运行投票任务
-     * @param time 投票任务的时间
      * @param vote 投票的发起者
     */
-    public static void runVoteTask(int time,String vote) {
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,vote), 20, true);
-        voteTaskId = taskHandler.getTaskId();
-        voteTaskState = true;
+    public static void runVoteTask(Player vote) {
+        Player player = vote;
+        int startPlayer = main.getConfig().getInt("vote_start_player",3);
+        int voteTime = main.getConfig().getInt("vote_time",5);
+        //这里为了防止有人把时间设置为0或>5
+        if (voteTime == 0 || voteTime > 5) {
+            voteTime = 5;
+        }
+        //这里写死最低发起投票人数为3，在配置文件中定义低于3也会按照3来判断
+        if (startPlayer < 3) {
+            startPlayer = 3;
+        }
+        int time = voteTime * 60;
+        boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && restartTaskState != 2;
+        boolean debugCondition = main.getConfig().getBoolean("debug",false) && player.hasPermission("autorestart.admin.vote.force");
+        if (normalCondition || debugCondition) {
+            String voter = player.getName();
+            TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,voter), 20, true);
+            voteTaskId = taskHandler.getTaskId();
+            voteTaskState = true;
+        } else {
+            player.sendMessage(main.getLang(player).translateString("vote_restart_msg_not_initiate"));
+        }
     }
 
     public static void cancelVoteTask() {
