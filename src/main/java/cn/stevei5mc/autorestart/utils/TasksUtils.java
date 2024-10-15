@@ -71,13 +71,13 @@ public class TasksUtils {
         }
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
         restartTaskId = taskHandler.getTaskId();
-        restartTaskState = 1;
-        if (taskType <= 2) { 
+        if (taskType <= 2 && TasksUtils.restartTaskState != 2) { 
             main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
             }
         }
+        restartTaskState = 1;
     }
 
     public static void cancelRestartTask() {

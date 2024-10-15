@@ -17,7 +17,7 @@ public class Initiate extends BaseSubCommand {
 
     @Override
     public boolean canUser(CommandSender sender) {
-        return sender.hasPermission("autorestart.user.vote");
+        return sender.hasPermission("autorestart.user.vote") && sender.isPlayer();
     }
 
     @Override
@@ -34,8 +34,6 @@ public class Initiate extends BaseSubCommand {
             if (sender.isPlayer()) {
                 Player player = (Player) sender;
                 vote = player.getName();
-            } else {
-                vote = "§d[§cServer§d]";
             }
             int startPlayer = main.getConfig().getInt("vote_start_player",3);
             int voteTime = main.getConfig().getInt("vote_time",5);
@@ -48,7 +46,7 @@ public class Initiate extends BaseSubCommand {
                 startPlayer = 3;
             }
             int time = voteTime * 60;
-            boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2;
+            boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && TasksUtils.restartTaskState != 2;
             boolean debugCondition = main.getConfig().getBoolean("debug",false) && sender.hasPermission("autorestart.admin.vote.force");
             if (normalCondition || debugCondition) {
                 TasksUtils.runVoteTask(time,vote);

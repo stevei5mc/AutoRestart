@@ -27,6 +27,8 @@ public class VoteTask extends Task {
         oppose = 0;
         abstention = 0;
         votePlayer.clear();
+        votePlayer.add(vote);
+        approval++;
         time2 = time;//设置投票时间
         msgTime= time;
         voter = vote;
