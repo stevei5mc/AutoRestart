@@ -5,6 +5,7 @@ command_help_cancel: §ecancel restart task
 command_help_restart: §eRun restart task.
 command_help_vote_initiate: §eInitiate voting
 command_help_vote_vote: §eParticipate in voting
+command_help_pause: Pause / Resume Task
 
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!

@@ -5,6 +5,7 @@ command_help_cancel: §e取消重启任务
 command_help_restart: §e运行重启任务
 command_help_vote_initiate: §e发起投票
 command_help_vote_vote: §e参与投票
+command_help_pause: 暂停/继续运行任务
 
 command_not_permission: §c你没有权限使用此命令！
 command_in_game_run: §c请在游戏内使用此命令！
