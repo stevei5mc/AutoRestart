@@ -1,23 +1,23 @@
-package cn.stevei5mc.autorestart.command.vote;
+package cn.stevei5mc.autorestart.command.admin.sub;
 
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.nukkit.Player;
-import cn.nukkit.Server; 
 import cn.stevei5mc.autorestart.utils.TasksUtils;
-import cn.stevei5mc.autorestart.tasks.RestartTask;
-import java.util.*;
 
-public class Initiate extends BaseSubCommand {
+/**
+ * @author LT_Name
+ */
+public class Cancel extends BaseSubCommand {
 
-    public Initiate(String name) {
+    public Cancel(String name) {
         super(name);
     }
 
     @Override
     public boolean canUser(CommandSender sender) {
-        return sender.hasPermission("autorestart.user.vote") && sender.isPlayer();
+        return sender.hasPermission("autorestart.admin.cancel");
     }
 
     @Override
@@ -27,14 +27,11 @@ public class Initiate extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        String vote = "";
-        if (TasksUtils.voteTaskState) {
-            sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_is_initiate"));
-        } else {
-            Player player = (Player) sender;
-            TasksUtils.runVoteTask(player);
+        TasksUtils.cancelRestartTask();
+        for (Player player : main.getServer().getOnlinePlayers().values()) {
+            player.sendMessage(main.getLang(player).translateString("restart_task_cancel"));
         }
-        return true; 
+        return true;
     }
 
     @Override

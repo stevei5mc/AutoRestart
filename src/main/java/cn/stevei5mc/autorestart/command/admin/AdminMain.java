@@ -3,7 +3,7 @@ package cn.stevei5mc.autorestart.command.admin;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.command.base.BaseCommand;
-import cn.stevei5mc.autorestart.command.admin.*;
+import cn.stevei5mc.autorestart.command.admin.sub.*;
 import cn.lanink.gamecore.utils.Language;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.gui.Admin;
