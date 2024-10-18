@@ -30,7 +30,6 @@ public class TasksUtils {
      * @param timeUnit 时间类型
     */
     public static void runRestartTask(int restartTime,int taskType,int timeUnit) {
-        cancelRestartTask();//不管重启任务在不在运行都取消一遍再运行任务，以防出现一些奇怪的问题
         int runTick = 20;
         int time = 30;
         String unit = "time_unit_seconds";
@@ -69,21 +68,22 @@ public class TasksUtils {
                 time = 30;
                 break;
         }
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
-        restartTaskId = taskHandler.getTaskId();
-        if (taskType <= 2 && TasksUtils.restartTaskState != 2) { 
+        if (taskType <= 2 && restartTaskState != 2) { 
             main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
             }
         }
+        cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
+        restartTaskId = taskHandler.getTaskId();
         restartTaskState = 1;
     }
 
     public static void cancelRestartTask() {
         main.getServer().getScheduler().cancelTask(restartTaskId);
-            restartTaskState = 0;
-            restartTaskType = 0;//重置任务编号
+        restartTaskState = 0;
+        restartTaskType = 0;//重置任务编号
     }
 
     /**
