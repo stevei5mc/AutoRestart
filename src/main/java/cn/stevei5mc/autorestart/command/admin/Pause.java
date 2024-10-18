@@ -29,15 +29,13 @@ public class Pause extends BaseSubCommand {
     public boolean execute(CommandSender sender, String label, String[] args) {
         if (TasksUtils.restartTaskState == 1) {
             TasksUtils.pauseRestartTask();
-            main.getLogger().info((main.getLang().translateString("restart_task_pause")));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.getLang(player).translateString("restart_task_pause"));
+                player.sendMessage(main.getLang(player).translateString("restart_msg_task_pause"));
             }
         } else if (TasksUtils.restartTaskState == 2) {
             TasksUtils.continueRunRestartTask();
-            main.getLogger().info((main.getLang().translateString("form_button_continue")));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.getLang(player).translateString("restart_task_continue"));
+                player.sendMessage(main.getLang(player).translateString("restart_msg_task_continue"));
             }
         }
         return true;

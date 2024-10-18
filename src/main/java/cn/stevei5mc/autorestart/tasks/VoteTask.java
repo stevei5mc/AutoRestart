@@ -42,7 +42,6 @@ public class VoteTask extends Task {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getLang(player).translateString("vote_restart_msg_in_initiate", voter, "/voterestart"));
                 }
-                main.getLogger().info(main.getLang().translateString("vote_restart_msg_in_initiate", voter, "/voterestart"));
                 msgTime = msgTime - 60;
             }
         }
@@ -53,12 +52,10 @@ public class VoteTask extends Task {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getLang(player).translateString("vote_restart_msg_success", approval, approvalVotes));
                 }
-                main.getLogger().info(main.getLang().translateString("vote_restart_msg_success", approval, approvalVotes));
             } else {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_end", approval, approvalVotes));
                 }
-                main.getLogger().info(main.getLang().translateString("vote_restart_msg_failed_end", approval, approvalVotes));
             }
         }
         time2--;
