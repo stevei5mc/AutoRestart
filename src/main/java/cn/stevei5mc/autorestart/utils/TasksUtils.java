@@ -123,6 +123,7 @@ public class TasksUtils {
     //这里我并没有找到Nukkit有提供暂停任务的方法，所以我自己实现了一个方法
     public static void pauseRestartTask() {
         restartTaskState = 2;
+        cancelVoteTask(); //取消掉投票重启的任务防止因投票重启而导致服务器重启
         main.getServer().getScheduler().cancelTask(restartTaskId);
     }
 
