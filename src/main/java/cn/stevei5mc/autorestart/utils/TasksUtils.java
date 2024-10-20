@@ -68,13 +68,14 @@ public class TasksUtils {
                 time = 30;
                 break;
         }
+        main.getLogger().info("task type = "+taskType+"time unit = "+timeUnit+"restart Task Type = "+restartTaskType);
         if (taskType <= 2 && restartTaskState != 2) { 
             main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
             }
+            // cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
         }
-        cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
         restartTaskId = taskHandler.getTaskId();
         restartTaskState = 1;

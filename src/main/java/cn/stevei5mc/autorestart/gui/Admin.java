@@ -8,8 +8,7 @@ import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import org.jetbrains.annotations.NotNull;
-import cn.stevei5mc.autorestart.utils.TasksUtils;
-import cn.stevei5mc.autorestart.utils.BaseUtils;
+import cn.stevei5mc.autorestart.utils.*;
 
 public class Admin {
 
@@ -20,6 +19,9 @@ public class Admin {
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
+        if (TasksUtils.restartTaskType < 2) {
+            simple.setContent(lang.translateString("form_confirm_cancel_description_time",BaseUtils.getRemainder(player)) + "\n\n");
+        }
         String trueButton = lang.translateString("form_button_confirm");
         String falseButton = lang.translateString("form_button_back");
         String unitSeconds = lang.translateString("time_unit_seconds");
@@ -27,27 +29,9 @@ public class Admin {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
                 String postscript = "";
                 String type = "";
-                switch (TasksUtils.restartTaskType) {
-                    case 1:
-                        type = lang.translateString("restart_task_type_time");
-                        postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",BaseUtils.getRemainder(player));
-                        break;
-                    case 2:
-                        type = lang.translateString("restart_task_type_manual_restart");
-                        postscript = "\n" + lang.translateString("form_confirm_cancel_description_time",BaseUtils.getRemainder(player));
-                        break;
-                    case 3:
-                        type = lang.translateString("restart_task_type_no_player");
-                        postscript = "";
-                        break;
-                    default:
-                        type = "§cUnknown type§r";
-                        postscript = "";
-                        break;
-                }
                 AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                     lang.translateString("form_confirm_cancel_title"),
-                    lang.translateString("form_confirm_cancel_description_task", type)+postscript,
+                    lang.translateString("form_confirm_cancel_description_task", BaseUtils.getRestartTaskName(player)),
                     trueButton,falseButton);
                     modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart cancel"));
                     modal.onClickedFalse(cp2 -> sendMain(cp2));

@@ -13,16 +13,14 @@ import java.util.*;
 public class RestartTask extends Task {
     public static int time2 =30;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static int t = 0;
 
     public RestartTask(int time1) {
         time2 = time1;
-        t = TasksUtils.restartTaskType;
     }
 
     @Override
     public void onRun(int currentTick) {
-        if (t <= 2) {
+        if (TasksUtils.restartTaskType <= 2) {
             if (time2 <= BaseUtils.getRestartTipTime()) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     String unit = main.getLang(player).translateString("time_unit_seconds");
@@ -79,7 +77,7 @@ public class RestartTask extends Task {
             time2--;// 每秒减少时间
         }
         //这段代码是给任务ID为3的任务来使用的
-        if (t == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
+        if (TasksUtils.restartTaskType == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
             main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
         }
     }

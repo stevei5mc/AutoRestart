@@ -4,8 +4,8 @@ import cn.stevei5mc.autorestart.tasks.RestartTask;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-//import java.util.*;
-
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+ 
 public class BaseUtils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
@@ -58,5 +58,23 @@ public class BaseUtils {
         }
         String remainder = main.getLang(player).translateString("variable_remainder",timee);
         return remainder;
+    }
+
+    /**
+     * 获取剩余时间
+     * @param player Player 传入play参数以实现多语言
+     * @return Task name
+    */
+    public static String getRestartTaskName(Player player) {
+        switch (TasksUtils.restartTaskType) {
+            case 1:
+                return main.getLang(player).translateString("restart_task_type_time");
+            case 2:
+                return main.getLang(player).translateString("restart_task_type_manual_restart");
+            case 3:
+                return main.getLang(player).translateString("restart_task_type_no_player");
+            default:
+                return "§cUnknown type§r";
+        }
     }
 }
