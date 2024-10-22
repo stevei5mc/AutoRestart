@@ -18,20 +18,51 @@
 - [x] **服务器无人时自动重启**
 - [x] **投票重启**
 ### **命令与权限**
-|命令|权限节点|命令/权限介绍|默认权限|
-|:-:|:-:|:-|:-:|
-|/autorestart|autorestart.admin|主命令、打开GUI|OP|
-|/autorestart reload|autorestart.admin.reload|重载配置文件|OP|
-|/autorestart cancel|autorestart.admin.cancel|取消重启任务|OP|
-|/autorestart pause|autorestart.admin.pause|暂停/继续运行重启任务|OP|
-|/autorestart restart manual|autorestart.admin.restart|手动重启服务器|OP|
-|/autorestart restart no-player|autorestart.admin.restart|在服务器没有玩家在线时自动重启服务器|OP|
-|/voterestart|autorestart.user.vote|主命令、打开GUI|player|
-|/voterestart initiate|autorestart.user.vote|发起投票|player|
-|/voterestart vote approval|autorestart.user.vote|投出赞成票|player|
-|/voterestart vote oppose|autorestart.user.vote|投出反对票|player|
-|/voterestart vote veto|autorestart.admin.vote.veto|使用一票否决|OP|
-||autorestart.admin.vote.force|在调试模式中强制发起投票|OP|
+<table>
+    <tr align="center" valign="center">
+        <th>命令</th><th>权限节点</th><th>命令/权限介绍</th><th>权限归属</th>
+    </tr>
+    <tr>
+        <td>/autorestart</td><td>autorestart.admin</td><td>主命令、打开GUI</td><td rowspan="6" align="center" valign="center">OP</td>
+    </tr>
+    <tr>
+        <td>/autorestart reload</td><td>autorestart.admin.reload</td><td>重载配置文件</td>
+    </tr>
+    <tr>
+        <td>/autorestart cancel</td><td>autorestart.admin.cancel</td><td>取消重启任务</td>
+    </tr>
+    <tr>
+      <td>/autorestart pause</td><td>autorestart.admin.pause</td><td>暂停/继续运行重启任务</td>
+    </tr>
+    <tr>
+      <td>/autorestart restart manual</td><td rowspan="2">autorestart.admin.restart</td><td>手动重启服务器</td>
+    </tr>
+    <tr>
+      <td>/autorestart restart no-player</td><td>在服务器没有玩家在线时自动重启服务器</td>
+    </tr>
+    <tr>
+      <td>/voterestart</td><td rowspan="5">autorestart.user.vote</td><td>主命令、打开GUI</td><td rowspan="5" align="center" valign="center">player</td>
+    </tr>
+    <tr>
+      <td>/voterestart initiate</td><td>发起投票</td>
+    </tr>
+    <tr>
+      <td>/voterestart vote approval</td><td>投出赞成票</td>
+    </tr>
+    <tr>
+      <td>/voterestart vote oppose</td><td>投出反对票</td>
+    </tr>
+    <tr>
+      <td>/voterestart vote abstention</td><td>投出弃权票</td>
+    </tr>
+    <tr>
+      <td>/voterestart vote veto</td><td>autorestart.admin.vote.veto</td><td>使用一票否决</td><td rowspan="2" align="center" valign="center">OP</td>
+    </tr>
+    <tr>
+      <td></td><td>autorestart.admin.vote.force</td><td>在调试模式中强制发起投票<br>该功能方便开发而设立的(需开启debug模式)</td>
+    </tr>
+</table>
+
 ### **配置文件介绍**
 ```yml
 #配置文件版本（勿动!!!）
