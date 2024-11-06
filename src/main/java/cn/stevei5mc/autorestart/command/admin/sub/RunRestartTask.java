@@ -37,17 +37,17 @@ public class RunRestartTask extends BaseSubCommand {
                 case "no-players":  
                     TasksUtils.cancelRestartTask();
                     TasksUtils.runRestartTask(3);
-                    main.getLogger().info((main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
+                    main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
                     for (Player player : main.getServer().getOnlinePlayers().values()) {
-                        player.sendMessage(main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
+                        player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
                     }
                     return true;
                 default:
-                    sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
+                    sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
                     return false;
             }
         }else{
-            sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
+            sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
             return false;
         }
     }

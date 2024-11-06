@@ -61,7 +61,7 @@ public class BaseUtils {
     }
 
     /**
-     * 获取剩余时间
+     * 获取重启任务名
      * @param player Player 传入play参数以实现多语言
      * @return Task name
     */

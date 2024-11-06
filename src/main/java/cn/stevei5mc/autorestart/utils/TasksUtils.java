@@ -70,9 +70,9 @@ public class TasksUtils {
         }
         main.getLogger().info("task type = "+taskType+"time unit = "+timeUnit+"restart Task Type = "+restartTaskType);
         if (taskType <= 2 && restartTaskState != 2) { 
-            main.getLogger().info((main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
+            main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
+                player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
             }
             // cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
         }
@@ -112,7 +112,7 @@ public class TasksUtils {
             voteTaskId = taskHandler.getTaskId();
             voteTaskState = true;
         } else {
-            player.sendMessage(main.getLang(player).translateString("vote_restart_msg_not_initiate"));
+            player.sendMessage(main.msgPrefix +main.getLang(player).translateString("vote_restart_msg_not_initiate"));
         }
     }
 

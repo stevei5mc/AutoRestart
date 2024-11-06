@@ -29,7 +29,7 @@ public class Initiate extends BaseSubCommand {
     public boolean execute(CommandSender sender, String label, String[] args) {
         String vote = "";
         if (TasksUtils.voteTaskState) {
-            sender.sendMessage(main.getLang(sender).translateString("vote_restart_msg_is_initiate"));
+            sender.sendMessage(main.getLang(sender).translateString(main.msgPrefix +"vote_restart_msg_is_initiate"));
         } else {
             Player player = (Player) sender;
             TasksUtils.runVoteTask(player);

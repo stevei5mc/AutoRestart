@@ -33,33 +33,33 @@ public class VoteCmd extends BaseSubCommand {
                 Player player = (Player) sender;
                 vote = player.getName();
                 if (VoteTask.votePlayer.contains(vote) && !args[1].equals("veto")) {
-                    sender.sendMessage(main.getLang(sender).translateString("vote_msg_failed_repeat"));
+                    sender.sendMessage(main.msgPrefix + main.getLang(sender).translateString("vote_msg_failed_repeat"));
                     return false;
                 }
             }
             if (sender.isPlayer() && args[1].equals("approval")) {
                 VoteTask.approval++;
-                sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_approval")));
+                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_approval")));
             } else if (sender.isPlayer() && args[1].equals("oppose")) {
                 VoteTask.oppose++;
-                sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
+                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
             } else if (sender.isPlayer() && args[1].equals("abstention")) {
                 VoteTask.abstention++;
-                sender.sendMessage(main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_abstention")));   
+                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_abstention")));
             } else if (args[1].equals("veto") && sender.hasPermission("autorestart.admin.vote.veto")) {
                 TasksUtils.cancelVoteTask();
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
-                    player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+                    player.sendMessage(main.msgPrefix +main.getLang(player).translateString("vote_restart_msg_failed_veto"));
                 }
             } else if (sender.isPlayer()) {
-                sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
+                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
             }
             if (!VoteTask.votePlayer.contains(vote) && sender.isPlayer()) {
                 VoteTask.votePlayer.add(vote);
             }
             return true;
         }else{
-            sender.sendMessage(main.getLang(sender).translateString("command_unknown"));
+            sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
             return false;
         }
     }

@@ -1,5 +1,5 @@
 #配置文件版本（勿动!!!）
-version: 2
+version: 3
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -30,3 +30,4 @@ vote_start_player: 3
 vote_time: 5
 #调试模式
 debug: false
+message_prefix: "§l§bAutoRestart §r§7>> "

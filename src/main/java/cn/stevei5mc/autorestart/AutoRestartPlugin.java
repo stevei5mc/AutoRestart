@@ -22,6 +22,7 @@ public class AutoRestartPlugin extends PluginBase {
     private static AutoRestartPlugin instance;
     private Config config;
     private static boolean tips = false;
+    public String msgPrefix = "";
 
     public Config getConfig() {
         return this.config;
@@ -47,6 +48,7 @@ public class AutoRestartPlugin extends PluginBase {
             loadLanguage();
             this.getServer().getCommandMap().register("", new AdminMain());//注册命令
             this.getServer().getCommandMap().register("", new VoteMain());
+            msgPrefix = config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
             int i = BaseUtils.getRestartUseTime();
             TasksUtils.runRestartTask(i,1,1);
             if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
@@ -110,7 +112,7 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void updataConfig() {
-        int latest = 2;
+        int latest = 3;
         if (config.getInt("version", 1) < latest) {
             if (config.getInt("version", 1) < 2) {
                 config.set("version", 2);
@@ -128,6 +130,13 @@ public class AutoRestartPlugin extends PluginBase {
                 }
                 if (!config.exists("debug")) {
                     config.set("debug",false);
+                }
+                config.save();
+            }
+            if (config.getInt("version") < 3) {
+                config.set("version", 3);
+                if (!config.exists("message_prefix")) {
+                    config.set("message_prefix","§l§bAutoRestart §r§7>> ");
                 }
                 config.save();
             }
