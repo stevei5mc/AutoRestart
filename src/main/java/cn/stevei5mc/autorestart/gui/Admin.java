@@ -19,7 +19,7 @@ public class Admin {
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
-        if (TasksUtils.restartTaskType < 2) {
+        if (TasksUtils.restartTaskType != 3 && TasksUtils.restartTaskState >= 1) {
             simple.setContent(lang.translateString("form_confirm_cancel_description_time",BaseUtils.getRemainder(player)) + "\n\n");
         }
         String trueButton = lang.translateString("form_button_confirm");
@@ -27,8 +27,6 @@ public class Admin {
         String unitSeconds = lang.translateString("time_unit_seconds");
         if (TasksUtils.restartTaskState >= 1 && player.hasPermission("autorestart.admin.cancel")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
-                String postscript = "";
-                String type = "";
                 AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                     lang.translateString("form_confirm_cancel_title"),
                     lang.translateString("form_confirm_cancel_description_task", BaseUtils.getRestartTaskName(player)),
