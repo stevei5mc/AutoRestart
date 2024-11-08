@@ -3,9 +3,9 @@ package cn.stevei5mc.autorestart.command.vote.sub;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
-import cn.stevei5mc.autorestart.tasks.VoteTask;
-import cn.stevei5mc.autorestart.utils.TasksUtils;
+import cn.stevei5mc.autorestart.utils.VoteUtils;
 import cn.nukkit.Player;
+
 import java.util.*;
 
 public class VoteCmd extends BaseSubCommand {
@@ -16,7 +16,7 @@ public class VoteCmd extends BaseSubCommand {
 
     @Override
     public boolean canUser(CommandSender sender) {
-        return sender.hasPermission("autorestart.user.vote");
+        return sender.hasPermission("autorestart.user.vote") && sender.isPlayer();
     }
 
     @Override
@@ -27,35 +27,10 @@ public class VoteCmd extends BaseSubCommand {
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         if (args.length == 2) {
-            String s = args[1];
-            String vote = "";
-            if (sender.isPlayer()) {
-                Player player = (Player) sender;
-                vote = player.getName();
-                if (VoteTask.votePlayer.contains(vote) && !args[1].equals("veto")) {
-                    sender.sendMessage(main.msgPrefix + main.getLang(sender).translateString("vote_msg_failed_repeat"));
-                    return false;
-                }
-            }
-            if (sender.isPlayer() && args[1].equals("approval")) {
-                VoteTask.approval++;
-                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_approval")));
-            } else if (sender.isPlayer() && args[1].equals("oppose")) {
-                VoteTask.oppose++;
-                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_oppose")));
-            } else if (sender.isPlayer() && args[1].equals("abstention")) {
-                VoteTask.abstention++;
-                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("vote_msg_vote",main.getLang(sender).translateString("vote_type_abstention")));
-            } else if (args[1].equals("veto") && sender.hasPermission("autorestart.admin.vote.veto")) {
-                TasksUtils.cancelVoteTask();
-                for (Player player : main.getServer().getOnlinePlayers().values()) {
-                    player.sendMessage(main.msgPrefix +main.getLang(player).translateString("vote_restart_msg_failed_veto"));
-                }
-            } else if (sender.isPlayer()) {
-                sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
-            }
-            if (!VoteTask.votePlayer.contains(vote) && sender.isPlayer()) {
-                VoteTask.votePlayer.add(vote);
+            String vote = args[1];
+            if(sender.isPlayer()){
+                Player voter = (Player) sender;
+                VoteUtils.getInstance().processVotingContent(voter,vote);
             }
             return true;
         }else{

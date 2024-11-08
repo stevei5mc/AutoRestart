@@ -1,18 +1,20 @@
 package cn.stevei5mc.autorestart;
 
-import cn.nukkit.plugin.PluginBase;
+import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.utils.Config;
-import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.utils.Config;
 import cn.stevei5mc.autorestart.command.admin.AdminMain;
 import cn.stevei5mc.autorestart.command.vote.VoteMain;
-import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
 import tip.utils.Api;
-import cn.stevei5mc.autorestart.TipsVar;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class AutoRestartPlugin extends PluginBase {
     private Language language;

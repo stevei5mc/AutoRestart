@@ -89,10 +89,9 @@ public class TasksUtils {
 
     /**
      * 运行投票任务
-     * @param vote 投票的发起者
+     * @param voter 投票的发起者
     */
-    public static void runVoteTask(Player vote) {
-        Player player = vote;
+    public static void runVoteTask(Player voter) {
         int startPlayer = main.getConfig().getInt("vote_start_player",3);
         int voteTime = main.getConfig().getInt("vote_time",5);
         //这里为了防止有人把时间设置为0或>5
@@ -104,15 +103,15 @@ public class TasksUtils {
             startPlayer = 3;
         }
         int time = voteTime * 60;
+        String player = voter.getName();
         boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && restartTaskState != 2;
-        boolean debugCondition = main.getConfig().getBoolean("debug",false) && player.hasPermission("autorestart.admin.vote.force");
+        boolean debugCondition = main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
         if (normalCondition || debugCondition) {
-            String voter = player.getName();
             TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,voter), 20, true);
             voteTaskId = taskHandler.getTaskId();
             voteTaskState = true;
         } else {
-            player.sendMessage(main.msgPrefix +main.getLang(player).translateString("vote_restart_msg_not_initiate"));
+            voter.sendMessage(main.msgPrefix +main.getLang(voter).translateString("vote_restart_msg_not_initiate"));
         }
     }
 
