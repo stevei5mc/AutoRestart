@@ -1,6 +1,7 @@
 package cn.stevei5mc.autorestart.utils;
 
 import cn.nukkit.Player;
+import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 
 import java.util.LinkedList;
@@ -21,15 +22,67 @@ public class VoteUtils {
         return instance;
     }
 
-    public void initializedData(Player initiator) {
-        String voter = initiator.getName();
+    public void initializedData(CommandSender sender) {
+        String voter = sender.getName();
         approval = 0;
         oppose = 0;
         abstention = 0;
-        approvalVotes = 0;
+        approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * 0.7);
         votePlayer.clear();
         votePlayer.add(voter);
         approval++;
+    }
+
+    public void processVotingContent(CommandSender voter, String voteContent) {
+        if (voter.isPlayer()) {
+            Player player = (Player) voter;
+            processVotingContent(player,voteContent);
+        } else if (!voter.isPlayer() && voteContent.equals("veto")) {
+            TasksUtils.cancelVoteTask();
+            main.getLogger().info(main.msgPrefix + main.getLang().translateString("vote_restart_msg_failed_veto"));
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                player.sendMessage(main.msgPrefix + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+            }
+        } else {
+            voter.sendMessage(main.msgPrefix +main.getLang(voter).translateString("command_in_game_run"));
+        }
+
+    }
+    public void processVotingContent(Player voter, String voteContent) {
+        String playerName = voter.getName();
+        if (votePlayer.contains(playerName) && !voteContent.equals("veto")) {
+            voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_msg_failed_repeat"));
+        }else if (voter.hasPermission("autorestart.user.vote") && voter.isPlayer()) {
+            switch (voteContent) {
+                case "approval":
+                    approval++;
+                    votePlayer.add(playerName);
+                    voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_approval")));
+                    break;
+                case "oppose":
+                    oppose++;
+                    votePlayer.add(playerName);
+                    voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_oppose")));
+                    break;
+                case "abstention":
+                    if (!voter.hasPermission("autorestart.admin.vote.veto")) {
+                        votePlayer.add(playerName);
+                        abstention++;
+                        voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_abstention")));
+                    }
+                    break;
+                case "veto":
+                    if (voter.hasPermission("autorestart.admin.vote.veto")) {
+                        TasksUtils.cancelVoteTask();
+                        for (Player player : main.getServer().getOnlinePlayers().values()) {
+                            player.sendMessage(main.msgPrefix + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+                        }
+                    }
+                    break;
+                default:
+                    voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("command_unknown"));
+            }
+        }
     }
 
     public int getApproval() {
@@ -46,34 +99,5 @@ public class VoteUtils {
 
     public int getApprovalVotes() {
         return approvalVotes;
-    }
-
-    public boolean processVotingContent(Player voter, String voteContent) {
-        String playerName = voter.getName();
-        if (votePlayer.contains(playerName) && !voteContent.equals("veto")) {
-            voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_msg_failed_repeat"));
-            return false;
-        }
-        if (voter.hasPermission("autorestart.user.vote")) {
-            if (voteContent.equals("approval")) {
-                approval++;
-                voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote",main.getLang(voter).translateString("vote_type_approval")));
-            }
-            if (voteContent.equals("oppose")) {
-                oppose++;
-                voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote",main.getLang(voter).translateString("vote_type_oppose")));
-            }
-            if (voteContent.equals("veto") && voter.hasPermission("autorestart.admin.vote.veto")) {
-                TasksUtils.cancelVoteTask();
-                for (Player player : main.getServer().getOnlinePlayers().values()) {
-                    player.sendMessage(main.getLang(player).translateString("vote_restart_msg_failed_veto"));
-                }
-            }
-            if(voteContent.equals("abstention")) {
-                abstention++;
-                voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote",main.getLang(voter).translateString("vote_type_abstention")));
-            }
-        }
-        return true;
     }
 }

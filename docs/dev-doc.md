@@ -24,7 +24,7 @@
 |0|停止|
 |1|运行|
 |2|暂停|
-### **示例代码**
+## **示例代码**
 - **这里给出的仅是示例代码并不能保证能够运行，在使用时需要根据需求进行调整**
 ---
 ```java
@@ -48,28 +48,34 @@
         Utils.cancelTask();
     }
 ```
-#### **讲解**
+## **讲解**
+### **TasksUtils**
 ```
-TasksUtils
-    - runRestartTask(int taskType) 运行重启任务
-    - runRestartTask(int restartTime,int taskType,int timeUnit) 运行重启任务
-    - runVoteTask(Player vote) 发起投票重启任务
-    - cancelVoteTask() 取消重启任务
-    - cancelRestartTask() 取消重启任务
-    - pauseRestartTask() 暂停任务
-    - continueRunRestartTask() 继续运行任务
-    - restartTaskState 重启任务的状态
-    - voteTaskState 投票任务的状态
-BaseUtils
-    - getRestartUseTime() 获取重启任务的重启时间
-    - getRestartTipTime() 获取提示时间,在还剩多少秒的时候通知玩家
-    - getRemainder(Player player) 获取剩余时间
-RestartTask
-    - time2 获取时间（单位：秒）
-VoteTask
-    - approval 获取赞成票数
-    - oppose 获取反对票数
-    - abstention 获取弃权票数
-    - approvalVotes 获取需要的赞成票数
+    runRestartTask(int taskType) 运行重启任务
+    runRestartTask(int restartTime,int taskType,int timeUnit) 运行重启任务
+    runVoteTask(Player vote) 发起投票重启任务
+    cancelVoteTask() 取消重启任务
+    cancelRestartTask() 取消重启任务
+    pauseRestartTask() 暂停任务
+    continueRunRestartTask() 继续运行任务
+    restartTaskState 重启任务的状态
+    voteTaskState 投票任务的状态
+```
+
+### **BaseUtils**
+```
+    getRestartUseTime() 获取重启任务的重启时间
+    getRestartTipTime() 获取提示时间,在还剩多少秒的时候通知玩家
+    getRemainder(Player player) 获取剩余时间
+```
+
+### **VoteUtils**
+```
+    getApproval(); 获取赞成票数
+    getOppose(); 获取反对票数
+    getAbstention(); 获取弃权票数
+    getApprovalVotes(); 获取需要的赞成票数
+    initializedData(CommandSender sender); 投票任务初始化
+    processVotingContent(CommandSender sender, String voteContent); 处理投票结果
 ```
 ---

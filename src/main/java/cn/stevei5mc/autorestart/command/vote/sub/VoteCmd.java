@@ -4,9 +4,8 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.stevei5mc.autorestart.utils.VoteUtils;
-import cn.nukkit.Player;
 
-import java.util.*;
+import java.util.LinkedList;
 
 public class VoteCmd extends BaseSubCommand {
 
@@ -16,7 +15,7 @@ public class VoteCmd extends BaseSubCommand {
 
     @Override
     public boolean canUser(CommandSender sender) {
-        return sender.hasPermission("autorestart.user.vote") && sender.isPlayer();
+        return sender.hasPermission("autorestart.user.vote");
     }
 
     @Override
@@ -28,10 +27,7 @@ public class VoteCmd extends BaseSubCommand {
     public boolean execute(CommandSender sender, String label, String[] args) {
         if (args.length == 2) {
             String vote = args[1];
-            if(sender.isPlayer()){
-                Player voter = (Player) sender;
-                VoteUtils.getInstance().processVotingContent(voter,vote);
-            }
+            VoteUtils.getInstance().processVotingContent(sender,vote);
             return true;
         }else{
             sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
