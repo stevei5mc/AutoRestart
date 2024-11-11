@@ -1,10 +1,10 @@
 package cn.stevei5mc.autorestart.utils;
 
-import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.stevei5mc.autorestart.tasks.RestartTask;
 import cn.nukkit.scheduler.TaskHandler;
+import cn.stevei5mc.autorestart.AutoRestartPlugin;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
 import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 public class TasksUtils {
@@ -68,7 +68,6 @@ public class TasksUtils {
                 time = 30;
                 break;
         }
-        main.getLogger().info("task type = "+taskType+"time unit = "+timeUnit+"restart Task Type = "+restartTaskType);
         if (taskType <= 2 && restartTaskState != 2) { 
             main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -104,14 +103,18 @@ public class TasksUtils {
         }
         int time = voteTime * 60;
         String player = voter.getName();
-        boolean normalCondition = Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && restartTaskState != 2;
-        boolean debugCondition = main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
+        boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && restartTaskState != 2;
+        boolean debugCondition = !voteTaskState && main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
         if (normalCondition || debugCondition) {
             TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,voter), 20, true);
             voteTaskId = taskHandler.getTaskId();
             voteTaskState = true;
         } else {
-            voter.sendMessage(main.msgPrefix +main.getLang(voter).translateString("vote_restart_msg_not_initiate"));
+            if (voteTaskState) {
+                voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_restart_msg_is_initiate"));
+            }else {
+                voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_restart_msg_not_initiate"));
+            }
         }
     }
 

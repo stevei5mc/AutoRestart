@@ -22,8 +22,15 @@ public class VoteUtils {
         return instance;
     }
 
-    public void initializedData(CommandSender sender) {
-        String voter = sender.getName();
+    /**
+     * 初始化投票数据
+     * 注：
+     * 不建议直接使用此方法，而是使用TasksUtils的runVoteTask方法。
+     * 如果直接使用此方法后果自负!!!!!!
+     * @param initiated 投票发起者
+     */
+    public void initializedData(Player initiated) {
+        String voter = initiated.getName();
         approval = 0;
         oppose = 0;
         abstention = 0;
@@ -33,6 +40,11 @@ public class VoteUtils {
         approval++;
     }
 
+    /**
+     * 处理投票数据
+     * @param voter 投票者
+     * @param voteContent 投出的票的类型
+     */
     public void processVotingContent(CommandSender voter, String voteContent) {
         if (voter.isPlayer()) {
             Player player = (Player) voter;
@@ -46,13 +58,20 @@ public class VoteUtils {
         } else {
             voter.sendMessage(main.msgPrefix +main.getLang(voter).translateString("command_in_game_run"));
         }
-
     }
+
+    /**
+     * 处理投票数据
+     * @param voter 投票者
+     * @param voteContent 投出的票的类型
+     */
     public void processVotingContent(Player voter, String voteContent) {
         String playerName = voter.getName();
-        if (votePlayer.contains(playerName) && !voteContent.equals("veto")) {
+        if (!voter.hasPermission("autorestart.user.vote")) {
+            voter.sendMessage(main.msgPrefix+main.getLang(voter).translateString("command_not_permission"));
+        }else if (votePlayer.contains(playerName) && !voteContent.equals("veto")) {
             voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_msg_failed_repeat"));
-        }else if (voter.hasPermission("autorestart.user.vote") && voter.isPlayer()) {
+        }else if (voter.hasPermission("autorestart.user.vote")) {
             switch (voteContent) {
                 case "approval":
                     approval++;
