@@ -56,6 +56,7 @@ restart_task_run: §a重啓任務開始運行。 類型：%1%
 restart_task_type_time: 定時重啓
 restart_task_type_no_player: 無線上玩家時重啓
 restart_task_type_manual_restart: 手動重啓
+restart_task_type_vote: 投票重啓
 
 time_unit_hour: 小時
 time_unit_minutes: 分钟

@@ -1,14 +1,16 @@
 package cn.stevei5mc.autorestart.tasks;
 
-import cn.nukkit.scheduler.Task;
-import cn.lanink.gamecore.utils.Language;
-import cn.stevei5mc.autorestart.utils.TasksUtils;
-import cn.stevei5mc.autorestart.utils.BaseUtils;
-import cn.nukkit.Server;
 import cn.nukkit.Player;
-import cn.stevei5mc.autorestart.AutoRestartPlugin;
+import cn.nukkit.Server;
 import cn.nukkit.level.Sound;
-import java.util.*;
+import cn.nukkit.scheduler.Task;
+import cn.stevei5mc.autorestart.AutoRestartPlugin;
+import cn.stevei5mc.autorestart.utils.BaseUtils;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 public class RestartTask extends Task {
     public static int time2 =30;
@@ -20,7 +22,8 @@ public class RestartTask extends Task {
 
     @Override
     public void onRun(int currentTick) {
-        if (TasksUtils.restartTaskType <= 2) {
+        int taskType = TasksUtils.getRestartTaskType();
+        if (taskType <= 2 || taskType == 4) {
             if (time2 <= BaseUtils.getRestartTipTime()) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     String unit = main.getLang(player).translateString("time_unit_seconds");
@@ -52,7 +55,7 @@ public class RestartTask extends Task {
             if (time2 <= 0) {
                 TasksUtils.cancelRestartTask();
                 Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
-                    if (main.getConfig().getBoolean("runcommand",true) && TasksUtils.restartTaskType <= 2) {
+                    if (main.getConfig().getBoolean("runcommand",true)) {
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
                             ArrayList<String> commands;
                             commands = new ArrayList<>(main.getConfig().getStringList("commands"));
@@ -66,7 +69,7 @@ public class RestartTask extends Task {
                             }
                         }
                     }
-                    if (main.getConfig().getBoolean("kick_player",true) && TasksUtils.restartTaskType <= 2) {
+                    if (main.getConfig().getBoolean("kick_player",true)) {
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
                             player.kick((main.getLang(player).translateString("kick_player_msg")), false);
                         }
@@ -77,7 +80,7 @@ public class RestartTask extends Task {
             time2--;// 每秒减少时间
         }
         //这段代码是给任务ID为3的任务来使用的
-        if (TasksUtils.restartTaskType == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
+        if (taskType == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
             main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
         }
     }

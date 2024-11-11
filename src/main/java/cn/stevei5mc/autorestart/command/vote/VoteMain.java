@@ -23,13 +23,13 @@ public class VoteMain extends BaseCommand {
         Language lang = main.getLang(sender);
         String cmdname = "§a/voterestart ";
         sender.sendMessage("§b=== AutoRestart vote command list ===");
-        sender.sendMessage(cmdname+"initiate "+main.getLang(sender).translateString("command_help_vote_initiate"));
-        sender.sendMessage(cmdname+"vote <approval|oppose|abstention|veto> "+main.getLang(sender).translateString("command_help_vote_vote"));
+        sender.sendMessage(cmdname+"initiate "+lang.translateString("command_help_vote_initiate"));
+        sender.sendMessage(cmdname+"vote <approval|oppose|abstention|veto> "+lang.translateString("command_help_vote_vote"));
     }
 
     @Override
     public void sendUI(Player player) {
-        if (TasksUtils.voteTaskState) {
+        if (TasksUtils.getVoteTaskState()) {
             Vote.voteGui(player);
         } else {
             Vote.initiateVote(player);  

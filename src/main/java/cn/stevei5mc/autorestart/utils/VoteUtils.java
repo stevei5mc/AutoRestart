@@ -43,13 +43,13 @@ public class VoteUtils {
     /**
      * 处理投票数据
      * @param voter 投票者
-     * @param voteContent 投出的票的类型
+     * @param voteType 投出的票的类型
      */
-    public void processVotingContent(CommandSender voter, String voteContent) {
+    public void processVotingContent(CommandSender voter, String voteType) {
         if (voter.isPlayer()) {
             Player player = (Player) voter;
-            processVotingContent(player,voteContent);
-        } else if (!voter.isPlayer() && voteContent.equals("veto")) {
+            processVotingContent(player,voteType);
+        } else if (!voter.isPlayer() && voteType.equals("veto")) {
             TasksUtils.cancelVoteTask();
             main.getLogger().info(main.msgPrefix + main.getLang().translateString("vote_restart_msg_failed_veto"));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -63,16 +63,16 @@ public class VoteUtils {
     /**
      * 处理投票数据
      * @param voter 投票者
-     * @param voteContent 投出的票的类型
+     * @param voteType 投出的票的类型
      */
-    public void processVotingContent(Player voter, String voteContent) {
+    public void processVotingContent(Player voter, String voteType) {
         String playerName = voter.getName();
         if (!voter.hasPermission("autorestart.user.vote")) {
             voter.sendMessage(main.msgPrefix+main.getLang(voter).translateString("command_not_permission"));
-        }else if (votePlayer.contains(playerName) && !voteContent.equals("veto")) {
+        }else if (votePlayer.contains(playerName) && !voteType.equals("veto")) {
             voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_msg_failed_repeat"));
         }else if (voter.hasPermission("autorestart.user.vote")) {
-            switch (voteContent) {
+            switch (voteType) {
                 case "approval":
                     approval++;
                     votePlayer.add(playerName);

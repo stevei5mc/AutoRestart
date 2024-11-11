@@ -56,6 +56,7 @@ restart_task_run: "§aRestart the task to start running. Type: %1%"
 restart_task_type_time: Scheduled restart
 restart_task_type_no_player: No online player
 restart_task_type_manual_restart: Manual restart
+restart_task_type_vote: Vote restart
 
 time_unit_hour: hour
 time_unit_minutes: minutes

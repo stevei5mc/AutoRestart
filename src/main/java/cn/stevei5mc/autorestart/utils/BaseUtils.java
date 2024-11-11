@@ -64,13 +64,15 @@ public class BaseUtils {
      * @return Task name
     */
     public static String getRestartTaskName(Player player) {
-        switch (TasksUtils.restartTaskType) {
+        switch (TasksUtils.getRestartTaskType()) {
             case 1:
                 return main.getLang(player).translateString("restart_task_type_time");
             case 2:
                 return main.getLang(player).translateString("restart_task_type_manual_restart");
             case 3:
                 return main.getLang(player).translateString("restart_task_type_no_player");
+            case 4:
+                return main.getLang(player).translateString("restart_task_type_vote");
             default:
                 return "§cUnknown type§r";
         }

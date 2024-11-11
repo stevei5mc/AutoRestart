@@ -19,13 +19,13 @@ public class Admin {
     public static void sendMain(@NotNull Player player) {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
-        if (TasksUtils.restartTaskType != 3 && TasksUtils.restartTaskState >= 1) {
+        if (TasksUtils.getRestartTaskType() != 3 && TasksUtils.getRestartTaskState() >= 1) {
             simple.setContent(lang.translateString("form_confirm_cancel_description_time",BaseUtils.getRemainder(player)) + "\n\n");
         }
         String trueButton = lang.translateString("form_button_confirm");
         String falseButton = lang.translateString("form_button_back");
         String unitSeconds = lang.translateString("time_unit_seconds");
-        if (TasksUtils.restartTaskState >= 1 && player.hasPermission("autorestart.admin.cancel")) {
+        if (TasksUtils.getRestartTaskState() >= 1 && player.hasPermission("autorestart.admin.cancel")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
                 AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                     lang.translateString("form_confirm_cancel_title"),
@@ -37,17 +37,17 @@ public class Admin {
                 })
             );
         }
-        if (TasksUtils.restartTaskState == 1 && player.hasPermission("autorestart.admin.pause")) {
+        if (TasksUtils.getRestartTaskState() == 1 && player.hasPermission("autorestart.admin.pause")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_pause"))
                 .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart pause"))
             ); 
         }
-        if (TasksUtils.restartTaskState == 2 && player.hasPermission("autorestart.admin.pause")) {
+        if (TasksUtils.getRestartTaskState() == 2 && player.hasPermission("autorestart.admin.pause")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_continue"))
                 .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart pause"))
             ); 
         }
-        if (TasksUtils.restartTaskState == 0 && player.hasPermission("autorestart.admin.restart")) {
+        if (TasksUtils.getRestartTaskState() == 0 && player.hasPermission("autorestart.admin.restart")) {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_manual_restart")).onClicked(cp -> {
                 int i = BaseUtils.getRestartTipTime();
                 AdvancedFormWindowModal modal = new AdvancedFormWindowModal(

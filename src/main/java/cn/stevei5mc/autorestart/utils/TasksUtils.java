@@ -9,9 +9,9 @@ import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 public class TasksUtils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public static int restartTaskState = 0;//任务状态，默认为 0
-    public static boolean voteTaskState = false;
-    public static int restartTaskType = 0;//任务类型，默认编号为 0
+    private static int restartTaskState = 0;//任务状态，默认为 0
+    private static boolean voteTaskState = false;
+    private static int restartTaskType = 0;//任务类型，默认编号为 0
     private static int restartTaskId;
     private static int voteTaskId;
 
@@ -32,24 +32,10 @@ public class TasksUtils {
     public static void runRestartTask(int restartTime,int taskType,int timeUnit) {
         int runTick = 20;
         int time = 30;
+        restartTaskType = taskType;
         String unit = "time_unit_seconds";
-        switch (taskType) {
-            case 1:
-                runTick = 20;
-                restartTaskType = 1;
-                break;
-            case 2:
-                runTick = 20;
-                restartTaskType = 2;
-                break;
-             case 3:
-                runTick = 100;
-                restartTaskType = 3;
-                break;
-            default:
-                runTick = 20;
-                restartTaskType = 0;
-                break;
+        if (taskType == 3) {
+            runTick = 100;
         }
         switch (timeUnit) {
             case 1:
@@ -132,5 +118,17 @@ public class TasksUtils {
 
     public static void continueRunRestartTask() {
         runRestartTask(RestartTask.time2,restartTaskType,2);
+    }
+
+    public static int getRestartTaskType() {
+        return restartTaskType;
+    }
+
+    public static int getRestartTaskState() {
+        return restartTaskState;
+    }
+
+    public static boolean getVoteTaskState() {
+        return voteTaskState;
     }
 }

@@ -27,12 +27,12 @@ public class Pause extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        if (TasksUtils.restartTaskState == 1) {
+        if (TasksUtils.getRestartTaskState() == 1) {
             TasksUtils.pauseRestartTask();
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.msgPrefix + main.getLang(player).translateString("restart_msg_task_pause"));
             }
-        } else if (TasksUtils.restartTaskState == 2) {
+        } else if (TasksUtils.getRestartTaskState() == 2) {
             TasksUtils.continueRunRestartTask();
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.msgPrefix + main.getLang(player).translateString("restart_msg_task_continue"));
