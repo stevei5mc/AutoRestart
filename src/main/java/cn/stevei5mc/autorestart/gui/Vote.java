@@ -1,12 +1,12 @@
 package cn.stevei5mc.autorestart.gui;
 
-import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.lanink.gamecore.form.element.ResponseElementButton;
-import cn.lanink.gamecore.form.windows.AdvancedFormWindowSimple;
 import cn.lanink.gamecore.form.windows.AdvancedFormWindowModal;
+import cn.lanink.gamecore.form.windows.AdvancedFormWindowSimple;
 import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.utils.VoteUtils;
 import org.jetbrains.annotations.NotNull;
 

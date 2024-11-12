@@ -1,12 +1,13 @@
 package cn.stevei5mc.autorestart.command.admin.sub;
 
+import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
-import cn.nukkit.Player;
-import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
-import java.util.*;
+import cn.stevei5mc.autorestart.utils.TasksUtils;
+
+import java.util.LinkedList;
 
 public class RunRestartTask extends BaseSubCommand {
 
