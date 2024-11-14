@@ -78,12 +78,12 @@ public class VoteUtils {
                     votePlayer.add(playerName);
                     voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_approval")));
                     break;
-                case "oppose":
+                case "abstention":
                     oppose++;
                     votePlayer.add(playerName);
                     voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_oppose")));
                     break;
-                case "abstention":
+                case "oppose":
                     if (!voter.hasPermission("autorestart.admin.vote.veto")) {
                         votePlayer.add(playerName);
                         abstention++;
@@ -104,18 +104,34 @@ public class VoteUtils {
         }
     }
 
+    /**
+     * 获取赞成票数
+     * @return 赞成票数
+     */
     public int getApproval() {
         return approval;
     }
 
+    /**
+     * 获取反对票数
+     * @return 反对票数
+     */
     public int getOppose() {
         return oppose;
     }
 
+    /**
+     * 获取弃权票数
+     * @return 弃权票数
+     */
     public int getAbstention() {
         return abstention;
     }
 
+    /**
+     * 获取需要的赞成票数
+     * @return 需要的赞成票数
+     */
     public int getApprovalVotes() {
         return approvalVotes;
     }

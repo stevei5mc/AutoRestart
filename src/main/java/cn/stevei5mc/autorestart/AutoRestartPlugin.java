@@ -47,10 +47,10 @@ public class AutoRestartPlugin extends PluginBase {
     public void onEnable() {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             tips = false; //这是为了防止一些意外的情况准备的
+            msgPrefix = config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
             loadLanguage();
             this.getServer().getCommandMap().register("", new AdminMain());//注册命令
             this.getServer().getCommandMap().register("", new VoteMain());
-            msgPrefix = config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
             int i = BaseUtils.getRestartUseTime();
             TasksUtils.runRestartTask(i,1,1);
             if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
