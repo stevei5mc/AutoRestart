@@ -1,4 +1,4 @@
-name: push snapshot
+name: Dispatch
 on:
   workflow_dispatch:
     inputs:
