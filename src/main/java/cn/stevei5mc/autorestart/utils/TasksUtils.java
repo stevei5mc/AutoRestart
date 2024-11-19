@@ -46,13 +46,12 @@ public class TasksUtils {
                 time = restartTime;
                 unit = "time_unit_seconds";
                 break;
-            // case 3:
-            //     time = 0;
-            //     runTick = 100;
-            //     break;
+            case 3:
+                time = restartTime * 3600;
+                unit = "time_unit_hour";
+                break;
             default:
                 time = 30;
-                break;
         }
         if (taskType <= 2 && restartTaskState != 2) { 
             main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));

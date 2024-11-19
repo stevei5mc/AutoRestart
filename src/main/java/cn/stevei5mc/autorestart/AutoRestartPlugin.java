@@ -17,10 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AutoRestartPlugin extends PluginBase {
-    private Language language;
     private String defaultLanguage;
     private final HashMap<String, Language> languageMap = new HashMap<>();
-    private List<String> languages = Arrays.asList("zh_CN", "zh_TW","en_US");
+    private final List<String> languages = Arrays.asList("zh_CN", "zh_TW","en_US");
     private static AutoRestartPlugin instance;
     private Config config;
     private static boolean tips = false;
@@ -41,7 +40,7 @@ public class AutoRestartPlugin extends PluginBase {
         for(String lang: languages){
             saveResource("language/"+lang+".yml",false);
         }
-        updataConfig();
+        updateConfig();
     }
 
     public void onEnable() {
@@ -58,6 +57,7 @@ public class AutoRestartPlugin extends PluginBase {
                 Api.registerVariables("TipsVar",TipsVar.class);
             }
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
+                checkLanguageFilesVersion();
                 if (!tips) {
                     this.getLogger().warning("§c未检测到前置插件§aTips§c，相关变量无法生效");
                     this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/Tips/");
@@ -111,10 +111,11 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void reload() {
         this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
+        loadLanguage();
     }
 
-    public void updataConfig() {
-        int latest = 3;
+    public void updateConfig() {
+        int latest = 4;
         if (config.getInt("version", 1) < latest) {
             if (config.getInt("version", 1) < 2) {
                 config.set("version", 2);
@@ -135,10 +136,13 @@ public class AutoRestartPlugin extends PluginBase {
                 }
                 config.save();
             }
-            if (config.getInt("version") < 3) {
-                config.set("version", 3);
+            if (config.getInt("version") < 4) {
+                config.set("version", 4);
                 if (!config.exists("message_prefix")) {
                     config.set("message_prefix","§l§bAutoRestart §r§7>> ");
+                }
+                if (!config.exists("update_language_files")) {
+                    config.set("update_language_files",false);
                 }
                 config.save();
             }
@@ -146,6 +150,32 @@ public class AutoRestartPlugin extends PluginBase {
         } else if (config.getInt("version", 1) > latest) {
             getLogger().error("§c配置文件的版本出现异常，将对配置文件进行重置");
             saveResource("config.yml",true);
+        }
+    }
+
+    public void checkLanguageFilesVersion() {
+        int latestVersion = 2;
+       // boolean updateLanguage = config.getBoolean("update_language_files",false);
+        for (String lang : languages) {
+            Config language = new Config(this.getDataFolder()+"/language/"+lang+".yml");
+            int version = language.getInt("language_version",1);
+            if (version == latestVersion) {
+                this.getLogger().info("语言文件" + lang + ".yml 的版本是最新的版本");
+            }else if (version < latestVersion) {
+                this.getLogger().warning("语言文件" + lang + ".yml 的版本需要进行更新，如果开启了自动更新则无视该消息");
+                saveLanguageFile(lang);
+            }else {
+                this.getLogger().error("语言文件" + lang + ".yml 的版本出现了异常，如果开启了自动更新则无视该消息");
+                saveLanguageFile(lang);
+            }
+        }
+        //this.getServer().dispatchCommand(this.getServer().getConsoleSender(), "autorestart reload");
+        reload();
+    }
+
+    private void saveLanguageFile(String file) {
+        if (config.getBoolean("update_language_files",false)) {
+            saveResource("language/"+file+".yml",true);
         }
     }
 }

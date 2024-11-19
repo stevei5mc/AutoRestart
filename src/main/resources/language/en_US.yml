@@ -1,3 +1,4 @@
+language_version: 2
 plugin_language: language code en_US
 
 command_help_reload: §ereload config
@@ -53,6 +54,7 @@ restart_task_cancel: §aThe restart task has been cancel
 restart_task_restart: §fThe server will restart in §a%1%§f %2%
 restart_task_run: "§aRestart the task to start running. Type: %1%"
 
+restart_task_type_auto: Auto restart
 restart_task_type_time: Scheduled restart
 restart_task_type_no_player: No online player
 restart_task_type_manual_restart: Manual restart
@@ -81,6 +83,7 @@ vote_restart_msg_failed_veto: "§cThe administrator used a veto power, and the v
 vote_restart_msg_not_initiate: "§cThe number of players is less than §b%1%§c, unable to start the voting process. Please wait for enough players to try again!"
 vote_restart_msg_is_initiate: "§cThe voting program is running and you cannot initiate it again!"
 vote_restart_msg_in_initiate: "§b%1%§a initiated a vote restart request. Please enter §b%2%§a to participate in the vote(the admin has one veto power!)"
+vote_restart_msg_vote_failed: "§cVoting failed, please check if the voting task is running properly"
 
 vote_msg_vote: "§aYou vote %1%"
 vote_msg_failed_repeat: "§cYou have already voted, you cannot vote again!"

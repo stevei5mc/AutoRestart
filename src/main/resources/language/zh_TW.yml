@@ -1,3 +1,4 @@
+language_version: 2
 plugin_language: language code zh_TW
 
 command_help_reload: §e重載配寘
@@ -53,6 +54,7 @@ restart_task_cancel: §a重啟任務已取消
 restart_task_restart: §f伺服器將在 §6%1% §e%2%後重啓
 restart_task_run: §a重啓任務開始運行。 類型：%1%
 
+restart_task_type_auto: 自動重啟
 restart_task_type_time: 定時重啓
 restart_task_type_no_player: 無線上玩家時重啓
 restart_task_type_manual_restart: 手動重啓
@@ -81,6 +83,7 @@ vote_restart_msg_failed_veto: "§c管理員使用了一票否决權，本次投�
 vote_restart_msg_not_initiate: "§c玩家人數不足 §b%1%§c，無法啟動投票程式，請等待足够的人數再試！"
 vote_restart_msg_is_initiate: "§c投票程式正在運行，你無法再次發起！"
 vote_restart_msg_in_initiate: "§b%1%§a 發起了投票重啓請求，請輸入 §b%2%§a 參與投票（管理員擁有一票否决權！）"
+vote_restart_msg_vote_failed: "§c投票失敗，請檢查投票任務是否正常運行"
 
 vote_msg_vote: "§a你投出了 %1%"
 vote_msg_failed_repeat: "§c你已經投票了，不能再次投票！"

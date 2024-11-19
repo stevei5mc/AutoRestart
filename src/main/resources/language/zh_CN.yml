@@ -1,3 +1,4 @@
+language_version: 2
 plugin_language: language code zh_CN
 
 command_help_reload: §e重载配置
@@ -53,6 +54,7 @@ restart_task_cancel: §a重启任务已取消
 restart_task_restart: §f服务器将于 §a%1%§f %2%后重启
 restart_task_run: §a重启任务开始运行。类型： %1%
 
+restart_task_type_auto: 自动重启
 restart_task_type_time: 定时重启
 restart_task_type_no_player: 无在线玩家时重启
 restart_task_type_manual_restart: 手动重启
@@ -81,6 +83,7 @@ vote_restart_msg_failed_veto: "§c管理员使用了一票否决权，本次投�
 vote_restart_msg_not_initiate: "§c无法启动投票程序，请检查是否符合发起投票的条件后再试"
 vote_restart_msg_is_initiate: "§c投票程序正在运行，你无法再次发起！"
 vote_restart_msg_in_initiate: "§b%1%§a 发起了投票重启请求，请输入 §b%2%§a 参与投票（管理员拥有一票否决权！）"
+vote_restart_msg_vote_failed: "§c投票失败，请检查投票任务是否正常运行"
 
 vote_msg_vote: "§a你投出了 %1%"
 vote_msg_failed_repeat: "§c你已经投票了，不能再次投票！"
