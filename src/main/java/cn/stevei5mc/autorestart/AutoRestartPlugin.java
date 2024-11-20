@@ -155,7 +155,6 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void checkLanguageFilesVersion() {
         int latestVersion = 2;
-       // boolean updateLanguage = config.getBoolean("update_language_files",false);
         for (String lang : languages) {
             Config language = new Config(this.getDataFolder()+"/language/"+lang+".yml");
             int version = language.getInt("language_version",1);
@@ -169,7 +168,6 @@ public class AutoRestartPlugin extends PluginBase {
                 saveLanguageFile(lang);
             }
         }
-        //this.getServer().dispatchCommand(this.getServer().getConsoleSender(), "autorestart reload");
         reload();
     }
 

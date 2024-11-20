@@ -123,6 +123,10 @@ public class TasksUtils {
         return restartTaskType;
     }
 
+    /**
+     * 获取重启任务的状态
+     * <br><br>0 = 停止<br>1= 运行<br>2 = 暂停
+     */
     public static int getRestartTaskState() {
         return restartTaskState;
     }

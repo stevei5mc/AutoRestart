@@ -24,9 +24,9 @@ public class VoteUtils {
 
     /**
      * 初始化投票数据
-     * 注：
-     * 不建议直接使用此方法，而是使用TasksUtils的runVoteTask方法。
-     * 如果直接使用此方法后果自负!!!!!!
+     * <br><br>注意：
+     * <br>不可以直接使用此方法，而是使用TasksUtils的runVoteTask方法。
+     * <br>如果直接使用此方法后果自负!!!!!!
      * @param initiated 投票发起者
      */
     public void initializedData(Player initiated) {
@@ -42,6 +42,10 @@ public class VoteUtils {
 
     /**
      * 处理投票数据
+     * <br><br>票类型
+     * <br><br>注意：
+     * <br>如果拥有一票否决权的话将无法投出反对票
+     * <br>approval = 赞成票<br>abstention = 弃权票<br>oppose = 反对票<br>veto = 一票否决
      * @param voter 投票者
      * @param voteType 投出的票的类型
      */
@@ -66,6 +70,10 @@ public class VoteUtils {
 
     /**
      * 处理投票数据
+     * <br><br>票类型
+     * <br><br>注意：
+     * <br>如果拥有一票否决权的话将无法投出反对票<br>
+     * <br>approval = 赞成票<br>abstention = 弃权票<br>oppose = 反对票<br>veto = 一票否决
      * @param voter 投票者
      * @param voteType 投出的票的类型
      */
