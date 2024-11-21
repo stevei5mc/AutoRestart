@@ -12,6 +12,7 @@ import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.utils.TasksUtils;
 import tip.utils.Api;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -149,6 +150,7 @@ public class AutoRestartPlugin extends PluginBase {
             getLogger().info("§a配置文件更新完毕，现在的配置文件版本已经是最新的了");
         } else if (config.getInt("version", 1) > latest) {
             getLogger().error("§c配置文件的版本出现异常，将对配置文件进行重置");
+            config.save(new File(this.getDataFolder() + "/config.yml.bak"));
             saveResource("config.yml",true);
         }
     }
