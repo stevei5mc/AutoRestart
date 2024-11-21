@@ -37,7 +37,6 @@ public class VoteTask extends Task {
             int approval = vu.getApproval();
             int approvalVotes = vu.getApprovalVotes();
             if (approval >= approvalVotes) {
-                TasksUtils.cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
                 TasksUtils.runRestartTask(BaseUtils.getRestartTipTime(),4,2);
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.msgPrefix + main.getLang(player).translateString("vote_restart_msg_success", approval, approvalVotes));

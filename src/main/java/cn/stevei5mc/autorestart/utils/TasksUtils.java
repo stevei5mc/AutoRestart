@@ -30,11 +30,12 @@ public class TasksUtils {
      * @param timeUnit 时间类型
     */
     public static void runRestartTask(int restartTime,int taskType,int timeUnit) {
+        cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
         int runTick = 20;
         int time = 30;
         restartTaskType = taskType;
         String unit = "time_unit_seconds";
-        if (taskType == 3) {
+        if (getRestartTaskType() == 3) {
             runTick = 100;
         }
         switch (timeUnit) {
@@ -58,7 +59,6 @@ public class TasksUtils {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
             }
-            // cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
         }
         TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
         restartTaskId = taskHandler.getTaskId();
@@ -88,7 +88,7 @@ public class TasksUtils {
         }
         int time = voteTime * 60;
         String player = voter.getName();
-        boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.time2 && restartTaskState != 2;
+        boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.getTime() && getRestartTaskType() != 2;
         boolean debugCondition = !voteTaskState && main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
         if (normalCondition || debugCondition) {
             TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,voter), 20, true);
@@ -116,7 +116,13 @@ public class TasksUtils {
     }
 
     public static void continueRunRestartTask() {
-        runRestartTask(RestartTask.time2,restartTaskType,2);
+        restartTaskState = 1;
+        int runTick = 20;
+        if (getRestartTaskType() == 3) {
+            runTick = 100;
+        }
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(RestartTask.getTime()), runTick, true);
+        restartTaskId = taskHandler.getTaskId();
     }
 
     public static int getRestartTaskType() {

@@ -39,7 +39,7 @@ public class BaseUtils {
      * @return remainder
     */
     public static String getRemainder(Player player) {
-        int time = RestartTask.time2;
+        int time = RestartTask.getTime();
         int hours = time / 3600;
         int minutes = (time % 3600) / 60;
         int seconds = time % 60;

@@ -32,11 +32,9 @@ public class RunRestartTask extends BaseSubCommand {
             switch (s) {
                 case "manual":
                     int i = BaseUtils.getRestartTipTime();
-                    TasksUtils.cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
                     TasksUtils.runRestartTask(i,2,2);
                     return true;
-                case "no-players":  
-                    TasksUtils.cancelRestartTask();
+                case "no-players":
                     TasksUtils.runRestartTask(3);
                     main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
                     for (Player player : main.getServer().getOnlinePlayers().values()) {

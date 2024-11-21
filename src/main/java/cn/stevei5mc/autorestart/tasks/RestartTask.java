@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class RestartTask extends Task {
-    public static int time2 =30;
+    private static int time2 =30;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     public RestartTask(int time1) {
@@ -83,5 +83,9 @@ public class RestartTask extends Task {
         if (taskType == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
             main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
         }
+    }
+
+    public static int getTime() {
+        return time2;
     }
 }
