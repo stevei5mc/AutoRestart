@@ -1,5 +1,5 @@
 #配置文件版本（勿动!!!）
-version: 4
+version: 5
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -30,5 +30,9 @@ vote_start_player: 3
 vote_time: 5
 #调试模式
 debug: false
+#消息前缀
 message_prefix: "§l§bAutoRestart §r§7>> "
-update_language_files: false
+#本地化语言文件（开启后语言文件才会保存至插件对应文件及其会使用保存至插件文件夹的语言文件）
+local_language_flies: false
+#自动更新语言文件（更新语言文件是使用覆盖式更新，旧版配置并不会保存）
+auto_update_language_files: false

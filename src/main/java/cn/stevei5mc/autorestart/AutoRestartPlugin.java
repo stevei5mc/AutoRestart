@@ -88,7 +88,11 @@ public class AutoRestartPlugin extends PluginBase {
         }
         for (String language : languages) {
             Config languageConfig = new Config(Config.YAML);
-            languageConfig.load(this.getDataFolder() + "/language/" + language + ".yml");
+            if (config.getBoolean("local_language_flies",false)) {
+                languageConfig.load(this.getDataFolder() + "/language/" + language + ".yml");
+            } else {
+                languageConfig.load(this.getResource("language/" + language + ".yml"));
+            }
             this.languageMap.put(language, new Language(languageConfig));
         }
         this.getLogger().info(this.getLang().translateString("plugin_language"));
@@ -116,7 +120,7 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void updateConfig() {
-        int latest = 4;
+        int latest = 5;
         if (config.getInt("version", 1) < latest) {
             if (config.getInt("version", 1) < 2) {
                 config.set("version", 2);
@@ -137,13 +141,16 @@ public class AutoRestartPlugin extends PluginBase {
                 }
                 config.save();
             }
-            if (config.getInt("version") < 4) {
-                config.set("version", 4);
+            if (config.getInt("version") < 5) {
+                config.set("version", 5);
                 if (!config.exists("message_prefix")) {
                     config.set("message_prefix","§l§bAutoRestart §r§7>> ");
                 }
-                if (!config.exists("update_language_files")) {
-                    config.set("update_language_files",false);
+                if (!config.exists("local_language_flies")) {
+                    config.set("local_language_flies",false);
+                }
+                if (!config.exists("auto_update_language_files")) {
+                    config.set("auto_update_language_files",false);
                 }
                 config.save();
             }
@@ -174,7 +181,7 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     private void saveLanguageFile(String file) {
-        if (config.getBoolean("update_language_files",false)) {
+        if (config.getBoolean("local_language_flies",false) && config.getBoolean("auto_update_language_files",false)) {
             saveResource("language/"+file+".yml",true);
         }
     }

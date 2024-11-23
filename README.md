@@ -66,7 +66,7 @@
 ### **配置文件介绍**
 ```yml
 #配置文件版本（勿动!!!）
-version: 2
+version: 5
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -97,6 +97,12 @@ vote_start_player: 3
 vote_time: 5
 #调试模式
 debug: false
+#消息前缀
+message_prefix: "§l§bAutoRestart §r§7>> "
+#本地化语言文件（开启后语言文件才会保存至插件对应文件及其会使用保存至插件文件夹的语言文件）
+local_language_flies: false
+#自动更新语言文件（更新语言文件是使用覆盖式更新，旧版配置并不会保存）
+auto_update_language_files: false
 ```
 ### **支持的语言**
 - **顺序按照支持的顺序排序**
@@ -108,6 +114,8 @@ debug: false
 ### **注意事项**
 - **自动重启还需要脚本的配合才能实现相关脚本在[Actions](https://github.com/stevei5mc/NewTipsVariables/actions)编译完成后会一并给出，你也可以到对应[GITHUB 仓库](https://github.com/stevei5mc/McStartServer)获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases)中也可以获取得到但只会在版本发布后才会有相关脚本(Windows用.bat后缀的脚本，Linux请用.sh后缀的脚本，另外每种系统的脚本都有两种根据你的需求选择)，如果你已经有了相关脚本则可以忽略**
 - **本插件的重启时间会受服务器TPS导致重启时间不会按现实的时间进行而是按照服务器TPS的计算的时间进行的**
+- **在使用时请不要随意改动语言文件或配置文件的版本号，否则所带来的后果一切自负！！！！！！**
+- **默认情况下使用的语言文件为内置的语言文件**
 
 ### **脚本使用说明**
 - **此内容使用于配套的启动脚本，可配置项已在下方列出**
