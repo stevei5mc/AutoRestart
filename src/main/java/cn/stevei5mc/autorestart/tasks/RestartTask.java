@@ -23,7 +23,7 @@ public class RestartTask extends Task {
     @Override
     public void onRun(int currentTick) {
         int taskType = TasksUtils.getRestartTaskType();
-        if (taskType <= 2 || taskType == 4) {
+        if (taskType != 3) {
             if (time2 <= BaseUtils.getRestartTipTime()) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     String unit = main.getLang(player).translateString("time_unit_seconds");

@@ -29,7 +29,7 @@ public class VoteTask extends Task {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.msgPrefix + main.getLang(player).translateString("vote_restart_msg_in_initiate",voterr, "/voterestart"));
                 }
-                msgTime = msgTime - 60;
+                msgTime = msgTime - 30;
             }
         }
         if (time2 <= 0) {

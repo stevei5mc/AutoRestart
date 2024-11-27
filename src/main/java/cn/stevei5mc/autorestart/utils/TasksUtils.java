@@ -54,7 +54,7 @@ public class TasksUtils {
             default:
                 time = 30;
         }
-        if (taskType <= 2 && restartTaskState != 2) { 
+        if (taskType != 3) {
             main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
             for (Player player : main.getServer().getOnlinePlayers().values()) {
                 player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
