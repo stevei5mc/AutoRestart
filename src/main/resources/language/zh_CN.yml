@@ -1,4 +1,4 @@
-language_version: 2
+language_version: 3
 plugin_language: language code zh_CN
 
 command_help_reload: §e重载配置
@@ -13,6 +13,9 @@ command_in_game_run: §c请在游戏内使用此命令！
 command_unknown: §c未知的命令或参数，请检查后再试！
 
 form_title: Auto Rstart plugin
+form_title_scheduled: 定时重启
+
+form_description_scheduled: "设置重启时间，并设置好时间单位后确认即可开启重启任务"
 
 form_button_restart_cancel: 取消重启任务
 form_button_reload: 重载配置
@@ -27,6 +30,9 @@ form_button_veto: "一票否决"
 form_button_abstention: "弃权"
 form_button_pause: 暂停任务
 form_button_continue: 继续运行
+form_button_scheduled_time: "定时重启"
+
+form_scheduled_input_set_time: 设置重启时间
 
 form_confirm_restart_title: 运行重启任务
 form_confirm_restart_description_task: |-
@@ -60,6 +66,7 @@ restart_task_type_no_player: 无在线玩家时重启
 restart_task_type_manual_restart: 手动重启
 restart_task_type_vote: 投票重启
 
+time_unit: 时间单位
 time_unit_hour: 小时
 time_unit_minutes: 分钟
 time_unit_seconds: 秒

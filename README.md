@@ -13,17 +13,18 @@
 - [x] **取消自动重启任务**
 - [x] **暂停任务**
 ### **任务类型**
-- [x] **定时重启**
+- [x] **自动重启**
 - [x] **手动重启（手动重启的时间为配置文件中的提示时间）**
 - [x] **服务器无人时自动重启**
 - [x] **投票重启**
+- [x] **定时重启**
 ### **命令与权限**
 <table>
     <tr align="center" valign="center">
         <th>命令</th><th>权限节点</th><th>命令/权限介绍</th><th>权限归属</th>
     </tr>
     <tr>
-        <td>/autorestart</td><td>autorestart.admin</td><td>主命令、打开GUI</td><td rowspan="6" align="center" valign="center">OP</td>
+        <td>/autorestart</td><td>autorestart.admin</td><td>主命令、打开GUI</td><td rowspan="5" align="center" valign="center">OP</td>
     </tr>
     <tr>
         <td>/autorestart reload</td><td>autorestart.admin.reload</td><td>重载配置文件</td>
@@ -35,10 +36,7 @@
       <td>/autorestart pause</td><td>autorestart.admin.pause</td><td>暂停/继续运行重启任务</td>
     </tr>
     <tr>
-      <td>/autorestart restart manual</td><td rowspan="2">autorestart.admin.restart</td><td>手动重启服务器</td>
-    </tr>
-    <tr>
-      <td>/autorestart restart no-player</td><td>在服务器没有玩家在线时自动重启服务器</td>
+      <td>/autorestart restart [任务类型] (时间单位) (时间)</td><td>autorestart.admin.restart</td><td>手动重启服务器</td>
     </tr>
     <tr>
       <td>/voterestart</td><td rowspan="5">autorestart.user.vote</td><td>主命令、打开GUI</td><td rowspan="5" align="center" valign="center">player</td>
@@ -62,6 +60,18 @@
       <td></td><td>autorestart.admin.vote.force</td><td>在调试模式中强制发起投票<br>该功能方便开发而设立的(需开启debug模式)</td>
     </tr>
 </table>
+
+#### **命令参数讲解**
+- **[ ]  内的参数必填**
+- **（ ） 内的参数选填**
+##### **任务类型**
+- `manual` **手动重启**
+- `no-players` **无人时重启**
+- `scheduled` **定时重启**
+##### **时间单位**
+- `hour` **小时**
+- `minutes` **分钟**
+- `seconds` **秒**
 
 ### **配置文件介绍**
 ```yml

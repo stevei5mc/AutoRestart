@@ -58,7 +58,9 @@ public class AutoRestartPlugin extends PluginBase {
                 Api.registerVariables("TipsVar",TipsVar.class);
             }
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
-                checkLanguageFilesVersion();
+                if (config.getBoolean("local_language_flies",false)) {
+                    checkLanguageFilesVersion();
+                }
                 if (!tips) {
                     this.getLogger().warning("§c未检测到前置插件§aTips§c，相关变量无法生效");
                     this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/Tips/");
@@ -163,7 +165,7 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void checkLanguageFilesVersion() {
-        int latestVersion = 2;
+        int latestVersion = 3;
         for (String lang : languages) {
             Config language = new Config(this.getDataFolder()+"/language/"+lang+".yml");
             int version = language.getInt("language_version",1);
@@ -181,7 +183,7 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     private void saveLanguageFile(String file) {
-        if (config.getBoolean("local_language_flies",false) && config.getBoolean("auto_update_language_files",false)) {
+        if (config.getBoolean("auto_update_language_files",false)) {
             saveResource("language/"+file+".yml",true);
         }
     }

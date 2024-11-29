@@ -29,7 +29,7 @@ public class AdminMain extends BaseCommand {
         sender.sendMessage("§b=== AutoRestart admin command list ===");
         sender.sendMessage(cmdname+"reload "+lang.translateString("command_help_reload"));
         sender.sendMessage(cmdname+"cancel "+lang.translateString("command_help_cancel"));
-        sender.sendMessage(cmdname+"restart <manual|no-players> "+lang.translateString("command_help_restart"));
+        sender.sendMessage(cmdname+"restart [task type] (time unit) (time) "+lang.translateString("command_help_restart"));
         sender.sendMessage(cmdname+"pause"+lang.translateString("command_help_pause"));
     }
 

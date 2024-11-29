@@ -1,4 +1,4 @@
-language_version: 2
+language_version: 3
 plugin_language: language code en_US
 
 command_help_reload: §ereload config
@@ -13,6 +13,9 @@ command_not_permission: §cYou not permission use the command!
 command_unknown: §cUnknown command or parameter, please check and try again!
 
 form_title: Auto Rstart plugin
+form_title_scheduled: Scheduled restart
+
+form_description_scheduled: "Set the restart time and confirm after setting the time unit to start the restart task"
 
 form_button_restart_cancel: cancel restart task
 form_button_reload: reload config
@@ -27,6 +30,9 @@ form_button_veto: "One ticket veto"
 form_button_abstention: "abstention"
 form_button_pause: Pause Task
 form_button_continue: continue run
+form_button_scheduled_time: "Scheduled restart"
+
+form_scheduled_input_set_time: Set restart time
 
 form_confirm_restart_title: Run restart task
 form_confirm_restart_description_task: |-
@@ -60,6 +66,7 @@ restart_task_type_no_player: No online player
 restart_task_type_manual_restart: Manual restart
 restart_task_type_vote: Vote restart
 
+time_unit: time unit
 time_unit_hour: hour
 time_unit_minutes: minutes
 time_unit_seconds: seconds

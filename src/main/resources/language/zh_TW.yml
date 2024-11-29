@@ -1,4 +1,4 @@
-language_version: 2
+language_version: 3
 plugin_language: language code zh_TW
 
 command_help_reload: §e重載配寘
@@ -13,6 +13,9 @@ command_in_game_run: §c請在遊戲內使用此命令！
 command_unknown: §c未知的命令或參數，請檢查後再試！
 
 form_title: Auto Rstart plugin
+form_title_scheduled: 定時重啓
+
+form_description_scheduled: "設定重啓時間，並設定好時間組織後確認即可開啟重啓任務"
 
 form_button_restart_cancel: 取消重啟任務
 form_button_reload: 重載配寘
@@ -27,6 +30,9 @@ form_button_veto: "一票否决"
 form_button_abstention: "棄權"
 form_button_pause: 暫停任務
 form_button_continue: 繼續運行
+form_button_scheduled_time: "定時重啓"
+
+form_scheduled_input_set_time: 設定重啓時間
 
 form_confirm_restart_title: 運行重啓任務
 form_confirm_restart_description_task:  |-
@@ -60,6 +66,7 @@ restart_task_type_no_player: 無線上玩家時重啓
 restart_task_type_manual_restart: 手動重啓
 restart_task_type_vote: 投票重啓
 
+time_unit: 時間組織
 time_unit_hour: 小時
 time_unit_minutes: 分钟
 time_unit_seconds: 秒
