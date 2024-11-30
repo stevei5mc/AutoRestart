@@ -87,7 +87,7 @@ public class TasksUtils {
             startPlayer = 3;
         }
         int time = voteTime * 60;
-        String player = voter.getName();
+
         boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.getTime() && getRestartTaskType() != 2;
         boolean debugCondition = !voteTaskState && main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
         if (normalCondition || debugCondition) {

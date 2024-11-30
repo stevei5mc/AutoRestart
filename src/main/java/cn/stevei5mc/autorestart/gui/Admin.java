@@ -129,7 +129,7 @@ public class Admin {
                     modal.onClickedFalse(Admin::sendMain);
                     cp.showFormWindow(modal);
                 }catch (Exception ignored) {
-                    player.sendMessage("必须是数字");
+                    player.sendMessage(AutoRestartPlugin.getInstance().msgPrefix +lang.translateString("command_unknown"));
                 }
             }
         });

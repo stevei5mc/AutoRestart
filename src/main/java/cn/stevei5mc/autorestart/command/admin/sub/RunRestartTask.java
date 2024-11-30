@@ -50,22 +50,28 @@ public class RunRestartTask extends BaseSubCommand {
         }else if(args.length == 4) {
             String type  = args[1];
             String timeUnit = args[2];
-            int time = Integer.parseInt(args[3]);
-            if (type.equals("scheduled")) {
-                switch (timeUnit) {
-                    case "hour":
-                        TasksUtils.runRestartTask(time,5,3);
-                        return true;
-                    case "minutes":
-                        TasksUtils.runRestartTask(time,5,1);
-                        return true;
-                    case "seconds":
-                        TasksUtils.runRestartTask(time,5,2);
-                        return true;
-                    default:
-                        sender.sendMessage(commandUnknown);
-                        return false;
+            int time = 0;
+            try {
+                time = Integer.parseInt(args[3]);
+                if (type.equals("scheduled")) {
+                    switch (timeUnit) {
+                        case "hour":
+                            TasksUtils.runRestartTask(time,5,3);
+                            return true;
+                        case "minutes":
+                            TasksUtils.runRestartTask(time,5,1);
+                            return true;
+                        case "seconds":
+                            TasksUtils.runRestartTask(time,5,2);
+                            return true;
+                        default:
+                            sender.sendMessage(commandUnknown);
+                            return false;
+                    }
                 }
+            }catch (Exception ignored) {
+                sender.sendMessage(main.msgPrefix + main.getLang(sender).translateString("command_unknown"));
+                return false;
             }
             sender.sendMessage(commandUnknown);
             return false;
@@ -88,9 +94,9 @@ public class RunRestartTask extends BaseSubCommand {
         String[] list2 = list.toArray(new String[0]);
         String[] timeUnit2 = timeUnit.toArray(new String[0]);
         return new CommandParameter[]{
-            new CommandParameter("task type", list2),
-            new CommandParameter("time unit",timeUnit2),
-                new CommandParameter("time", CommandParamType.INT,false)
+            CommandParameter.newEnum("task type",list2),
+            CommandParameter.newEnum("time unit",timeUnit2),
+            CommandParameter.newType("time",CommandParamType.INT)
         };
     }
 }
