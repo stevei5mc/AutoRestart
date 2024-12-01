@@ -95,8 +95,8 @@ public class RunRestartTask extends BaseSubCommand {
         String[] timeUnit2 = timeUnit.toArray(new String[0]);
         return new CommandParameter[]{
             CommandParameter.newEnum("task type",list2),
-            CommandParameter.newEnum("time unit",timeUnit2),
-            CommandParameter.newType("time",CommandParamType.INT)
+            CommandParameter.newEnum("time unit",true,timeUnit2),
+            CommandParameter.newType("time",true,CommandParamType.INT)
         };
     }
 }
