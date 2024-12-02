@@ -14,6 +14,7 @@ public class TasksUtils {
     private static int restartTaskType = 0;//任务类型，默认编号为 0
     private static int restartTaskId;
     private static int voteTaskId;
+    private static boolean autoTaskState = false;
 
     /**
      * 运行重启任务
@@ -30,39 +31,46 @@ public class TasksUtils {
      * @param timeUnit 时间类型
     */
     public static void runRestartTask(int restartTime,int taskType,int timeUnit) {
-        cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
-        int runTick = 20;
-        int time = 30;
-        restartTaskType = taskType;
-        String unit = "time_unit_seconds";
-        if (getRestartTaskType() == 3) {
-            runTick = 100;
-        }
-        switch (timeUnit) {
-            case 1:
-                time = restartTime * 60;
-                unit = "time_unit_minutes";
-                break;
-            case 2:
-                time = restartTime;
-                unit = "time_unit_seconds";
-                break;
-            case 3:
-                time = restartTime * 3600;
-                unit = "time_unit_hour";
-                break;
-            default:
-                time = 30;
-        }
-        if (taskType != 3) {
-            main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
-            for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
+        if(taskType == 1 && autoTaskState) {
+            throw new IllegalArgumentException();
+        }else {
+            if (taskType == 1) {
+                autoTaskState = true;
             }
+            cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
+            int runTick = 20;
+            int time = 30;
+            restartTaskType = taskType;
+            String unit = "time_unit_seconds";
+            if (getRestartTaskType() == 3) {
+                runTick = 100;
+            }
+            switch (timeUnit) {
+                case 1:
+                    time = restartTime * 60;
+                    unit = "time_unit_minutes";
+                    break;
+                case 2:
+                    time = restartTime;
+                    unit = "time_unit_seconds";
+                    break;
+                case 3:
+                    time = restartTime * 3600;
+                    unit = "time_unit_hour";
+                    break;
+                default:
+                    time = 30;
+            }
+            if (taskType != 3) {
+                main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
+                for (Player player : main.getServer().getOnlinePlayers().values()) {
+                    player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
+                }
+            }
+            TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
+            restartTaskId = taskHandler.getTaskId();
+            restartTaskState = 1;
         }
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
-        restartTaskId = taskHandler.getTaskId();
-        restartTaskState = 1;
     }
 
     public static void cancelRestartTask() {
