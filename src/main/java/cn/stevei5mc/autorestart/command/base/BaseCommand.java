@@ -45,9 +45,9 @@ public abstract class BaseCommand extends Command {
                     if (command.canUser(sender)) {
                         return command.execute(sender, s, args);
                     }else if (sender.isPlayer()) {
-                        sender.sendMessage(main.msgPrefix +lang.translateString("command_not_permission"));
+                        sender.sendMessage(main.getMessagePrefix() +lang.translateString("command_not_permission"));
                     }else {
-                        sender.sendMessage(main.msgPrefix +lang.translateString("command_in_game_run"));
+                        sender.sendMessage(main.getMessagePrefix() +lang.translateString("command_in_game_run"));
                     }
                 }else {
                     this.sendHelp(sender);
@@ -61,7 +61,7 @@ public abstract class BaseCommand extends Command {
             }
             return true;
         }
-        sender.sendMessage(main.msgPrefix +lang.translateString("command_not_permission"));
+        sender.sendMessage(main.getMessagePrefix() +lang.translateString("command_not_permission"));
         return true;
     }
 

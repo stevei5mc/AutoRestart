@@ -56,15 +56,15 @@ public class VoteUtils {
                 processVotingContent(player,voteType);
             } else if (!voter.isPlayer() && voteType.equals("veto")) {
                 TasksUtils.cancelVoteTask();
-                main.getLogger().info(main.msgPrefix + main.getLang().translateString("vote_restart_msg_failed_veto"));
+                main.getLogger().info(main.getMessagePrefix() + main.getLang().translateString("vote_restart_msg_failed_veto"));
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
-                    player.sendMessage(main.msgPrefix + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+                    player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
                 }
             } else {
-                voter.sendMessage(main.msgPrefix +main.getLang(voter).translateString("command_in_game_run"));
+                voter.sendMessage(main.getMessagePrefix() +main.getLang(voter).translateString("command_in_game_run"));
             }
         }else {
-            voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_restart_msg_vote_failed"));
+            voter.sendMessage(main.getMessagePrefix() + main.getLang(voter).translateString("vote_restart_msg_vote_failed"));
         }
     }
 
@@ -81,9 +81,9 @@ public class VoteUtils {
         String playerName = voter.getName();
         if (TasksUtils.getVoteTaskState()) {
             if (!voter.hasPermission("autorestart.user.vote")) {
-                voter.sendMessage(main.msgPrefix+main.getLang(voter).translateString("command_not_permission"));
+                voter.sendMessage(main.getMessagePrefix()+main.getLang(voter).translateString("command_not_permission"));
             }else if (votePlayer.contains(playerName) && !voteType.equals("veto")) {
-                voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_msg_failed_repeat"));
+                voter.sendMessage(main.getMessagePrefix() + main.getLang(voter).translateString("vote_msg_failed_repeat"));
             }else if (voter.hasPermission("autorestart.user.vote")) {
                 switch (voteType) {
                     case "approval":
@@ -107,16 +107,16 @@ public class VoteUtils {
                         if (voter.hasPermission("autorestart.admin.vote.veto")) {
                             TasksUtils.cancelVoteTask();
                             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                                player.sendMessage(main.msgPrefix + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
+                                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
                             }
                         }
                         break;
                     default:
-                        voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("command_unknown"));
+                        voter.sendMessage(main.getMessagePrefix() + main.getLang(voter).translateString("command_unknown"));
                 }
             }
         }else {
-            voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_restart_msg_vote_failed"));
+            voter.sendMessage(main.getMessagePrefix() + main.getLang(voter).translateString("vote_restart_msg_vote_failed"));
         }
     }
 

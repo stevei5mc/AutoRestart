@@ -62,9 +62,9 @@ public class TasksUtils {
                     time = 30;
             }
             if (taskType != 3) {
-                main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
+                main.getLogger().info(main.getMessagePrefix() +(main.getLang().translateString("restart_task_restart", restartTime, main.getLang().translateString(unit))));
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
-                    player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
+                    player.sendMessage(main.getMessagePrefix() +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
                 }
             }
             TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
@@ -104,9 +104,9 @@ public class TasksUtils {
             voteTaskState = true;
         } else {
             if (voteTaskState) {
-                voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_restart_msg_is_initiate"));
+                voter.sendMessage(main.getMessagePrefix() + main.getLang(voter).translateString("vote_restart_msg_is_initiate"));
             }else {
-                voter.sendMessage(main.msgPrefix + main.getLang(voter).translateString("vote_restart_msg_not_initiate"));
+                voter.sendMessage(main.getMessagePrefix() + main.getLang(voter).translateString("vote_restart_msg_not_initiate"));
             }
         }
     }

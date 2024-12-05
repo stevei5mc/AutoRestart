@@ -129,7 +129,7 @@ public class Admin {
                     modal.onClickedFalse(Admin::sendMain);
                     cp.showFormWindow(modal);
                 }catch (Exception ignored) {
-                    player.sendMessage(AutoRestartPlugin.getInstance().msgPrefix +lang.translateString("command_unknown"));
+                    player.sendMessage(AutoRestartPlugin.getInstance().getMessagePrefix() +lang.translateString("command_unknown"));
                 }
             }
         });

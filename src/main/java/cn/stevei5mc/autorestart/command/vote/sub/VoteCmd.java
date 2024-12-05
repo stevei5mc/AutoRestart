@@ -30,7 +30,7 @@ public class VoteCmd extends BaseSubCommand {
             VoteUtils.getInstance().processVotingContent(sender,vote);
             return true;
         }else{
-            sender.sendMessage(main.msgPrefix +main.getLang(sender).translateString("command_unknown"));
+            sender.sendMessage(main.getMessagePrefix() +main.getLang(sender).translateString("command_unknown"));
             return false;
         }
     }

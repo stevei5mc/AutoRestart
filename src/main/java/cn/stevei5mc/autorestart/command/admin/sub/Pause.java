@@ -30,12 +30,12 @@ public class Pause extends BaseSubCommand {
         if (TasksUtils.getRestartTaskState() == 1) {
             TasksUtils.pauseRestartTask();
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.msgPrefix + main.getLang(player).translateString("restart_msg_task_pause"));
+                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("restart_msg_task_pause"));
             }
         } else if (TasksUtils.getRestartTaskState() == 2) {
             TasksUtils.continueRunRestartTask();
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.msgPrefix + main.getLang(player).translateString("restart_msg_task_continue"));
+                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("restart_msg_task_continue"));
             }
         }
         return true;

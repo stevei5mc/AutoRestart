@@ -28,7 +28,7 @@ public class RunRestartTask extends BaseSubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
-        String commandUnknown = main.msgPrefix + main.getLang(sender).translateString("command_unknown");
+        String commandUnknown = main.getMessagePrefix() + main.getLang(sender).translateString("command_unknown");
         if (args.length == 2) {
             String s = args[1];
             switch (s) {
@@ -38,9 +38,9 @@ public class RunRestartTask extends BaseSubCommand {
                     return true;
                 case "no-players":
                     TasksUtils.runRestartTask(3);
-                    main.getLogger().info(main.msgPrefix +(main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
+                    main.getLogger().info(main.getMessagePrefix() +(main.getLang().translateString("restart_task_run",main.getLang().translateString("restart_task_type_no_player"))));
                     for (Player player : main.getServer().getOnlinePlayers().values()) {
-                        player.sendMessage(main.msgPrefix +main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
+                        player.sendMessage(main.getMessagePrefix() +main.getLang(player).translateString("restart_task_run",main.getLang(player).translateString("restart_task_type_no_player")));
                     }
                     return true;
                 default:
@@ -70,7 +70,7 @@ public class RunRestartTask extends BaseSubCommand {
                     }
                 }
             }catch (Exception ignored) {
-                sender.sendMessage(main.msgPrefix + main.getLang(sender).translateString("command_unknown"));
+                sender.sendMessage(main.getMessagePrefix() + main.getLang(sender).translateString("command_unknown"));
                 return false;
             }
             sender.sendMessage(commandUnknown);

@@ -24,7 +24,6 @@ public class AutoRestartPlugin extends PluginBase {
     private static AutoRestartPlugin instance;
     private Config config;
     private static boolean tips = false;
-    public String msgPrefix = "";
 
     public Config getConfig() {
         return this.config;
@@ -47,7 +46,6 @@ public class AutoRestartPlugin extends PluginBase {
     public void onEnable() {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             tips = false; //这是为了防止一些意外的情况准备的
-            msgPrefix = config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
             loadLanguage();
             this.getServer().getCommandMap().register("", new AdminMain());//注册命令
             this.getServer().getCommandMap().register("", new VoteMain());
@@ -186,5 +184,9 @@ public class AutoRestartPlugin extends PluginBase {
         if (config.getBoolean("auto_update_language_files",false)) {
             saveResource("language/"+file+".yml",true);
         }
+    }
+
+    public String getMessagePrefix() {
+        return config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
     }
 }
