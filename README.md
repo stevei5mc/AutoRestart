@@ -181,4 +181,5 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 |-|-|-|
 |![4](docs/image/4.jpg)|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
 |![7](docs/image/7.jpg)|![8](docs/image/8.jpg)|![9](docs/image/9.jpg)|
+|![10](docs/image/10.jpg)|![11](docs/image/11.jpg)||
 ## **[开发文档](docs/dev-doc.md)**
