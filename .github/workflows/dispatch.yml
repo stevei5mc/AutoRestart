@@ -24,8 +24,11 @@ jobs:
         echo "url=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> $GITHUB_OUTPUT
     - name: 拉取代码
       uses: actions/checkout@v4.1.1
+    - name: 获取脚本资源
+      uses: actions/checkout@v4.1.1
       with:
-        submodules: true
+        repository: 'stevei5mc/McStartServer'
+        path: ./script
     - name: 拉取代码(批准PR专用)
       if: ${{ inputs.PR_Approve }}
       env:
@@ -45,7 +48,7 @@ jobs:
         mvn -B package --file pom.xml
         mkdir staging
         cp target/*.jar staging
-    - name: 准备资源
+    - name: 整理脚本资源
       run: |
         pwd
         cp ./script/server_script/Windows/*.bat staging
