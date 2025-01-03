@@ -14,6 +14,19 @@ jobs:
         echo "repository_name=${GITHUB_REPOSITORY/${{ github.repository_owner }}\//}" >> $GITHUB_OUTPUT
     - name: 拉取代码
       uses: actions/checkout@v4.1.1
+    - name: Extractor pom.xml gav info 
+      uses: andreacomo/maven-gav-extractor@v2.0.1
+      id: getPomInfo
+    - name: Show get pom.xml gav info
+      run: |
+        echo Group id: ${{ steps.getPomInfo.outputs.group-id }}
+        echo Artifact id: ${{ steps.getPomInfo.outputs.artifact-id }}
+        echo Version: ${{ steps.getPomInfo.outputs.version }}
+    - name: 让这个工作流失败
+      if: steps.getPomInfo.outputs.version != steps.get_info.outputs.VERSION
+      run: |
+        echo ${{ steps.getPomInfo.outputs.version }} != ${{ steps.get_info.outputs.version }}
+        a=--=-=--=-=
     - name: 获取脚本资源
       uses: actions/checkout@v4.1.1
       with:
@@ -47,15 +60,15 @@ jobs:
     - name: 收集构建文件
       uses: actions/upload-artifact@v4.3.3
       with:
-        name: ${{ steps.get_info.outputs.repository_name }}-Release-${{ steps.get_info.outputs.VERSION }}
+        name: ${{ steps.get_info.outputs.repository_name }}-Release-${{ steps.get_info.outputs.version }}
         path: github_artifact 
     - name: 发布新版本
       uses: ncipollo/release-action@v1.14.0
       with:
-        tag: ${{ steps.get_info.outputs.VERSION }}
-        name: ${{ steps.get_info.outputs.VERSION }}
+        tag: ${{ steps.get_info.outputs.version }}
+        name: ${{ steps.get_info.outputs.version }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        bodyFile: ./docs/changelogs/${{ steps.get_info.outputs.VERSION }}.md
+        bodyFile: ./docs/changelogs/${{ steps.get_info.outputs.version }}.md
         artifacts: ./staging/*.*
     #这个暂时没有用
     # - name: 发布至minebbs
