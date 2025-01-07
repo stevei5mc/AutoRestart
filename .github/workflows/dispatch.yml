@@ -32,6 +32,12 @@ jobs:
         ls -la
         gh pr checkout ${{ inputs.PR_ID }}
         ls -la
+    - name: 安装java8
+      uses: actions/setup-java@v4.2.1
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        cache: maven
     - name: Extractor pom.xml gav info 
       uses: andreacomo/maven-gav-extractor@v2.0.1
       id: getPomInfo
@@ -45,12 +51,6 @@ jobs:
       with:
         repository: 'stevei5mc/McStartServer'
         path: ./script
-    - name: 安装java8
-      uses: actions/setup-java@v4.2.1
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: maven
     - name: 构建
       run: |
         mvn -B package --file pom.xml
