@@ -183,3 +183,19 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 |![7](docs/image/7.jpg)|![8](docs/image/8.jpg)|![9](docs/image/9.jpg)|
 |![10](docs/image/10.jpg)|![11](docs/image/11.jpg)||
 ## **[开发文档](docs/dev-doc.md)**
+- **详细的文档内容请在Releases处下载`-javadoc.jar`结尾的文件**
+### **Maven**
+[![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart)
+```xml
+<repository>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+</repository>
+```
+```xml
+<dependency>
+	<groupId>com.github.stevei5mc</groupId>
+	<artifactId>AutoRestart</artifactId>
+	<version>1.0.0-beta5</version>
+</dependency>
+```
