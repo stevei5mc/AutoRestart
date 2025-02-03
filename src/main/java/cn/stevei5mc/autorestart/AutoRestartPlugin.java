@@ -64,7 +64,7 @@ public class AutoRestartPlugin extends PluginBase {
                     this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/Tips/");
                 }
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
-                getLogger().warning("§c警告! §c本插件为免费且开源的一款插件，如果你是付费获取到的那么你就被骗了");
+                getLogger().warning("§c警告! §c本插件为免费且开源的，如果您付费获取获取的，则有可能被误导");
                 getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
             },20);
         } else {
