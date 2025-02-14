@@ -148,4 +148,26 @@ public class TasksUtils {
     public static boolean getVoteTaskState() {
         return voteTaskState;
     }
+
+    /**
+     * 获取重启任务名
+     * @param player 传入player参数以实现多语言
+     * @return Task name
+     */
+    public static String getRestartTaskName(Player player) {
+        switch (TasksUtils.getRestartTaskType()) {
+            case 1:
+                return main.getLang(player).translateString("restart_task_type_auto");
+            case 2:
+                return main.getLang(player).translateString("restart_task_type_manual_restart");
+            case 3:
+                return main.getLang(player).translateString("restart_task_type_no_player");
+            case 4:
+                return main.getLang(player).translateString("restart_task_type_vote");
+            case 5:
+                return main.getLang(player).translateString("restart_task_type_time");
+            default:
+                return "§cUnknown type§r";
+        }
+    }
 }

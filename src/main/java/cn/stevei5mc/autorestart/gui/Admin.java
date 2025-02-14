@@ -11,6 +11,7 @@ import cn.nukkit.form.element.ElementInput;
 import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.ElementStepSlider;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
+import cn.stevei5mc.autorestart.tasks.RestartTask;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.utils.TasksUtils;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +28,7 @@ public class Admin {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowSimple simple = new AdvancedFormWindowSimple(lang.translateString("form_title"));
         if (TasksUtils.getRestartTaskType() != 3 && TasksUtils.getRestartTaskState() >= 1) {
-            simple.setContent(lang.translateString("form_confirm_cancel_description_time",BaseUtils.getRemainder(player)) + "\n\n");
+            simple.setContent(lang.translateString("form_confirm_cancel_description_time", RestartTask.getRestartRemainder(player)) + "\n\n");
         }
         String trueButton = lang.translateString("form_button_confirm");
         String falseButton = lang.translateString("form_button_back");
@@ -36,7 +37,7 @@ public class Admin {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_restart_cancel")).onClicked(cp -> {
                 AdvancedFormWindowModal modal = new AdvancedFormWindowModal(
                     lang.translateString("form_confirm_cancel_title"),
-                    lang.translateString("form_confirm_cancel_description_task", BaseUtils.getRestartTaskName(player)),
+                    lang.translateString("form_confirm_cancel_description_task", TasksUtils.getRestartTaskName(player)),
                     trueButton,falseButton);
                     modal.onClickedTrue(cp2 -> Server.getInstance().dispatchCommand(cp2, "autorestart cancel"));
                     modal.onClickedFalse(Admin::sendMain);

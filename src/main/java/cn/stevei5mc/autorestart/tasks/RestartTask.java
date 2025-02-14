@@ -88,4 +88,32 @@ public class RestartTask extends Task {
     public static int getTime() {
         return time2;
     }
+
+    /**
+     * 获取剩余时间
+     * @param player 传入player参数以实现多语言
+     * @return remainder
+     */
+    public static String getRestartRemainder(Player player) {
+        String hourUnit = main.getLang(player).translateString("time_unit_hour");
+        String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
+        String secondUnit = main.getLang(player).translateString("time_unit_seconds");
+        if (TasksUtils.getRestartTaskState() >= 1 && TasksUtils.getRestartTaskType() != 3) {
+            int time = RestartTask.getTime();
+            int hours = time / 3600;
+            int minutes = (time % 3600) / 60;
+            int seconds = time % 60;
+            String timee = "";
+            if (hours > 0) {
+                timee = hours + hourUnit + minutes + minuteUnit + seconds + secondUnit;
+            } else if (minutes > 0) {
+                timee = minutes + minuteUnit + seconds + secondUnit;
+            } else {
+                timee = seconds + secondUnit;
+            }
+            return main.getLang(player).translateString("variable_remainder",timee);
+        }else {
+            return "--"+secondUnit;
+        }
+    }
 }
