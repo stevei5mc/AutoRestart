@@ -9,7 +9,7 @@ import cn.stevei5mc.autorestart.utils.VoteUtils;
 
 
 public class VoteTask extends Task {
-    public static int time2 = 0;
+    private static int time2 = 0;
     private static int msgTime = 0;
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     private static VoteUtils vu = VoteUtils.getInstance();
@@ -24,18 +24,32 @@ public class VoteTask extends Task {
 
     @Override
     public void onRun(int currentTick) {
-        if (msgTime == time2) {
-            if (msgTime > 0) {
-                for (Player player : main.getServer().getOnlinePlayers().values()) {
-                    player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_in_initiate",voterr, "/voterestart"));
-                }
-                msgTime = msgTime - 30;
+        int approval = vu.getApproval();
+        int approvalVotes = vu.getApprovalVotes();
+        int oppose = vu.getOppose();
+        int abstention = vu.getAbstention();
+        for (Player player : main.getServer().getOnlinePlayers().values()) {
+            String msg = main.getLang(player).translateString("prompt_voting_status_info","/voterestart",approval,approvalVotes,oppose,abstention,getVoteRemainder(player));
+            switch (main.getConfig().getInt("prompt_type",0)) {
+                case 1:
+                    player.sendTip(msg);
+                    break;
+                case 2:
+                    player.sendPopup(msg);
+                    break;
+                default:
+                    player.sendActionBar(msg);
+                    break;
             }
+        }
+        if (msgTime == time2 && msgTime > 0) {
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_in_initiate",voterr, "/voterestart"));
+            }
+            msgTime = msgTime - 30;
         }
         if (time2 <= 0) {
             TasksUtils.cancelVoteTask();
-            int approval = vu.getApproval();
-            int approvalVotes = vu.getApprovalVotes();
             if (approval >= approvalVotes) {
                 TasksUtils.runRestartTask(BaseUtils.getRestartTipTime(),4,2);
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -48,5 +62,33 @@ public class VoteTask extends Task {
             }
         }
         time2--;
+    }
+
+    public static int getTime() {
+        return time2;
+    }
+
+    /**
+     * 获取剩余时间
+     * @param player 传入player参数以实现多语言
+     * @return remainder
+     */
+    public static String getVoteRemainder(Player player) {
+        String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
+        String secondUnit = main.getLang(player).translateString("time_unit_seconds");
+        if (TasksUtils.getRestartTaskState() >= 1 && TasksUtils.getRestartTaskType() != 3) {
+            int time = getTime();
+            int minutes = (time % 3600) / 60;
+            int seconds = time % 60;
+            String timee = "";
+            if (minutes > 0) {
+                timee = minutes + minuteUnit + seconds + secondUnit;
+            } else {
+                timee = seconds + secondUnit;
+            }
+            return main.getLang(player).translateString("variable_remainder",timee);
+        }else {
+            return "--"+secondUnit;
+        }
     }
 }

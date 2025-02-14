@@ -1,4 +1,4 @@
-language_version: 3
+language_version: 4
 plugin_language: language code zh_TW
 
 command_help_reload: §e重載配寘
@@ -48,6 +48,11 @@ form_confirm_cancel_description_time: 伺服器重啓剩餘 %1%
 
 kick_player_msg: §e伺服器重啓中 稍後再會
 
+prompt_voting_status_info: |
+    請輸入§b%1%§a參與投票
+    贊成票：%2%/%3%反對票：%4%棄權票：% 5%
+    投票時間 %6%
+
 reload_success: §a已重載配寘！
 
 restart_msg_title: §c即將重啓
@@ -71,7 +76,9 @@ time_unit_hour: 小時
 time_unit_minutes: 分钟
 time_unit_seconds: 秒
 
+variable_none_data: "暫無數據"
 variable_remainder: "%1%"
+variable_vote_data_in_run: "贊成票: %1%/%2% 反對票: %3% 棄權票: %4%"
 
 vote_restart_form_title: "投票重啓系統"
 vote_restart_form_description_confirm: |-

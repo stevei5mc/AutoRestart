@@ -1,8 +1,10 @@
 package cn.stevei5mc.autorestart.utils;
 
+import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
+import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 import java.util.LinkedList;
 
@@ -13,7 +15,7 @@ public class VoteUtils {
     private int abstention = 0;
     private int approvalVotes = 0;
     private final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    private LinkedList<String> votePlayer = new LinkedList<String>();
+    private LinkedList<String> votePlayer = new LinkedList<>();
 
     public static VoteUtils getInstance() {
         if (instance == null) {
@@ -150,5 +152,21 @@ public class VoteUtils {
      */
     public int getApprovalVotes() {
         return approvalVotes;
+    }
+
+    /**
+     * 获取投票的综合数据
+     * @param player 传入player参数以实现多语言
+     * @return 返回综合数据
+     */
+    public String getVoteData(Player player) {
+        Language lang = main.getLang(player);
+        String data;
+        if (TasksUtils.getVoteTaskState()) {
+            data = lang.translateString("variable_vote_data_in_run",getApproval(),getApprovalVotes(),getOppose(),getAbstention());
+        }else {
+            data = lang.translateString("variable_none_data");
+        }
+        return data;
     }
 }

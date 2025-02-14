@@ -1,5 +1,5 @@
 #配置文件版本（勿动!!!）
-version: 5
+version: 6
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -18,7 +18,7 @@ play_sound: true
 sound:
   name: "random.toast"
   volume: 1.0
-  pitch: 1.0
+  pitch: 0.5
 #重启前执行的命令(&con为控制台执行 @p 代表玩家名)
 runcommand: true
 commands:
@@ -29,10 +29,15 @@ vote_start_player: 3
 #投票的时间限制（最高只能为5）
 vote_time: 5
 #调试模式
-debug: false
+debug: true
 #消息前缀
 message_prefix: "§l§bAutoRestart §r§7>> "
 #本地化语言文件（开启后语言文件才会保存至插件对应文件及其会使用保存至插件文件夹的语言文件）
 local_language_flies: false
 #自动更新语言文件（更新语言文件是使用覆盖式更新，旧版配置并不会保存）
 auto_update_language_files: false
+#显示投票状态
+prompt_voting_status: true
+#显示投票状态的类型
+# 0 = ActionBar，1 = tip，2 = popup
+prompt_type: 0

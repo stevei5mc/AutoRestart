@@ -1,4 +1,4 @@
-language_version: 3
+language_version: 4
 plugin_language: language code zh_CN
 
 command_help_reload: §e重载配置
@@ -48,6 +48,11 @@ form_confirm_cancel_description_time: 距离服务器重启剩余 %1%
 
 kick_player_msg: §e服务器重启中 稍后再会
 
+prompt_voting_status_info: |
+    请输入 §b%1%§a 参与投票
+    赞成票: %2%/%3% 反对票: %4% 弃权票: %5%
+    投票时间 %6%
+
 reload_success: §a已重载配置！
 
 restart_msg_title: §c即将重启
@@ -71,7 +76,9 @@ time_unit_hour: 小时
 time_unit_minutes: 分钟
 time_unit_seconds: 秒
 
+variable_none_data: "暂无数据"
 variable_remainder: "%1%"
+variable_vote_data_in_run: "赞成票: %1%/%2% 反对票: %3% 弃权票: %4%"
 
 vote_restart_form_title: "投票重启系统"
 vote_restart_form_description_confirm: |-

@@ -1,4 +1,4 @@
-language_version: 3
+language_version: 4
 plugin_language: language code en_US
 
 command_help_reload: §ereload config
@@ -48,6 +48,11 @@ form_confirm_cancel_description_time: Server restart remaining %1%
 
 kick_player_msg: §eServer restarting, See you later
 
+prompt_voting_status_info: |
+    Please enter § b%1% § a to participate in the voting
+    Positive votes: %2%/%3% Negative votes: %4% Abstention votes: %5%
+    Voting time %6%
+
 reload_success: §areload config success！
 
 restart_msg_title: §cServer Restarting
@@ -71,7 +76,9 @@ time_unit_hour: hour
 time_unit_minutes: minutes
 time_unit_seconds: seconds
 
+variable_none_data: "None data"
 variable_remainder: "%1%"
+variable_vote_data_in_run: "approval vote: %1%/%2% oppose vote: %3% abstention vote: %4%"
 
 vote_restart_form_title: "Vote restart system"
 vote_restart_form_description_confirm: |-
@@ -95,6 +102,6 @@ vote_restart_msg_vote_failed: "§cVoting failed, please check if the voting task
 vote_msg_vote: "§aYou vote %1%"
 vote_msg_failed_repeat: "§cYou have already voted, you cannot vote again!"
 
-vote_type_approval: "approva vote"
+vote_type_approval: "approval vote"
 vote_type_oppose: "oppose vote"
 vote_type_abstention: "abstention vote"

@@ -99,7 +99,7 @@ public class RestartTask extends Task {
         String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
         String secondUnit = main.getLang(player).translateString("time_unit_seconds");
         if (TasksUtils.getRestartTaskState() >= 1 && TasksUtils.getRestartTaskType() != 3) {
-            int time = RestartTask.getTime();
+            int time = getTime();
             int hours = time / 3600;
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
