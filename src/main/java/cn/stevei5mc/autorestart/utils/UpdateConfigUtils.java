@@ -10,7 +10,7 @@ public class UpdateConfigUtils {
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     public static void updateConfig() {
-        int latest = 6;
+        int latest = 7;
         Config config = AutoRestartPlugin.getInstance().getConfig();
         if (config.getInt("version", 1) < latest) {
             if (config.getInt("version", 1) < 2) {
@@ -45,13 +45,13 @@ public class UpdateConfigUtils {
                 }
                 config.save();
             }
-            if (config.getInt("version") < 6) {
-                config.set("version",6);
-                if (!config.exists("local_language_flies")) {
-                    config.set("local_language_flies",false);
+            if (config.getInt("version") < 7) {
+                config.set("version",7);
+                if (!config.exists("prompt_voting_status")) {
+                    config.set("prompt_voting_status",true);
                 }
-                if (!config.exists("auto_update_language_files")) {
-                    config.set("auto_update_language_files",false);
+                if (!config.exists("prompt_type")) {
+                    config.set("prompt_type",1);
                 }
                 config.save();
             }

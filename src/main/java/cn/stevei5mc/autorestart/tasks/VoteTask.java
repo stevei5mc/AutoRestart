@@ -28,18 +28,20 @@ public class VoteTask extends Task {
         int approvalVotes = vu.getApprovalVotes();
         int oppose = vu.getOppose();
         int abstention = vu.getAbstention();
-        for (Player player : main.getServer().getOnlinePlayers().values()) {
-            String msg = main.getLang(player).translateString("prompt_voting_status_info","/voterestart",approval,approvalVotes,oppose,abstention,getVoteRemainder(player));
-            switch (main.getConfig().getInt("prompt_type",0)) {
-                case 1:
-                    player.sendTip(msg);
-                    break;
-                case 2:
-                    player.sendPopup(msg);
-                    break;
-                default:
-                    player.sendActionBar(msg);
-                    break;
+        if (main.getConfig().getBoolean("prompt_voting_status",true)) {
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                String msg = main.getLang(player).translateString("prompt_voting_status_info","/voterestart",approval,approvalVotes,oppose,abstention,getVoteRemainder(player));
+                switch (main.getConfig().getInt("prompt_type",0)) {
+                    case 1:
+                        player.sendTip(msg);
+                        break;
+                    case 2:
+                        player.sendPopup(msg);
+                        break;
+                    default:
+                        player.sendActionBar(msg);
+                        break;
+                }
             }
         }
         if (msgTime == time2 && msgTime > 0) {

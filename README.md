@@ -76,7 +76,7 @@
 ### **配置文件介绍**
 ```yml
 #配置文件版本（勿动!!!）
-version: 6
+version: 7
 #默认语言
 default_language: zh_CN
 #重启时间(分钟 min)
@@ -179,7 +179,7 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 |步骤|说明|
 |:-:|:-|
 |1|准备好相关的启动脚本并放置在服务端的根目录下(一般情况下启动脚本是放置在服务端的根目录下)并调整好启动脚本的配置(如果你有相关的启动脚本则无视这一步骤)|
-|2|将本插件放进`plugins`文件夹，并确保安装前置插件[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)后启动服务器 <br> 安装前置插件[Tips](https://motci.cn/job/Tips/)可让变量`{restart-remainder}`生效（这是可选的）|
+|2|将本插件放进`plugins`文件夹，并确保安装前置插件[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)后启动服务器 <br> 安装前置插件[Tips](https://motci.cn/job/Tips/)对接的变量生效（这是可选的）|
 |3|如果不使用默认配置则修改好配置文件后重启服务器让新的配置生效（由于自动重启任务的配置读取是在服务器启动阶段进行的，所以无法通过重载配置文件的操作让新的配置完全生效只能通过重启服务器来让新的配置生效）|
 ## **效果预览**
 |![1](docs/image/1.jpg)|![2](docs/image/2.jpg)|![3](docs/image/3.jpg)|
@@ -187,8 +187,14 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 |![4](docs/image/4.jpg)|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
 |![7](docs/image/7.jpg)|![8](docs/image/8.jpg)|![9](docs/image/9.jpg)|
 |![10](docs/image/10.jpg)|![11](docs/image/11.jpg)||
-## **[开发文档](docs/dev-doc.md)**
-- **详细的文档内容请在[Releases](https://github.com/stevei5mc/AutoRestart/releases)下载`-javadoc.jar`结尾的文件**
+## **变量信息**
+|变量|介绍|
+|:-:|:-:|
+|{restart-remainder}|获取重启任务的剩余时间|
+|{vote-data}|获取投票重启的数据|
+
+## **开发文档**
+- **请在[Releases](https://github.com/stevei5mc/AutoRestart/releases)界面下载`-javadoc.jar`结尾的文件解压后点击`index.html`获取相关文档**
 ### **Maven**
 [![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0-beta5)
 ```xml
