@@ -106,7 +106,7 @@ vote_start_player: 3
 #投票的时间限制（最高只能为5）
 vote_time: 5
 #调试模式
-debug: true
+debug: false
 #消息前缀
 message_prefix: "§l§bAutoRestart §r§7>> "
 #本地化语言文件（开启后语言文件才会保存至插件对应文件及其会使用保存至插件文件夹的语言文件）
@@ -196,7 +196,7 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 ## **开发文档**
 - **请在[Releases](https://github.com/stevei5mc/AutoRestart/releases)界面下载`-javadoc.jar`结尾的文件解压后点击`index.html`获取相关文档**
 ### **Maven**
-[![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0-beta5)
+[![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0-beta6)
 ```xml
 <repository>
 	<id>jitpack.io</id>
@@ -207,6 +207,6 @@ jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 <dependency>
 	<groupId>com.github.stevei5mc</groupId>
 	<artifactId>AutoRestart</artifactId>
-	<version>1.0.0-beta5</version>
+	<version>1.0.0-beta6</version>
 </dependency>
 ```

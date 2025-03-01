@@ -10,6 +10,12 @@
         <java.version>1.8</java.version>
         <compiler.encoding>UTF-8</compiler.encoding>
     </properties>
+    <distributionManagement>
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </distributionManagement>
     <repositories>
         <repository>
             <id>opencollab-repo-release</id>
