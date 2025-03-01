@@ -44,12 +44,12 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         cache: maven
-        server-id: jitpack
-        server-username: ${{ secrets.JITPACK_USER }}
-        server-password: ${{ secrets.JITPACK_PASS }}
+        # server-id: jitpack
+        # server-username: ${{ secrets.JITPACK_USER }}
+        # server-password: ${{ secrets.JITPACK_PASS }}
     - name: 构建
       run: |
-        mvn -B deploy --file pom.xml
+        mvn -B package --file pom.xml
         mkdir staging
         cp target/*.jar staging
     - name: 整理脚本资源
