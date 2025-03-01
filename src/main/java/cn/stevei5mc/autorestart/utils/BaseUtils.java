@@ -1,8 +1,6 @@
 package cn.stevei5mc.autorestart.utils;
 
-import cn.nukkit.Player;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
-import cn.stevei5mc.autorestart.tasks.RestartTask;
 
 public class BaseUtils {
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
