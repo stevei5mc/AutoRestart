@@ -167,13 +167,6 @@ jvm_ram_xmx="1024M"  #设置最大内存
 jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
 server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就将testmc改为生存服
 ```
-
-```sh
-ReStart_Time=20s  #等待多少秒后重启要加时间单位
-jvm_ram_xms="512M"  #设置最小内存
-jvm_ram_xmx="1024M"  #设置最大内存
-jar_name="server.jar"  #开服核心的名字记得加.jar后缀名
-```
 </details>
 
 
