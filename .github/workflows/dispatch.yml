@@ -11,6 +11,9 @@ on:
         description: 'PR Approve ID'
         required: false
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,8 +29,6 @@ jobs:
       uses: actions/checkout@v4.1.1
     - name: 拉取代码(批准PR专用)
       if: ${{ inputs.PR_Approve }}
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         ls -la
         gh pr checkout ${{ inputs.PR_ID }}
@@ -41,9 +42,9 @@ jobs:
     - name: Extractor pom.xml gav info 
       id: getPomInfo
       run: |
-        echo "groupId=$(mvn help:evaluate -f ${{ env.pomPath }} -Dexpression=project.groupId -q -DforceStdout)" >> $GITHUB_OUTPUT
-        echo "artifactId=$(mvn help:evaluate -f ${{ env.pomPath }} -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_OUTPUT
-        echo "version=$(mvn help:evaluate -f ${{ env.pomPath }} -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+        echo "groupId=$(mvn help:evaluate -Dexpression=project.groupId -q -DforceStdout)" >> $GITHUB_OUTPUT
+        echo "artifactId=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_OUTPUT
+        echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
     - name: Show get pom.xml gav info
       run: |
         echo Group id: ${{ steps.getPomInfo.outputs.groupId }}
