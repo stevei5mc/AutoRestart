@@ -12,7 +12,7 @@ public class VoteTask extends Task {
     private static int time2 = 0;
     private static int msgTime = 0;
     private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    private static VoteUtils vu = VoteUtils.getInstance();
+    private static final VoteUtils vu = VoteUtils.getInstance();
     private static String voterr;
 
     public VoteTask(int time,Player voter) {
@@ -51,7 +51,6 @@ public class VoteTask extends Task {
             msgTime = msgTime - 30;
         }
         if (time2 <= 0) {
-            TasksUtils.cancelVoteTask();
             if (approval >= approvalVotes) {
                 TasksUtils.runRestartTask(BaseUtils.getRestartTipTime(),4,2);
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -62,6 +61,7 @@ public class VoteTask extends Task {
                     player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_failed_end", approval, approvalVotes));
                 }
             }
+            TasksUtils.cancelVoteTask();
         }
         time2--;
     }
@@ -82,7 +82,7 @@ public class VoteTask extends Task {
             int time = getTime();
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
-            String timee = "";
+            String timee;
             if (minutes > 0) {
                 timee = minutes + minuteUnit + seconds + secondUnit;
             } else {

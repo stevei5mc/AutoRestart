@@ -114,6 +114,7 @@ public class TasksUtils {
     public static void cancelVoteTask() {
         main.getServer().getScheduler().cancelTask(voteTaskId);
         voteTaskState = false;
+        VoteUtils.getInstance().clearData(); // 投票任务结束后清理掉无用的数据
     }
 
     //这里我并没有找到Nukkit有提供暂停任务的方法，所以我自己实现了一个方法

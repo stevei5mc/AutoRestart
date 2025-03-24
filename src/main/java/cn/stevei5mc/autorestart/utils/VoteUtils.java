@@ -4,7 +4,6 @@ import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
-import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 import java.util.LinkedList;
 
@@ -25,6 +24,16 @@ public class VoteUtils {
     }
 
     /**
+     * 清理无用数据
+     */
+    public void clearData() {
+        approval = 0;
+        oppose = 0;
+        abstention = 0;
+        votePlayer.clear();
+    }
+
+    /**
      * 初始化投票数据
      * <br><br>注意：
      * <br>不可以直接使用此方法，而是使用TasksUtils的runVoteTask方法。
@@ -32,22 +41,19 @@ public class VoteUtils {
      * @param initiated 投票发起者
      */
     public void initializedData(Player initiated) {
+        clearData(); //这里先清理一遍旧数据以防出现问题
         String voter = initiated.getName();
-        approval = 0;
-        oppose = 0;
-        abstention = 0;
         approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * 0.7);
-        votePlayer.clear();
         votePlayer.add(voter);
         approval++;
     }
 
     /**
      * 处理投票数据
-     * <br><br>票类型
+     * <br><br>票类型：
+     * <br>approval = 赞成票<br>abstention = 弃权票<br>oppose = 反对票<br>veto = 一票否决
      * <br><br>注意：
      * <br>如果拥有一票否决权的话将无法投出反对票
-     * <br>approval = 赞成票<br>abstention = 弃权票<br>oppose = 反对票<br>veto = 一票否决
      * @param voter 投票者
      * @param voteType 投出的票的类型
      */
@@ -72,10 +78,10 @@ public class VoteUtils {
 
     /**
      * 处理投票数据
-     * <br><br>票类型
-     * <br><br>注意：
-     * <br>如果拥有一票否决权的话将无法投出反对票<br>
+     * <br><br>票类型：
      * <br>approval = 赞成票<br>abstention = 弃权票<br>oppose = 反对票<br>veto = 一票否决
+     * <br><br>注意：
+     * <br>如果拥有一票否决权的话将无法投出反对票
      * @param voter 投票者
      * @param voteType 投出的票的类型
      */
