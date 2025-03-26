@@ -27,25 +27,33 @@ public class VoteUtils {
      * 清理无用数据
      */
     public void clearData() {
-        approval = 0;
-        oppose = 0;
-        abstention = 0;
-        votePlayer.clear();
+        if (!TasksUtils.getVoteTaskState()) {
+            approval = 0;
+            oppose = 0;
+            abstention = 0;
+            votePlayer.clear();
+        }else {
+            throw new IllegalStateException(); // 如果投票任务处于运行的状态则抛出该异常
+        }
     }
 
     /**
      * 初始化投票数据
      * <br><br>注意：
-     * <br>不可以直接使用此方法，而是使用TasksUtils的runVoteTask方法。
-     * <br>如果直接使用此方法后果自负!!!!!!
+     * <br>请使用TasksUtils的runVoteTask方法，如果直接运行该方法是无法启动投票任务的
+     * <br>因为在运行投票任务时会顺带运行该方法，所以无需重复的运行该方法
      * @param initiated 投票发起者
      */
     public void initializedData(Player initiated) {
-        clearData(); //这里先清理一遍旧数据以防出现问题
-        String voter = initiated.getName();
-        approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * 0.7);
-        votePlayer.add(voter);
-        approval++;
+        if (!TasksUtils.getVoteTaskState()) {
+            clearData(); //这里先清理一遍旧数据以防出现问题
+            String voter = initiated.getName();
+            approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * 0.7);
+            votePlayer.add(voter);
+            approval++;
+        }else {
+            throw new IllegalStateException(); // 如果投票任务处于运行的状态则抛出该异常
+        }
     }
 
     /**
