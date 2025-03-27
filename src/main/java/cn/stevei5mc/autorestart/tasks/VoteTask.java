@@ -11,7 +11,7 @@ import cn.stevei5mc.autorestart.utils.VoteUtils;
 public class VoteTask extends Task {
     private static int time2 = 0;
     private static int msgTime = 0;
-    private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+    private static final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     private static final VoteUtils vu = VoteUtils.getInstance();
     private static String voterr;
 
@@ -78,7 +78,7 @@ public class VoteTask extends Task {
     public static String getVoteRemainder(Player player) {
         String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
         String secondUnit = main.getLang(player).translateString("time_unit_seconds");
-        if (TasksUtils.getRestartTaskState() >= 1 && TasksUtils.getRestartTaskType() != 3) {
+        if (TasksUtils.getVoteTaskState()) {
             int time = getTime();
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
