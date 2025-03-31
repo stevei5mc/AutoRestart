@@ -105,12 +105,12 @@ public class RestartTask extends Task {
             int seconds = time % 60;
             String timee = "";
             if (hours > 0) {
-                timee = hours + hourUnit + minutes + minuteUnit + seconds + secondUnit;
-            } else if (minutes > 0) {
-                timee = minutes + minuteUnit + seconds + secondUnit;
-            } else {
-                timee = seconds + secondUnit;
+                timee = hours + hourUnit;
             }
+            if (minutes > 0) {
+                timee = timee + minutes + minuteUnit;
+            }
+            timee = timee + seconds + secondUnit;
             return main.getLang(player).translateString("variable_remainder",timee);
         }else {
             return "--"+secondUnit;

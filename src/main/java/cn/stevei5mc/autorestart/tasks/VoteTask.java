@@ -82,12 +82,11 @@ public class VoteTask extends Task {
             int time = getTime();
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
-            String timee;
+            String timee = "";
             if (minutes > 0) {
-                timee = minutes + minuteUnit + seconds + secondUnit;
-            } else {
-                timee = seconds + secondUnit;
+                timee = minutes + minuteUnit;
             }
+            timee = timee + seconds + secondUnit;
             return main.getLang(player).translateString("variable_remainder",timee);
         }else {
             return "--"+secondUnit;
