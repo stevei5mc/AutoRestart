@@ -48,7 +48,7 @@ public class VoteUtils {
         if (!TasksUtils.getVoteTaskState()) {
             clearData(); //这里先清理一遍旧数据以防出现问题
             String voter = initiated.getName();
-            approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * 0.7);
+            approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * (2.0 / 3));
             votePlayer.add(voter);
             approval++;
         }else {
