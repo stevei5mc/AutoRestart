@@ -10,7 +10,7 @@ public class UpdateConfigUtils {
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     public static void updateConfig() {
-        int latest = 7;
+        int latest = 8;
         Config config = AutoRestartPlugin.getInstance().getConfig();
         if (config.getInt("version", 1) < latest) {
             if (config.getInt("version", 1) < 2) {
@@ -52,6 +52,13 @@ public class UpdateConfigUtils {
                 }
                 if (!config.exists("prompt_type")) {
                     config.set("prompt_type",1);
+                }
+                config.save();
+            }
+            if (config.getInt("version") < 8) {
+                config.set("version",8);
+                if (!config.exists("ignore_remainder_time")) {
+                    config.set("ignore_remainder_time",false);
                 }
                 config.save();
             }

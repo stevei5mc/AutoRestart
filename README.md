@@ -75,49 +75,51 @@
 
 ### **配置文件介绍**
 ```yml
-#配置文件版本（勿动!!!）
-version: 7
-#默认语言
+# 配置文件版本（勿动!!!）
+version: 8
+# 默认语言
 default_language: zh_CN
-#重启时间(分钟 min)
+# 重启时间(分钟 min)
 restart_time: 180
-#提示时间(秒 s)
+# 提示时间(秒 s)
 tips_time: 30
-#是否在重启前把玩家踢出
+#  是否在重启前把玩家踢出
 kick_player: true
-#一些显示的设置
-#显示title(包括subtitle)
+# 一些显示的设置
+# 显示title(包括subtitle)
 show_title: true
-#底部显示(在物品栏上方)
+# 底部显示(在物品栏上方)
 show_tip: true
-#是否播放音效
+# 是否播放音效
 play_sound: true
 sound:
   name: "random.toast"
   volume: 1.0
   pitch: 0.5
-#重启前执行的命令(&con为控制台执行 @p 代表玩家名)
+# 重启前执行的命令(&con为控制台执行 @p 代表玩家名)
 runcommand: true
 commands:
   - "help"
   - "say hello @p&con"
-#发起重启投票的最低人数（最低只能为3）
+# 发起重启投票的最低人数（最低只能为3）
 vote_start_player: 3
-#投票的时间限制（最高只能为5）
+# 投票的时间限制（最高只能为5 (分钟 min)）
 vote_time: 5
-#调试模式
+# 调试模式
 debug: false
-#消息前缀
+# 消息前缀
 message_prefix: "§l§bAutoRestart §r§7>> "
-#本地化语言文件（开启后语言文件才会保存至插件对应文件及其会使用保存至插件文件夹的语言文件）
+# 本地化语言文件（开启后语言文件才会保存至插件对应文件及其会使用保存至插件文件夹的语言文件）
 local_language_flies: false
-#自动更新语言文件（更新语言文件是使用覆盖式更新，旧版配置并不会保存）
+# 自动更新语言文件（更新语言文件是使用覆盖式更新，旧版配置并不会保存）
 auto_update_language_files: false
-#显示投票状态
+# 显示投票状态
 prompt_voting_status: true
-#显示投票状态的类型
+# 显示投票状态的类型
 # 0 = ActionBar，1 = tip，2 = popup
 prompt_type: 0
+# 忽略剩余时间，启用后当赞成票数达到要求不需要等到投票结束就执行相关功能
+ignore_remainder_time: false
 ```
 ### **支持的语言**
 - **顺序按照支持的顺序排序**

@@ -62,6 +62,12 @@ public class VoteTask extends Task {
                 }
             }
             TasksUtils.cancelVoteTask();
+        }else if (main.getConfig().getBoolean("ignore_remainder_time",false) && approval >= approvalVotes) {
+            TasksUtils.runRestartTask(BaseUtils.getRestartTipTime(),4,2);
+            for (Player player : main.getServer().getOnlinePlayers().values()) {
+                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_success", approval, approvalVotes));
+            }
+            TasksUtils.cancelVoteTask();
         }
         time2--;
     }
