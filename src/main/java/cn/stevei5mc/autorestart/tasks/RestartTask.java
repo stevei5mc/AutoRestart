@@ -56,10 +56,13 @@ public class RestartTask extends Task {
                 TasksUtils.cancelRestartTask();
                 Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
                     if (main.getConfig().getBoolean("runcommand",true)) {
+                        ArrayList<String> globalCommands = new ArrayList<>(main.getConfig().getStringList("commands.global"));
+                        for (String cmd : globalCommands) {
+                            main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd);
+                        }
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
-                            ArrayList<String> commands;
-                            commands = new ArrayList<>(main.getConfig().getStringList("commands"));
-                            for (String s : commands) {
+                            ArrayList<String> playerCommands = new ArrayList<>(main.getConfig().getStringList("commands.player"));
+                            for (String s : playerCommands) {
                                 String[] cmd = s.split("&");
                                 if ((cmd.length > 1) && ("con".equals(cmd[1]))) {
                                     main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0].replace("@p", player.getName()));

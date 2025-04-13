@@ -76,7 +76,7 @@
 ### **配置文件介绍**
 ```yml
 # 配置文件版本（勿动!!!）
-version: 8
+version: 9
 # 默认语言
 default_language: zh_CN
 # 重启时间(分钟 min)
@@ -99,8 +99,15 @@ sound:
 # 重启前执行的命令(&con为控制台执行 @p 代表玩家名)
 runcommand: true
 commands:
-  - "help"
-  - "say hello @p&con"
+  global:
+    # 全局性的命令，需要在关服前执行的命令（注意，如果需要每一名玩家都执行命令的请在 player 的命令配置中填写）
+    - "list"
+    - "status"
+  player:
+    # 为每一名玩家执行的命令
+    # &con为控制台执行 @p代表玩家名
+    - "help"
+    - "say hello @p&con"
 # 发起重启投票的最低人数（最低只能为3）
 vote_start_player: 3
 # 投票的时间限制（最高只能为5 (分钟 min)）
