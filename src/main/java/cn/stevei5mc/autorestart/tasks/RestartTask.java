@@ -55,23 +55,7 @@ public class RestartTask extends Task {
             if (time2 <= 0) {
                 TasksUtils.cancelRestartTask();
                 Server.getInstance().getScheduler().scheduleDelayedTask(main, () -> {
-                    if (main.getConfig().getBoolean("runcommand",true)) {
-                        ArrayList<String> globalCommands = new ArrayList<>(main.getConfig().getStringList("commands.global"));
-                        for (String cmd : globalCommands) {
-                            main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd);
-                        }
-                        for (Player player : main.getServer().getOnlinePlayers().values()) {
-                            ArrayList<String> playerCommands = new ArrayList<>(main.getConfig().getStringList("commands.player"));
-                            for (String s : playerCommands) {
-                                String[] cmd = s.split("&");
-                                if ((cmd.length > 1) && ("con".equals(cmd[1]))) {
-                                    main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0].replace("@p", player.getName()));
-                                }else {
-                                    main.getServer().dispatchCommand(player, cmd[0].replace("@p", player.getName()));
-                                }
-                            }
-                        }
-                    }
+                    runCommand();
                     if (main.getConfig().getBoolean("kick_player",true)) {
                         for (Player player : main.getServer().getOnlinePlayers().values()) {
                             player.kick((main.getLang(player).translateString("kick_player_msg")), false);
@@ -84,6 +68,7 @@ public class RestartTask extends Task {
         }
         //这段代码是给任务ID为3的任务来使用的
         if (taskType == 3 && Server.getInstance().getOnlinePlayers().size() == 0) {
+            runCommand();
             main.getServer().shutdown(); // 关闭服务器  注意：这里不会自动重启，你需要配置服务器管理工具或脚本来自动重启服务器进程
         }
     }
@@ -117,6 +102,28 @@ public class RestartTask extends Task {
             return main.getLang(player).translateString("variable_remainder",timee);
         }else {
             return "--"+secondUnit;
+        }
+    }
+
+    public static void runCommand() {
+        if (main.getConfig().getBoolean("runcommand",true)) {
+            ArrayList<String> globalCommands = new ArrayList<>(main.getConfig().getStringList("commands.global"));
+            for (String cmd : globalCommands) {
+                main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd);
+            }
+            if (TasksUtils.getRestartTaskType() != 3) {
+                for (Player player : main.getServer().getOnlinePlayers().values()) {
+                    ArrayList<String> playerCommands = new ArrayList<>(main.getConfig().getStringList("commands.player"));
+                    for (String s : playerCommands) {
+                        String[] cmd = s.split("&");
+                        if ((cmd.length > 1) && ("con".equals(cmd[1]))) {
+                            main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0].replace("@p", player.getName()));
+                        }else {
+                            main.getServer().dispatchCommand(player, cmd[0].replace("@p", player.getName()));
+                        }
+                    }
+                }
+            }
         }
     }
 }
