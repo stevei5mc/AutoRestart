@@ -37,7 +37,7 @@ public class VoteCmd extends BaseSubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
-        LinkedList<String> vote = new LinkedList<String>();
+        LinkedList<String> vote = new LinkedList<>();
         vote.add("approval");
         vote.add("oppose");
         vote.add("abstention");

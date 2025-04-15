@@ -3,7 +3,7 @@ package cn.stevei5mc.autorestart.utils;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 
 public class BaseUtils {
-    private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+    private static final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     /**
      * 获取在重启前的开始提示的时间

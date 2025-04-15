@@ -50,7 +50,7 @@ public class RunRestartTask extends BaseSubCommand {
         }else if(args.length == 4) {
             String type  = args[1];
             String timeUnit = args[2];
-            int time = 0;
+            int time;
             try {
                 time = Integer.parseInt(args[3]);
                 if (type.equals("scheduled")) {

@@ -13,7 +13,6 @@ import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.utils.UpdateConfigUtils;
 import tip.utils.Api;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

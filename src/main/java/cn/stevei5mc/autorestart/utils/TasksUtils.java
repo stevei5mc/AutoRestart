@@ -8,7 +8,7 @@ import cn.stevei5mc.autorestart.tasks.RestartTask;
 import cn.stevei5mc.autorestart.tasks.VoteTask;
 
 public class TasksUtils {
-    private static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+    private static final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     private static int restartTaskState = 0;//任务状态，默认为 0
     private static boolean voteTaskState = false;
     private static int restartTaskType = 0;//任务类型，默认编号为 0
@@ -39,7 +39,7 @@ public class TasksUtils {
             }
             cancelRestartTask(); //这里取消掉现有的重启任务，再运行新的重启任务以免出现奇怪的问题
             int runTick = 20;
-            int time = 30;
+            int time;
             restartTaskType = taskType;
             String unit = "time_unit_seconds";
             if (getRestartTaskType() == 3) {
