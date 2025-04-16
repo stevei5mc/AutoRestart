@@ -60,7 +60,7 @@ public class UpdateConfigUtils {
                 }
                 if (config.exists("commands")) {
                     ArrayList<String> commands = new ArrayList<>(main.getConfig().getStringList("commands"));
-                    config.remove("commands");
+                    config.set("commands","");
                     config.set("commands.global",Arrays.asList("list", "status"));
                     config.set("commands.player",commands);
                 }
