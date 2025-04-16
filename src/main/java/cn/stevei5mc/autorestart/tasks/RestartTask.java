@@ -3,7 +3,7 @@ package cn.stevei5mc.autorestart.tasks;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.level.Sound;
-import cn.nukkit.scheduler.Task;
+import cn.nukkit.scheduler.PluginTask;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.utils.TasksUtils;
@@ -12,11 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class RestartTask extends Task {
+public class RestartTask extends PluginTask<AutoRestartPlugin> {
     private static int time2 =30;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
-    public RestartTask(int time1) {
+    public RestartTask(AutoRestartPlugin main,int time1) {
+        super(main);
         time2 = time1;
     }
 

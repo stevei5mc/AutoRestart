@@ -67,7 +67,7 @@ public class TasksUtils {
                     player.sendMessage(main.getMessagePrefix() +main.getLang(player).translateString("restart_task_restart",restartTime, main.getLang(player).translateString(unit)));
                 }
             }
-            TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(time), runTick, true);
+            TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(main,time), runTick, true);
             restartTaskId = taskHandler.getTaskId();
             restartTaskState = 1;
         }
@@ -99,7 +99,7 @@ public class TasksUtils {
         boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.getTime() && getRestartTaskType() != 2;
         boolean debugCondition = !voteTaskState && main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
         if (normalCondition || debugCondition) {
-            TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(time,voter), 20, true);
+            TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(main,time,voter), 20, true);
             voteTaskId = taskHandler.getTaskId();
             voteTaskState = true;
         } else {
@@ -130,7 +130,7 @@ public class TasksUtils {
         if (getRestartTaskType() == 3) {
             runTick = 100;
         }
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(RestartTask.getTime()), runTick, true);
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(main,RestartTask.getTime()), runTick, true);
         restartTaskId = taskHandler.getTaskId();
     }
 

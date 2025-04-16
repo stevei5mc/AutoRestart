@@ -52,14 +52,12 @@ public class UpdateConfigUtils {
                 if (!config.exists("prompt_type")) {
                     config.set("prompt_type",1);
                 }
-
             }
             if (config.getInt("version") < 9) {
                 config.set("version",9);
                 if (!config.exists("ignore_remainder_time")) {
                     config.set("ignore_remainder_time",false);
                 }
-
                 if (config.exists("commands")) {
                     ArrayList<String> commands = new ArrayList<>(main.getConfig().getStringList("commands"));
                     config.remove("commands");

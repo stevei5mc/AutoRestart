@@ -1,21 +1,22 @@
 package cn.stevei5mc.autorestart.tasks;
 
 import cn.nukkit.Player;
-import cn.nukkit.scheduler.Task;
+import cn.nukkit.scheduler.PluginTask;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.utils.VoteUtils;
 
 
-public class VoteTask extends Task {
+public class VoteTask extends PluginTask<AutoRestartPlugin> {
     private static int time2 = 0;
     private static int msgTime = 0;
     private static final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     private static final VoteUtils vu = VoteUtils.getInstance();
     private static String voterr;
 
-    public VoteTask(int time,Player voter) {
+    public VoteTask(AutoRestartPlugin main,int time,Player voter) {
+        super(main);
         vu.initializedData(voter);
         time2 = time;//设置投票时间
         msgTime= time;
