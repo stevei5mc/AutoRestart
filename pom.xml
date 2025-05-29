@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.stevei5mc</groupId>
     <artifactId>AutoRestart</artifactId>
-    <version>1.0.0-beta7</version>
+    <version>1.0.0<!-- -beta7 --></version>
     <properties>
         <java.version>1.8</java.version>
         <compiler.encoding>UTF-8</compiler.encoding>
     </properties>
+
     <repositories>
         <repository>
             <id>opencollab-repo-release</id>
@@ -36,6 +37,7 @@
             <url>https://repo.lanink.cn/repository/maven-public/</url>
         </repository>
     </repositories>
+
     <dependencies>
         <dependency>
             <groupId>cn.nukkit</groupId>
@@ -62,6 +64,7 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

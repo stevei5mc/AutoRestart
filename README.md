@@ -74,6 +74,9 @@
 - `seconds` **秒**
 
 ### **配置文件介绍**
+<details>
+<summary>config.yml</summary>
+
 ```yml
 # 配置文件版本（勿动!!!）
 version: 9
@@ -128,6 +131,9 @@ prompt_type: 0
 # 忽略剩余时间，启用后当赞成票数达到要求不需要等到投票结束就执行相关功能
 ignore_remainder_time: false
 ```
+
+</details>
+
 ### **支持的语言**
 - **顺序按照支持的顺序排序**
 - [x] zh_CN   中文(简体)
@@ -136,11 +142,10 @@ ignore_remainder_time: false
 
 ## **使用方法**
 ### **注意事项**
-- **自动重启还需要脚本的配合才能实现相关脚本在[Actions](https://github.com/stevei5mc/NewTipsVariables/actions)编译完成后会一并给出，你也可以到对应[GITHUB 仓库](https://github.com/stevei5mc/McStartServer)获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases)中也可以获取得到但只会在版本发布后才会有相关脚本(Windows用.bat后缀的脚本，Linux请用.sh后缀的脚本，另外每种系统的脚本都有两种根据你的需求选择)，如果你已经有了相关脚本则可以忽略**
+- **自动重启还需要脚本的配合才能实现相关脚本在[Actions](https://github.com/stevei5mc/NewTipsVariables/actions) 编译完成后会一并给出，你也可以到对应 [GITHUB 仓库](https://github.com/stevei5mc/McStartServer) 获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases) 中也可以获取得到但只会在版本发布后才会有相关脚本(Windows用.bat后缀的脚本，Linux请用.sh后缀的脚本，另外每种系统的脚本都有两种根据你的需求选择)，如果你已经有了相关脚本则可以忽略**
 - **本插件的重启时间会受服务器TPS导致重启时间不会按现实的时间进行而是按照服务器TPS的计算的时间进行的**
 - **在使用时请不要随意改动语言文件或配置文件的版本号，否则所带来的后果一切自负！！！！！！**
 - **默认情况下使用的语言文件为内置的语言文件**
-- **`1.0.0-beta7`发布后没有问题将发布正式版本**
 
 ### **脚本使用说明**
 - **此内容使用于配套的启动脚本，可配置项已在下方列出**
@@ -200,7 +205,7 @@ server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就�
 ## **开发文档**
 - **请在[Releases](https://github.com/stevei5mc/AutoRestart/releases)界面下载`-javadoc.jar`结尾的文件解压后点击`index.html`获取相关文档**
 ### **Maven**
-[![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0-beta7)
+[![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0)
 ```xml
 <repository>
 	<id>jitpack.io</id>
@@ -211,6 +216,6 @@ server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就�
 <dependency>
 	<groupId>com.github.stevei5mc</groupId>
 	<artifactId>AutoRestart</artifactId>
-	<version>1.0.0-beta7</version>
+	<version>1.0.0</version>
 </dependency>
 ```
