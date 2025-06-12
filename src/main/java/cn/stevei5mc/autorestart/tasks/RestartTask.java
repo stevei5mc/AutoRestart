@@ -38,17 +38,10 @@ public class RestartTask extends PluginTask<AutoRestartPlugin> {
                         player.sendTip(main.getLang(player).translateString("restrat_msg_tip", time2, unit));
                     }
                     if (main.getConfig().getBoolean("play_sound",true)) {
-                        //参考和使用部分代码 https://github.com/glorydark/CustomForm/blob/main/src/main/java/glorydark/nukkit/customform/scriptForms/data/SoundData.java
-                        //读取配置中音效的设置
                         String soundName = main.getConfig().getString("sound.name","random.toast");
                         float volume = (float) main.getConfig().getDouble("sound.volume",1.0);
                         float pitch = (float) main.getConfig().getDouble("sound.pitch",1.0);
-                        Optional<Sound> find = Arrays.stream(Sound.values()).filter(get -> get.getSound().equals(soundName)).findAny();// 获取音效对象
-                        Sound sound = find.orElse(null);
-                        // 检查音效是否存在
-                        if (sound != null) {
-                            player.getLevel().addSound(player.getLocation(), sound, volume, pitch);// 播放音效给玩家
-                        }
+                        BaseUtils.playSound(soundName,volume,pitch,player);
                     }
                 }
             }
