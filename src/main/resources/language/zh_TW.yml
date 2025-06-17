@@ -1,4 +1,4 @@
-language_version: 4
+language_version: 5
 plugin_language: language code zh_TW
 
 command_help_reload: §e重載配寘
@@ -11,9 +11,21 @@ command_help_pause: 暫停/繼續運行任務
 command_not_permission: §c你沒有許可權使用此命令！
 command_in_game_run: §c請在遊戲內使用此命令！
 command_unknown: §c未知的命令或參數，請檢查後再試！
+command_create_failed: "§c無法添加命令 Se%1%§c ，請檢查是否正確填寫或存在相同命令！"
+command_create_success: "§a命令 §b%1%§a 添加成功！"
+
+error_input_parameter: "§c輸入的參數有誤，請重新嘗試！"
 
 form_title: Auto Rstart plugin
 form_title_scheduled: 定時重啓
+form_title_config_set: "管理配置文件"
+form_title_config_set_base: "配置管理 - 基礎設置"
+form_title_config_set_show: "配置管理 - 顯示設置"
+form_title_config_set_command: "配置管理 - 命令設置"
+form_title_config_set_command_view: "命令管理 - 查看命令"
+form_title_config_set_command_create: "命令管理 - 創建命令"
+form_title_config_set_command_delete: "命令管理 - 刪除命令"
+form_title_config_set_sound: "配置管理 - 音效設置"
 
 form_description_scheduled: "設定重啓時間，並設定好時間組織後確認即可開啟重啓任務"
 
@@ -31,6 +43,14 @@ form_button_abstention: "棄權"
 form_button_pause: 暫停任務
 form_button_continue: 繼續運行
 form_button_scheduled_time: "定時重啓"
+form_button_config_set: "管理配置文件"
+form_button_config_set_base: "基礎設置"
+form_button_config_set_show: "提示設置"
+form_button_config_set_command: "命令設置"
+form_button_config_set_command_view: "查看命令"
+form_button_config_set_command_create: "創建命令"
+form_button_config_set_command_delete: "刪除命令"
+form_button_config_set_sound: "音效設置"
 
 form_scheduled_input_set_time: 設定重啓時間
 
@@ -45,6 +65,25 @@ form_confirm_cancel_description_task:  |-
     是否取消本次重啓任務？
     任務類型： %1%
 form_confirm_cancel_description_time: 伺服器重啓剩餘 %1%
+
+form_config_set_description: |-
+    注意：
+    一、 配置項是根據對應的功能來分類的
+    二、 配置項是與配置文件對應的，僅為部分配置項加上描述
+
+form_config_set_base_label_local_language: "啟用本地語言文件後則會在插件文件夾生成語言文件並使用插件文件夾裡的語言文件"
+form_config_set_base_label_auto_update_language: "啟用後不需要手動更新語言文件，插件會自動執行更新操作"
+form_config_set_base_label_ignore_vote_remainder: "啟用後，不需要等待投票時間結束，只需要等待滿足足夠的票數就可以執行對應的任務"
+
+form_config_set_command_create_label_tip: |-
+    填寫想要執行的命令。
+    注：
+    一、 命令類型為 player 時 @p 和 &con 參數才能生效！
+    二、 創建命令時可通過下方的選擇開關來選擇創建的命令類型
+
+form_config_set_command_delete_confirm_choose: "是否刪除所選命令？"
+form_config_set_command_delete_confirm_description: "請確認下列命令是否需要刪除？"
+form_config_set_command_delete_confirm_again: "我確認刪除下列命令:"
 
 kick_player_msg: §e伺服器重啓中 稍後再會
 
@@ -72,6 +111,7 @@ restart_task_type_manual_restart: 手動重啓
 restart_task_type_vote: 投票重啓
 
 time_unit: 時間組織
+time_unit_type: "（ 時間單位: %1% ）"
 time_unit_hour: 小時
 time_unit_minutes: 分钟
 time_unit_seconds: 秒

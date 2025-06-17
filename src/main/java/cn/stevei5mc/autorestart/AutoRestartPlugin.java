@@ -120,7 +120,7 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void checkLanguageFilesVersion() {
-        int latestVersion = 3;
+        int latestVersion = 5;
         for (String lang : languages) {
             Config language = new Config(this.getDataFolder()+"/language/"+lang+".yml");
             int version = language.getInt("language_version",1);
@@ -145,5 +145,9 @@ public class AutoRestartPlugin extends PluginBase {
 
     public String getMessagePrefix() {
         return config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
+    }
+
+    public List<String> getLanguages() {
+        return languages;
     }
 }

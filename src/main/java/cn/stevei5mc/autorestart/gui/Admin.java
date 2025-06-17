@@ -79,6 +79,7 @@ public class Admin {
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_scheduled_time")).onClicked(Admin::sendSetRestartTime));
         }
         if (player.hasPermission("autorestart.admin.reload")) {
+            simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set")).onClicked(SettingsConfig::configSettings));
             simple.addButton(new ResponseElementButton(lang.translateString("form_button_reload"))
                 .onClicked(cp -> Server.getInstance().dispatchCommand(cp, "autorestart reload"))
             );
@@ -101,7 +102,7 @@ public class Admin {
                 int time2;
                 try {
                     time2 = Integer.parseInt(formResponseCustom.getInputResponse(1));
-                    if (time2 == 0) {
+                    if (time2 < 1) {
                         time2 = 1;
                     }
                     String timeUnit = "";
