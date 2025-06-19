@@ -1,5 +1,4 @@
-language_version: 5
-plugin_language: language code zh_TW
+language_version: 6
 
 command_help_reload: §e重載配寘
 command_help_cancel: §e取消重啟任務
@@ -110,7 +109,7 @@ restart_task_type_no_player: 無線上玩家時重啓
 restart_task_type_manual_restart: 手動重啓
 restart_task_type_vote: 投票重啓
 
-time_unit: 時間組織
+time_unit: 時間單位
 time_unit_type: "（ 時間單位: %1% ）"
 time_unit_hour: 小時
 time_unit_minutes: 分钟

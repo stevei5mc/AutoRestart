@@ -13,6 +13,7 @@ import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.utils.UpdateConfigUtils;
 import tip.utils.Api;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -36,10 +37,10 @@ public class AutoRestartPlugin extends PluginBase {
     public void onLoad() {
         instance = this;
         saveDefaultConfig();
-        this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
         for(String lang: languages){
             saveResource("language/"+lang+".yml",false);
         }
+        loadConfig();
         UpdateConfigUtils.updateConfig();
     }
 
@@ -56,21 +57,19 @@ public class AutoRestartPlugin extends PluginBase {
                 Api.registerVariables("TipsVar",TipsVar.class);
             }
             Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
-                if (config.getBoolean("local_language_flies",false)) {
-                    checkLanguageFilesVersion();
-                }
+                checkLanguageFilesVersion();
                 if (!tips) {
                     this.getLogger().warning("§c未检测到前置插件§aTips§c，相关变量无法生效");
-                    this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/Tips/");
+                    this.getLogger().warning("https://motci.cn/job/GameCore/          https://ci.lanink.cn/job/Tips/");
                 }
                 getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
                 getLogger().warning("§c警告! §c本插件为免费且开源的，如果您付费获取获取的，则有可能被误导");
-                getLogger().info("§a开源链接和使用方法: §bhttps://github.com/stevei5mc/AutoRestart");
+                getLogger().info("§aGITHUB:§b https://github.com/stevei5mc/AutoRestart");
             },20);
         } else {
             //不存在作为卸载该插件
             this.getLogger().warning("§c未检测到前置插件§aMemoriesOfTime-GameCore§c，请安装后再试!!!");
-            this.getLogger().warning("§b下载地址: §ehttps://motci.cn/job/GameCore/ 或 https://ci.lanink.cn/job/GameCore/");
+            this.getLogger().warning("https://ci.lanink.cn/job/GameCore/         https://motci.cn/job/GameCore/");
             this.onDisable();
         }
     }
@@ -95,7 +94,7 @@ public class AutoRestartPlugin extends PluginBase {
             }
             this.languageMap.put(language, new Language(languageConfig));
         }
-        this.getLogger().info(this.getLang().translateString("plugin_language"));
+        this.getLogger().info("Default language code "+defaultLanguage);
     }
     //同上
     public Language getLang() {
@@ -115,31 +114,49 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void reload() {
-        this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
+        loadConfig();
         loadLanguage();
     }
 
-    public void checkLanguageFilesVersion() {
-        int latestVersion = 5;
-        for (String lang : languages) {
-            Config language = new Config(this.getDataFolder()+"/language/"+lang+".yml");
-            int version = language.getInt("language_version",1);
-            if (version == latestVersion) {
-                this.getLogger().info("语言文件" + lang + ".yml 的版本是最新的版本");
-            }else if (version < latestVersion) {
-                this.getLogger().warning("语言文件" + lang + ".yml 的版本需要进行更新，如果开启了自动更新则无视该消息");
-                saveLanguageFile(lang);
-            }else {
-                this.getLogger().error("语言文件" + lang + ".yml 的版本出现了异常，如果开启了自动更新则无视该消息");
-                saveLanguageFile(lang);
-            }
-        }
-        reload();
+    public void loadConfig() {
+        this.config = new Config(this.getDataFolder() + "/config.yml", Config.YAML);
     }
 
-    private void saveLanguageFile(String file) {
-        if (config.getBoolean("auto_update_language_files",false)) {
-            saveResource("language/"+file+".yml",true);
+    public void checkLanguageFilesVersion() {
+        if (config.getBoolean("local_language_flies",false)) {
+            int latestVersion = 6;
+            for (String lang : languages) {
+                Config langFile = new Config(this.getDataFolder() + "/language/" + lang + ".yml");
+                int version = langFile.getInt("language_version", 1);
+                if (version == latestVersion) {
+                    this.getLogger().info("语言文件" + lang + ".yml 的版本是最新的版本");
+                } else if (version < latestVersion) {
+                    if (config.getBoolean("auto_update_language_files", false)) {
+                        boolean needSave = false;
+                        if (!langFile.exists("language_version")) {
+                            needSave = true;
+                        }
+                        langFile.set("language_version", latestVersion);
+                        if (needSave) {
+                            langFile.save();
+                        }
+                        Config newLangFile = new Config(Config.YAML);
+                        newLangFile.load(this.getResource("language/" + lang + ".yml"));
+
+                        Language updateLang = new Language(langFile);
+                        updateLang.update(newLangFile);
+                        this.getLogger().info("语言文件 " + lang + ".yml 已更新至最新版本，请查看是否有新内容");
+                    } else {
+                        this.getLogger().warning("语言文件 " + lang + ".yml 有新版本，请及时更新以免影响正常使用");
+                    }
+                } else {
+                    // 检查出语言文件出现版本号出现问题就进行重置操作并对有问题的语言文件生成对应的备份文件
+                    langFile.save(new File(this.getDataFolder() + "/language/" + lang + ".yml.backup"));
+                    saveResource("language/" + lang + ".yml", true);
+                    this.getLogger().error("§c语言文件 "+lang+".yml 出现版本号异常，现已自动修复，请检查备份文件 "+lang+".yml.backup 来排查问题所在！");
+                }
+            }
+            reload();
         }
     }
 

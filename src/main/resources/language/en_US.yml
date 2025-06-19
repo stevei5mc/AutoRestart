@@ -1,5 +1,4 @@
-language_version: 5
-plugin_language: language code en_US
+language_version: 6
 
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task

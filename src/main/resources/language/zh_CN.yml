@@ -1,5 +1,4 @@
-language_version: 5
-plugin_language: language code zh_CN
+language_version: 6
 
 command_help_reload: §e重载配置
 command_help_cancel: §e取消重启任务
