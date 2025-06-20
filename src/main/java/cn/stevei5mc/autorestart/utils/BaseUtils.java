@@ -2,23 +2,23 @@ package cn.stevei5mc.autorestart.utils;
 
 import cn.nukkit.Player;
 import cn.nukkit.level.Sound;
+import cn.nukkit.utils.Config;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 public class BaseUtils {
-    private static final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
+    private static final Config config = AutoRestartPlugin.getInstance().getConfig();
 
     /**
      * 获取在重启前的开始提示的时间
      * @return 开始提示的时间
     */
     public static int getRestartTipTime() {
-        int time = 30;
-        int i = main.getConfig().getInt("tips_time", 30);
-        if (i > 0) {
-            time = i;
+        int time = config.getInt("pre_restart_tip_time", 30);
+        if (time < 1) {
+            time = 30;
         }
         return time;
     }
@@ -28,10 +28,9 @@ public class BaseUtils {
      * @return 重启服务器需要的时间
     */
     public static int getRestartUseTime() {
-        int time = 2;
-        int i = main.getConfig().getInt("restart_time", 2);
-        if (i > 0) {
-            time = i;
+        int time  = config.getInt("restart_time", 2);
+        if (time  < 1) {
+            time = 30;
         }
         return time;
     }

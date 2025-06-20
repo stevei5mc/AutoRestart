@@ -11,11 +11,10 @@ public class UpdateConfigUtils {
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     public static void updateConfig() {
-        int latest = 9;
+        int latestVersion = 10;
         Config config = AutoRestartPlugin.getInstance().getConfig();
-        if (config.getInt("version", 1) < latest) {
+        if (config.getInt("version", 1) < latestVersion) {
             if (config.getInt("version", 1) < 2) {
-                config.set("version", 2);
                 if (!config.exists("vote_start_player")) {
                     config.set("vote_start_player",3);
                 }
@@ -33,7 +32,6 @@ public class UpdateConfigUtils {
                 }
             }
             if (config.getInt("version") < 5) {
-                config.set("version", 5);
                 if (!config.exists("message_prefix")) {
                     config.set("message_prefix","§l§bAutoRestart §r§7>> ");
                 }
@@ -45,7 +43,6 @@ public class UpdateConfigUtils {
                 }
             }
             if (config.getInt("version") < 7) {
-                config.set("version",7);
                 if (!config.exists("prompt_voting_status")) {
                     config.set("prompt_voting_status",true);
                 }
@@ -54,9 +51,8 @@ public class UpdateConfigUtils {
                 }
             }
             if (config.getInt("version") < 9) {
-                config.set("version",9);
-                if (!config.exists("ignore_remainder_time")) {
-                    config.set("ignore_remainder_time",false);
+                if (!config.exists("ignore_vote_remainder_time")) {
+                    config.set("ignore_vote_remainder_time",false); // 考虑到有的用户是从旧版本一下子更新至最新版本所以也在这里同步修改
                 }
                 if (config.exists("commands")) {
                     ArrayList<String> commands = new ArrayList<>(main.getConfig().getStringList("commands"));
@@ -65,9 +61,22 @@ public class UpdateConfigUtils {
                     config.set("commands.player",commands);
                 }
             }
+            if (config.getInt("version") < 10) {
+                if (config.exists("tips_time")) {
+                    int i = config.getInt("tips_time");
+                    config.remove("tips_time");
+                    config.set("pre_restart_tip_time", i);
+                }
+                if (config.exists("ignore_remainder_time")) {
+                    boolean b = config.getBoolean("ignore_remainder_time");
+                    config.remove("ignore_remainder_time");
+                    config.set("ignore_vote_remainder_time",b);
+                }
+            }
+            config.set("version", latestVersion);
             config.save();
             main.getLogger().info("§a配置文件更新完毕，现在的配置文件版本已经是最新的了");
-        } else if (config.getInt("version", 1) > latest) {
+        } else if (config.getInt("version", 1) > latestVersion) {
             main.getLogger().error("§c配置文件的版本出现异常，将对配置文件进行重置");
             config.save(new File(main.getDataFolder() + "/config.yml.bak"));
             main.saveResource("config.yml",true);

@@ -1,11 +1,11 @@
 # 配置文件版本（勿动!!!）
-version: 9
+version: 10
 # 默认语言
 default_language: zh_CN
 # 重启时间(分钟 min)
 restart_time: 180
 # 提示时间(秒 s)
-tips_time: 30
+pre_restart_tip_time: 30
 #  是否在重启前把玩家踢出
 kick_player: true
 # 一些显示的设置
@@ -49,4 +49,4 @@ prompt_voting_status: true
 # 0 = ActionBar，1 = tip，2 = popup
 prompt_type: 0
 # 忽略剩余时间，启用后当赞成票数达到要求不需要等到投票结束就执行相关功能
-ignore_remainder_time: false
+ignore_vote_remainder_time: false
