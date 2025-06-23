@@ -1,5 +1,7 @@
 language_version: 6
 
+broadcast_restart_reminder_time: "§a距离服务器执行重启剩余 §e%1%"
+
 command_help_reload: §e重载配置
 command_help_cancel: §e取消重启任务
 command_help_restart: §e运行重启任务
@@ -10,8 +12,9 @@ command_help_pause: 暂停/继续运行任务
 command_not_permission: §c你没有权限使用此命令！
 command_in_game_run: §c请在游戏内使用此命令！
 command_unknown: §c未知的命令或参数，请检查后再试！
-command_create_failed: "§c无法添加命令 Se%1%§c ，请检查是否正确填写或存在相同命令！"
+command_create_failed: "§c无法添加命令 §e%1%§c ，请检查是否正确填写或存在相同命令！"
 command_create_success: "§a命令 §b%1%§a 添加成功！"
+command_delete_success: "§a命令 §b%1%§a  删除成功！"
 
 error_input_parameter: "§c输入的参数有误，请重新尝试！"
 

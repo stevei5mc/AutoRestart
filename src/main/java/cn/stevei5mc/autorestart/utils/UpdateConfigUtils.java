@@ -11,7 +11,7 @@ public class UpdateConfigUtils {
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     public static void updateConfig() {
-        int latestVersion = 10;
+        int latestVersion = 11;
         Config config = AutoRestartPlugin.getInstance().getConfig();
         if (config.getInt("version", 1) < latestVersion) {
             if (config.getInt("version", 1) < 2) {
@@ -61,7 +61,7 @@ public class UpdateConfigUtils {
                     config.set("commands.player",commands);
                 }
             }
-            if (config.getInt("version") < 10) {
+            if (config.getInt("version") < 11) {
                 if (config.exists("tips_time")) {
                     int i = config.getInt("tips_time");
                     config.remove("tips_time");
@@ -71,6 +71,12 @@ public class UpdateConfigUtils {
                     boolean b = config.getBoolean("ignore_remainder_time");
                     config.remove("ignore_remainder_time");
                     config.set("ignore_vote_remainder_time",b);
+                }
+                if(!config.exists("enable_reminder_timer")) {
+                    config.set("enable_reminder_timer",true);
+                }
+                if (!config.exists("broadcast_restart_reminder_cycle")) {
+                    config.set("broadcast_restart_reminder_cycle",30);
                 }
             }
             config.set("version", latestVersion);

@@ -1,5 +1,7 @@
 language_version: 6
 
+broadcast_restart_reminder_time: "§aTime remaining until server restart: §e%1%"
+
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task
 command_help_restart: §eRun restart task.
@@ -12,6 +14,7 @@ command_not_permission: §cYou not permission use the command!
 command_unknown: §cUnknown command or parameter, please check and try again!
 command_create_failed: "§cFailed to add command Se%1%§c. Please check if the input is correct or if the command already exists!"
 command_create_success: "§aCommand §b%1%§a added successfully!"
+command_delete_success: "§aCommand §b%1%§a deleted successfully!"
 
 error_input_parameter: "§cThe input parameter is incorrect. Please try again!"
 

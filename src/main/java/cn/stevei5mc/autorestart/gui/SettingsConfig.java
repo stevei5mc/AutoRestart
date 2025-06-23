@@ -60,7 +60,7 @@ public class SettingsConfig {
                 configSave();
                 configBaseSettings(player);
             }catch (NumberFormatException e) {
-                player.sendMessage(lang.translateString("error_input_parameter"));
+                player.sendMessage(main.getMessagePrefix()+lang.translateString("error_input_parameter"));
             }
 
         });
@@ -118,7 +118,7 @@ public class SettingsConfig {
         }));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set_command_create")).onClicked(SettingsConfig::createCmd));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set_command_delete")).onClicked(SettingsConfig::deleteCmd));
-        simple.addButton(new ResponseElementButton(lang.translateString("form_button_back")).onClicked(SettingsConfig::configSettings));
+        simple.addButton(new ResponseElementButton(lang.translateString("form_button_back")).onClicked(SettingsConfig::configCmdSettings));
         player.showFormWindow(simple);
     }
 
@@ -135,9 +135,9 @@ public class SettingsConfig {
             String cmdType = form.getToggleResponse(2)? "commands.player" : "commands.global";
             ArrayList<String> cmdList = new ArrayList<>(main.getConfig().getStringList(cmdType));
             if (cmdName.equals("") || cmdName.isEmpty() || cmdList.contains(cmdName)) {
-                player.sendMessage(lang.translateString("command_create_failed", cmdName));
+                player.sendMessage(main.getMessagePrefix()+lang.translateString("command_create_failed", cmdName));
             }else {
-                player.sendMessage(lang.translateString("command_create_success",cmdName));
+                player.sendMessage(main.getMessagePrefix()+lang.translateString("command_create_success",cmdName));
                 cmdList.add(cmdName);
                 main.getConfig().set(cmdType,cmdList);
                 configSave();
@@ -172,17 +172,20 @@ public class SettingsConfig {
             delCmdList.onResponded((form1, player2) -> {
                 if (form.getToggleResponse(0) && form1.getToggleResponse(1)) {
                     globalCmd.remove(form.getDropdownResponse(1).getElementContent());
+                    player2.sendMessage(main.getMessagePrefix()+lang.translateString("command_delete_success",form.getDropdownResponse(1).getElementContent()));
                     main.getConfig().set("commands.global",globalCmd);
                 }
                 boolean ruleA = form.getToggleResponse(0) && form.getToggleResponse(2) && form1.getToggleResponse(3);
                 boolean ruleB = !form.getToggleResponse(0) && form.getToggleResponse(2) && form1.getToggleResponse(1);
                 if (ruleA || ruleB) {
                     playerCmd.remove(form.getDropdownResponse(3).getElementContent());
+                    player2.sendMessage(main.getMessagePrefix()+lang.translateString("command_delete_success",form.getDropdownResponse(3).getElementContent()));
                     main.getConfig().set("commands.player",playerCmd);
                 }
                 if (form.getToggleResponse(0) || form.getToggleResponse(2)) {
                     configSave();
                 }
+                deleteCmd(player2);
             });
             player1.showFormWindow(delCmdList);
         });
@@ -217,7 +220,7 @@ public class SettingsConfig {
                 configSave();
                 configSoundSetting(player);
             }catch (NumberFormatException e) {
-                player.sendMessage(lang.translateString("error_input_parameter"));
+                player.sendMessage(main.getMessagePrefix()+lang.translateString("error_input_parameter"));
             }
         });
         player.showFormWindow(custom);

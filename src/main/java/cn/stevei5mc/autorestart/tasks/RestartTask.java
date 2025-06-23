@@ -11,17 +11,25 @@ import java.util.ArrayList;
 
 public class RestartTask extends PluginTask<AutoRestartPlugin> {
     private static int time2 =30;
+    private static int broadcastCycle = 0;
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
-    public RestartTask(AutoRestartPlugin main,int time1) {
+    public RestartTask(AutoRestartPlugin main,int time) {
         super(main);
-        time2 = time1;
+        time2 = time;
+        broadcastCycle = time;
     }
 
     @Override
     public void onRun(int currentTick) {
         int taskType = TasksUtils.getRestartTaskType();
         if (taskType != 3) {
+            if (main.getConfig().getBoolean("enable_reminder_timer",true) && time2 == broadcastCycle && broadcastCycle > 0) {
+                broadcastCycle = broadcastCycle -main.getConfig().getInt("broadcast_restart_reminder_cycle",30) * 60;
+                for (Player player : main.getServer().getOnlinePlayers().values()) {
+                    player.sendMessage(main.getMessagePrefix()+main.getLang(player).translateString("broadcast_restart_reminder_time",getRestartRemainder(player)));
+                }
+            }
             if (time2 <= BaseUtils.getRestartTipTime()) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     String unit = main.getLang(player).translateString("time_unit_seconds");

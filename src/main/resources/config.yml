@@ -1,5 +1,5 @@
 # 配置文件版本（勿动!!!）
-version: 10
+version: 11
 # 默认语言
 default_language: zh_CN
 # 重启时间(分钟 min)
@@ -50,3 +50,8 @@ prompt_voting_status: true
 prompt_type: 0
 # 忽略剩余时间，启用后当赞成票数达到要求不需要等到投票结束就执行相关功能
 ignore_vote_remainder_time: false
+# 定时提醒服务器执行的剩余时间
+## 是否启用
+enable_reminder_timer: true
+## 广播周期 （单位：分钟）
+broadcast_restart_reminder_cycle: 30

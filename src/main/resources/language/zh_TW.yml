@@ -1,5 +1,7 @@
 language_version: 6
 
+broadcast_restart_reminder_time: "§a距離伺服器執行重啟剩餘 §e%1%"
+
 command_help_reload: §e重載配寘
 command_help_cancel: §e取消重啟任務
 command_help_restart: §e§e運行重啓任務。
@@ -12,6 +14,7 @@ command_in_game_run: §c請在遊戲內使用此命令！
 command_unknown: §c未知的命令或參數，請檢查後再試！
 command_create_failed: "§c無法添加命令 Se%1%§c ，請檢查是否正確填寫或存在相同命令！"
 command_create_success: "§a命令 §b%1%§a 添加成功！"
+command_delete_success: "§a命令 §b%1%§a 刪除成功！"
 
 error_input_parameter: "§c輸入的參數有誤，請重新嘗試！"
 
