@@ -12,7 +12,7 @@ command_help_pause: 暫停/繼續運行任務
 command_not_permission: §c你沒有許可權使用此命令！
 command_in_game_run: §c請在遊戲內使用此命令！
 command_unknown: §c未知的命令或參數，請檢查後再試！
-command_create_failed: "§c無法添加命令 Se%1%§c ，請檢查是否正確填寫或存在相同命令！"
+command_create_failed: "§c無法添加命令 §e%1%§c ，請檢查是否正確填寫或存在相同命令！"
 command_create_success: "§a命令 §b%1%§a 添加成功！"
 command_delete_success: "§a命令 §b%1%§a 刪除成功！"
 

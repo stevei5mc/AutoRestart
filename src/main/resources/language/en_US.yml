@@ -12,7 +12,7 @@ command_help_pause: Pause / Resume Task
 command_in_game_run: §cPlease use this command within the game!
 command_not_permission: §cYou not permission use the command!
 command_unknown: §cUnknown command or parameter, please check and try again!
-command_create_failed: "§cFailed to add command Se%1%§c. Please check if the input is correct or if the command already exists!"
+command_create_failed: "§cFailed to add command §e%1%§c. Please check if the input is correct or if the command already exists!"
 command_create_success: "§aCommand §b%1%§a added successfully!"
 command_delete_success: "§aCommand §b%1%§a deleted successfully!"
 

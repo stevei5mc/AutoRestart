@@ -54,10 +54,13 @@
       <td>/voterestart vote abstention</td><td>投出弃权票</td>
     </tr>
     <tr>
-      <td>/voterestart vote veto</td><td>autorestart.admin.vote.veto</td><td>使用一票否决</td><td rowspan="2" align="center" valign="center">OP</td>
+      <td>/voterestart vote veto</td><td>autorestart.admin.vote.veto</td><td>使用一票否决</td><td rowspan="3" align="center" valign="center">OP</td>
     </tr>
     <tr>
       <td></td><td>autorestart.admin.vote.force</td><td>在调试模式中强制发起投票<br>该功能方便开发而设立的(需开启debug模式)</td>
+    </tr>
+    <tr>
+      <td></td><td>autorestart.admin.reload</td><td>在线修改配置文件<br>注： 跟重载配置文件的权限相同但无相关命令</td>
     </tr>
 </table>
 
@@ -145,12 +148,26 @@ broadcast_restart_reminder_cycle: 30
 - [x] zh_TW   中文(繁體)
 - [x] en_US   English (United States)
 
+### **变量信息**
+- **对接Tips的变量信息**
+
+|变量|介绍|
+|:-:|:-:|
+|{restart-remainder}|获取重启任务的剩余时间|
+|{vote-data}|获取投票重启的数据|
+|{vote-remainder}|获取投票重启任务的剩余时间|
+
 ## **使用方法**
+|步骤|说明|
+|:-:|:-|
+|1|准备好相关的启动脚本并放置在服务端的根目录下 **（一般情况下启动脚本是放置在服务端的根目录下）** 并调整好启动脚本的配置 **(如果你拥有并使用相关的启动脚本则无视这一步骤)**|
+|2|**将本插件放进`plugins`文件夹，并确保安装前置插件[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)后启动服务器** <br> 安装前置插件[Tips](https://motci.cn/job/Tips/)对接的变量生效（这是可选的）|
+|3|如果不使用默认配置则修改好配置文件后重启服务器让新的配置生效（由于自动重启任务的配置读取是在服务器启动阶段进行的，所以无法通过重载配置文件的操作让新的配置完全生效只能通过重启服务器来让新的配置生效）|
 ### **注意事项**
-- **自动重启还需要脚本的配合才能实现相关脚本在[Actions](https://github.com/stevei5mc/NewTipsVariables/actions) 编译完成后会一并给出，你也可以到对应 [GITHUB 仓库](https://github.com/stevei5mc/McStartServer) 获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases) 中也可以获取得到但只会在版本发布后才会有相关脚本(Windows用.bat后缀的脚本，Linux请用.sh后缀的脚本，另外每种系统的脚本都有两种根据你的需求选择)，如果你已经有了相关脚本则可以忽略**
-- **本插件的重启时间会受服务器TPS导致重启时间不会按现实的时间进行而是按照服务器TPS的计算的时间进行的**
-- **在使用时请不要随意改动语言文件或配置文件的版本号，否则所带来的后果一切自负！！！！！！**
-- **默认情况下使用的语言文件为内置的语言文件**
+1. **自动重启还需要脚本的配合才能实现，相关脚本会在 [Github Actions](https://github.com/stevei5mc/NewTipsVariables/actions) 中编译完成后会一并给出，也可以到对应 [GITHUB 仓库](https://github.com/stevei5mc/McStartServer) 中获取，[Releases](https://github.com/stevei5mc/AutoRestart/releases) 界面也可以获取得到相关脚本，但只会在版本发布后才会有相关脚本( Windows用`.bat`后缀的脚本，Linux请用`.sh`后缀的脚本，另外每种系统的脚本都有两种，建议根据实际需求选用 )，如果你已经拥有了相关脚本则可以忽略这一点**
+2. **本插件会受 `TPS` 的影响可能会导致跟时间相关的数据计算不准确！**
+3. **在使用时请不要随意改动语言文件或配置文件的版本号，否则所带来的后果一切自负！！！！！！**
+4. **默认情况下使用的语言文件为内置的语言文件，如果有修改语言文件的需求请将 `local_language_flies` 的 `false` 改为 `true`**
 
 ### **脚本使用说明**
 - **此内容使用于配套的启动脚本，可配置项已在下方列出**
@@ -188,29 +205,20 @@ server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就�
 ```
 </details>
 
-
-|步骤|说明|
-|:-:|:-|
-|1|准备好相关的启动脚本并放置在服务端的根目录下(一般情况下启动脚本是放置在服务端的根目录下)并调整好启动脚本的配置(如果你有相关的启动脚本则无视这一步骤)|
-|2|将本插件放进`plugins`文件夹，并确保安装前置插件[MemoriesOfTime-GameCore](https://motci.cn/job/GameCore/)后启动服务器 <br> 安装前置插件[Tips](https://motci.cn/job/Tips/)对接的变量生效（这是可选的）|
-|3|如果不使用默认配置则修改好配置文件后重启服务器让新的配置生效（由于自动重启任务的配置读取是在服务器启动阶段进行的，所以无法通过重载配置文件的操作让新的配置完全生效只能通过重启服务器来让新的配置生效）|
 ## **效果预览**
 |![1](docs/image/1.jpg)|![2](docs/image/2.jpg)|![3](docs/image/3.jpg)|
 |-|-|-|
 |![4](docs/image/4.jpg)|![5](docs/image/5.jpg)|![6](docs/image/6.jpg)|
 |![7](docs/image/7.jpg)|![8](docs/image/8.jpg)|![9](docs/image/9.jpg)|
 |![10](docs/image/10.jpg)|![11](docs/image/11.jpg)||
-## **变量信息**
-|变量|介绍|
-|:-:|:-:|
-|{restart-remainder}|获取重启任务的剩余时间|
-|{vote-data}|获取投票重启的数据|
-|{vote-remainder}|获取投票重启任务的剩余时间|
 
 ## **开发文档**
 - **请在[Releases](https://github.com/stevei5mc/AutoRestart/releases)界面下载`-javadoc.jar`结尾的文件解压后点击`index.html`获取相关文档**
-### **Maven**
-[![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0)
+- [![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0)
+
+<details>
+<summary>Maven</summary>
+
 ```xml
 <repository>
 	<id>jitpack.io</id>
@@ -224,3 +232,5 @@ server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就�
 	<version>1.0.0</version>
 </dependency>
 ```
+
+</details>
