@@ -42,8 +42,6 @@ public class SettingsConfig {
         custom.addElement(new ElementInput("pre_restart_tip_time  "+timeUnitS,"",String.valueOf(main.getConfig().getInt("pre_restart_tip_time",30))));
         custom.addElement(new ElementLabel(lang.translateString("form_config_set_base_label_local_language")));
         custom.addElement(new ElementToggle("local_language_flies",main.getConfig().getBoolean("local_language_flies",false)));
-        custom.addElement(new ElementLabel(lang.translateString("form_config_set_base_label_auto_update_language")));
-        custom.addElement(new ElementToggle("auto_update_language_files",main.getConfig().getBoolean("auto_update_language_files",false)));
         custom.addElement(new ElementLabel(lang.translateString("form_config_set_base_label_ignore_vote_remainder")));
         custom.addElement(new ElementToggle("ignore_vote_remainder_time",main.getConfig().getBoolean("ignore_vote_remainder_time",false)));
         custom.addElement(new ElementToggle("kick_player",main.getConfig().getBoolean("kick_player",true)));
@@ -54,9 +52,8 @@ public class SettingsConfig {
                 main.getConfig().set("restart_time",Integer.parseInt(form.getInputResponse(1)));
                 main.getConfig().set("pre_restart_tip_time",Integer.parseInt(form.getInputResponse(2)));
                 main.getConfig().set("local_language_flies", form.getToggleResponse(4));
-                main.getConfig().set("auto_update_language_files", form.getToggleResponse(6));
-                main.getConfig().set("ignore_vote_remainder_time",form.getToggleResponse(8));
-                main.getConfig().set("kick_player",form.getToggleResponse(9));
+                main.getConfig().set("ignore_vote_remainder_time",form.getToggleResponse(6));
+                main.getConfig().set("kick_player",form.getToggleResponse(7));
                 configSave();
                 configBaseSettings(player);
             }catch (NumberFormatException e) {
@@ -127,7 +124,7 @@ public class SettingsConfig {
         Language lang = AutoRestartPlugin.getInstance().getLang(player);
         AdvancedFormWindowCustom createCmd = new AdvancedFormWindowCustom(lang.translateString("form_title_config_set_command_create"));
         createCmd.addElement(new ElementLabel(lang.translateString("form_config_set_command_create_label_tip")));
-        createCmd.addElement(new ElementInput("创建的命令", "say Hello world or say Hello @p&con"));
+        createCmd.addElement(new ElementInput(lang.translateString("form_config_set_command_input_create"), "say Hello world or say Hello @p&con"));
         createCmd.addElement(new ElementToggle("global / player",false));
         createCmd.onClosed(SettingsConfig::configSettings);
         createCmd.onResponded((form, player1) -> {

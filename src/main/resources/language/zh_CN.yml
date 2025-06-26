@@ -73,9 +73,10 @@ form_config_set_description: |-
     一、 配置项是根据对应的功能来分类的
     二、 配置项是与配置文件对应的，仅为部分配置项加上描述
 
-form_config_set_base_label_local_language: "启用本地语言文件后则会在插件文件夹生成语言文件并使用插件文件夹里的语言文件"
-form_config_set_base_label_auto_update_language: "启用后不需要手动更新语言文件，插件会自动执行更新操作"
+form_config_set_base_label_local_language: "启用本地语言文件后则会在插件文件夹生成语言文件并使用插件文件夹里的语言文件，若有新的内容将自动执行更新以免影响使用"
 form_config_set_base_label_ignore_vote_remainder: "启用后，不需要等待投票时间结束，只需要等待满足足够的票数就可以执行对应的任务"
+
+form_config_set_command_input_create: "请输入想要创建的命令："
 
 form_config_set_command_create_label_tip: |-
     填写想要执行的命令。

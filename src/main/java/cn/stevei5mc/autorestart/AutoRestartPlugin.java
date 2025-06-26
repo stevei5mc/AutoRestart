@@ -131,24 +131,19 @@ public class AutoRestartPlugin extends PluginBase {
                 if (version == latestVersion) {
                     this.getLogger().info("语言文件" + lang + ".yml 的版本是最新的版本");
                 } else if (version < latestVersion) {
-                    if (config.getBoolean("auto_update_language_files", false)) {
-                        boolean needSave = false;
-                        if (!langFile.exists("language_version")) {
-                            needSave = true;
-                        }
-                        langFile.set("language_version", latestVersion);
-                        if (needSave) {
-                            langFile.save();
-                        }
-                        Config newLangFile = new Config(Config.YAML);
-                        newLangFile.load(this.getResource("language/" + lang + ".yml"));
-
-                        Language updateLang = new Language(langFile);
-                        updateLang.update(newLangFile);
-                        this.getLogger().info("语言文件 " + lang + ".yml 已更新至最新版本，请查看是否有新内容");
-                    } else {
-                        this.getLogger().warning("语言文件 " + lang + ".yml 有新版本，请及时更新以免影响正常使用");
+                    boolean needSave = false;
+                    if (!langFile.exists("language_version")) {
+                        needSave = true;
                     }
+                    langFile.set("language_version", latestVersion);
+                    if (needSave) {
+                        langFile.save();
+                    }
+                    Config newLangFile = new Config(Config.YAML);
+                    newLangFile.load(this.getResource("language/" + lang + ".yml"));
+                    Language updateLang = new Language(langFile);
+                    updateLang.update(newLangFile);
+                    this.getLogger().info("语言文件 " + lang + ".yml 已更新至最新版本，请查看是否有新内容");
                 } else {
                     // 检查出语言文件出现版本号出现问题就进行重置操作并对有问题的语言文件生成对应的备份文件
                     langFile.save(new File(this.getDataFolder() + "/language/" + lang + ".yml.backup"));

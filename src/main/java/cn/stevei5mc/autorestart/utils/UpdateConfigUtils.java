@@ -11,7 +11,7 @@ public class UpdateConfigUtils {
     public static AutoRestartPlugin main = AutoRestartPlugin.getInstance();
 
     public static void updateConfig() {
-        int latestVersion = 11;
+        int latestVersion = 12;
         Config config = AutoRestartPlugin.getInstance().getConfig();
         if (config.getInt("version", 1) < latestVersion) {
             if (config.getInt("version", 1) < 2) {
@@ -61,7 +61,7 @@ public class UpdateConfigUtils {
                     config.set("commands.player",commands);
                 }
             }
-            if (config.getInt("version") < 11) {
+            if (config.getInt("version") < 12) {
                 if (config.exists("tips_time")) {
                     int i = config.getInt("tips_time");
                     config.remove("tips_time");
@@ -77,6 +77,9 @@ public class UpdateConfigUtils {
                 }
                 if (!config.exists("broadcast_restart_reminder_cycle")) {
                     config.set("broadcast_restart_reminder_cycle",30);
+                }
+                if (config.exists("auto_update_language_files")) {
+                    config.remove("auto_update_language_files");
                 }
             }
             config.set("version", latestVersion);

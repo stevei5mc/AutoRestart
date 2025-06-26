@@ -73,9 +73,10 @@ form_config_set_description: |-
     1. Config items are categorized based on their corresponding functions.
     2. Config items correspond to the config file, with descriptions provided only for some items.
 
-form_config_set_base_label_local_language: "When local language files are enabled, a language file will be generated in the plugin folder and used from there."
-form_config_set_base_label_auto_update_language: "When enabled, the plugin will automatically update the language files without manual intervention."
+form_config_set_base_label_local_language: "After enabling the local language file, a language file will be generated in the plugin folder and used from there. If there is new content, it will automatically update to avoid affecting usage."
 form_config_set_base_label_ignore_vote_remainder: "When enabled, the task can be executed as soon as the required number of votes is reached, without waiting for the voting period to end."
+
+form_config_set_command_input_create: "Please enter the command you want to create:"
 
 form_config_set_command_create_label_tip: |-
     Enter the command you want to execute.
