@@ -1,4 +1,4 @@
-language_version: 6
+language_version: 7
 
 broadcast_restart_reminder_time: "§a距離伺服器執行重啟剩餘 §e%1%"
 
@@ -28,6 +28,7 @@ form_title_config_set_command_view: "命令管理 - 查看命令"
 form_title_config_set_command_create: "命令管理 - 創建命令"
 form_title_config_set_command_delete: "命令管理 - 刪除命令"
 form_title_config_set_sound: "配置管理 - 音效設置"
+form_title_config_set_vote: "配置管理 - 投票設置"
 
 form_description_scheduled: "設定重啓時間，並設定好時間組織後確認即可開啟重啓任務"
 
@@ -53,6 +54,7 @@ form_button_config_set_command_view: "查看命令"
 form_button_config_set_command_create: "創建命令"
 form_button_config_set_command_delete: "刪除命令"
 form_button_config_set_sound: "音效設置"
+form_button_config_set_vote: "投票設置"
 
 form_scheduled_input_set_time: 設定重啓時間
 
@@ -74,7 +76,8 @@ form_config_set_description: |-
     二、 配置項是與配置文件對應的，僅為部分配置項加上描述
 
 form_config_set_base_label_local_language: "啟用本地語言文件後則會在插件文件夾生成語言文件並使用插件文件夾裡的語言文件，若有新的內容將自動執行更新以免影響使用"
-form_config_set_base_label_ignore_vote_remainder: "啟用後，不需要等待投票時間結束，只需要等待滿足足夠的票數就可以執行對應的任務"
+
+form_config_set_vote_label_ignore_vote_remainder: "啟用後，不需要等待投票時間結束，只需要等待滿足足夠的票數就可以執行對應的任務"
 
 form_config_set_command_input_create: "請輸入想要創建的命令："
 

@@ -124,7 +124,7 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void checkLanguageFilesVersion() {
         if (config.getBoolean("local_language_flies",false)) {
-            int latestVersion = 6;
+            int latestVersion = 7;
             for (String lang : languages) {
                 Config langFile = new Config(this.getDataFolder() + "/language/" + lang + ".yml");
                 int version = langFile.getInt("language_version", 1);

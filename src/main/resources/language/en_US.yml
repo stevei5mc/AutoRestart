@@ -1,4 +1,4 @@
-language_version: 6
+language_version: 7
 
 broadcast_restart_reminder_time: "§aTime remaining until server restart: §e%1%"
 
@@ -28,6 +28,7 @@ form_title_config_set_command_view: "Command Management - View Commands"
 form_title_config_set_command_create: "Command Management - Create Command"
 form_title_config_set_command_delete: "Command Management - Delete Command"
 form_title_config_set_sound: "Config Management - Sound Settings"
+form_title_config_set_vote: "Config Management - Voting Settings"
 
 form_description_scheduled: "Set the restart time and confirm after setting the time unit to start the restart task"
 
@@ -53,6 +54,7 @@ form_button_config_set_command_view: "View Commands"
 form_button_config_set_command_create: "Create Command"
 form_button_config_set_command_delete: "Delete Command"
 form_button_config_set_sound: "Sound Settings"
+form_button_config_set_vote: "Voting Settings"
 
 form_scheduled_input_set_time: Set restart time
 
@@ -74,7 +76,8 @@ form_config_set_description: |-
     2. Config items correspond to the config file, with descriptions provided only for some items.
 
 form_config_set_base_label_local_language: "After enabling the local language file, a language file will be generated in the plugin folder and used from there. If there is new content, it will automatically update to avoid affecting usage."
-form_config_set_base_label_ignore_vote_remainder: "When enabled, the task can be executed as soon as the required number of votes is reached, without waiting for the voting period to end."
+
+form_config_set_vote_label_ignore_vote_remainder: "When enabled, the task can be executed as soon as the required number of votes is reached, without waiting for the voting period to end."
 
 form_config_set_command_input_create: "Please enter the command you want to create:"
 

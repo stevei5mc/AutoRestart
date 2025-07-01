@@ -27,6 +27,7 @@ public class SettingsConfig {
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set_show")).onClicked(SettingsConfig::configShowSettings));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set_command")).onClicked(SettingsConfig::configCmdSettings));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set_sound")).onClicked(SettingsConfig::configSoundSetting));
+        simple.addButton(new ResponseElementButton(lang.translateString("form_button_config_set_vote")).onClicked(SettingsConfig::configVoteSettings));
         simple.addButton(new ResponseElementButton(lang.translateString("form_button_back")).onClicked(Admin::sendMain));
         player.showFormWindow(simple);
     }
@@ -42,8 +43,6 @@ public class SettingsConfig {
         custom.addElement(new ElementInput("pre_restart_tip_time  "+timeUnitS,"",String.valueOf(main.getConfig().getInt("pre_restart_tip_time",30))));
         custom.addElement(new ElementLabel(lang.translateString("form_config_set_base_label_local_language")));
         custom.addElement(new ElementToggle("local_language_flies",main.getConfig().getBoolean("local_language_flies",false)));
-        custom.addElement(new ElementLabel(lang.translateString("form_config_set_base_label_ignore_vote_remainder")));
-        custom.addElement(new ElementToggle("ignore_vote_remainder_time",main.getConfig().getBoolean("ignore_vote_remainder_time",false)));
         custom.addElement(new ElementToggle("kick_player",main.getConfig().getBoolean("kick_player",true)));
         custom.onClosed(SettingsConfig::configSettings);
         custom.onResponded((form, player1) -> {
@@ -52,8 +51,7 @@ public class SettingsConfig {
                 main.getConfig().set("restart_time",Integer.parseInt(form.getInputResponse(1)));
                 main.getConfig().set("pre_restart_tip_time",Integer.parseInt(form.getInputResponse(2)));
                 main.getConfig().set("local_language_flies", form.getToggleResponse(4));
-                main.getConfig().set("ignore_vote_remainder_time",form.getToggleResponse(6));
-                main.getConfig().set("kick_player",form.getToggleResponse(7));
+                main.getConfig().set("kick_player",form.getToggleResponse(5));
                 configSave();
                 configBaseSettings(player);
             }catch (NumberFormatException e) {
@@ -70,18 +68,22 @@ public class SettingsConfig {
         AdvancedFormWindowCustom custom = new AdvancedFormWindowCustom(lang.translateString("form_title_config_set_show"));
         custom.addElement(new ElementToggle("show_title",main.getConfig().getBoolean("show_title",true)));
         custom.addElement(new ElementToggle("show_tip",main.getConfig().getBoolean("show_tip",true)));
-        custom.addElement(new ElementToggle("prompt_voting_status",main.getConfig().getBoolean("prompt_voting_status",true)));
-        custom.addElement(new ElementStepSlider("prompt_type", Arrays.asList("ActionBar","tip","popup"),main.getConfig().getInt("prompt_type",0)));
         custom.addElement(new ElementInput("message_prefix", "", main.getConfig().getString("message_prefix","§l§bAutoRestart §r§7>> ")));
+        custom.addElement(new ElementToggle("enable_reminder_timer",main.getConfig().getBoolean("enable_reminder_timer",true)));
+        custom.addElement(new ElementInput("broadcast_restart_reminder_cycle","",String.valueOf(main.getConfig().getInt("broadcast_restart_reminder_cycle",30))));
         custom.onClosed(SettingsConfig::configSettings);
         custom.onResponded((form, player1) -> {
-            main.getConfig().set("show_title",form.getToggleResponse(0));
-            main.getConfig().set("show_tip",form.getToggleResponse(1));
-            main.getConfig().set("prompt_voting_status",form.getToggleResponse(2));
-            main.getConfig().set("prompt_type",form.getStepSliderResponse(3).getElementID());
-            main.getConfig().set("message_prefix", form.getInputResponse(1));
-            configSave();
-            configShowSettings(player);
+            try {
+                main.getConfig().set("show_title",form.getToggleResponse(0));
+                main.getConfig().set("show_tip",form.getToggleResponse(1));
+                main.getConfig().set("message_prefix", form.getInputResponse(2));
+                main.getConfig().set("enable_reminder_timer",form.getToggleResponse(3));
+                main.getConfig().set("broadcast_restart_reminder_cycle",Integer.parseInt(form.getInputResponse(4)));
+                configSave();
+                configShowSettings(player);
+            }catch (NumberFormatException e) {
+                player.sendMessage(main.getMessagePrefix()+lang.translateString("error_input_parameter"));
+            }
         });
         player.showFormWindow(custom);
     }
@@ -216,6 +218,31 @@ public class SettingsConfig {
                 }
                 configSave();
                 configSoundSetting(player);
+            }catch (NumberFormatException e) {
+                player.sendMessage(main.getMessagePrefix()+lang.translateString("error_input_parameter"));
+            }
+        });
+        player.showFormWindow(custom);
+    }
+
+    public static void configVoteSettings(@NotNull Player player) {
+        Language lang = main.getLang(player);
+        String timeUnitMin = lang.translateString("time_unit_type", lang.translateString("time_unit_minutes"));
+        AdvancedFormWindowCustom custom = new AdvancedFormWindowCustom(lang.translateString("form_title_config_set_vote"));
+        custom.addElement(new ElementToggle("prompt_voting_status",main.getConfig().getBoolean("prompt_voting_status",true)));
+        custom.addElement(new ElementStepSlider("prompt_type", Arrays.asList("ActionBar","tip","popup"),main.getConfig().getInt("prompt_type",0)));
+        custom.addElement(new ElementLabel(lang.translateString("form_config_set_vote_label_ignore_vote_remainder")));
+        custom.addElement(new ElementToggle("ignore_vote_remainder_time",main.getConfig().getBoolean("ignore_vote_remainder_time",false)));
+        custom.addElement(new ElementInput("vote_time  "+timeUnitMin,"",String.valueOf(main.getConfig().getInt("vote_time",5))));
+        custom.onClosed(SettingsConfig::configSettings);
+        custom.onResponded((form, player1) -> {
+            try {
+                main.getConfig().set("prompt_voting_status",form.getToggleResponse(0));
+                main.getConfig().set("prompt_type",form.getStepSliderResponse(1).getElementID());
+                main.getConfig().set("ignore_vote_remainder_time",form.getToggleResponse(3));
+                main.getConfig().set("vote_time",Integer.parseInt(form.getInputResponse(4)));
+                configSave();
+                configVoteSettings(player);
             }catch (NumberFormatException e) {
                 player.sendMessage(main.getMessagePrefix()+lang.translateString("error_input_parameter"));
             }
