@@ -212,7 +212,7 @@ server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就�
 
 ## **开发文档**
 - **请在[Releases](https://github.com/stevei5mc/AutoRestart/releases)界面下载`-javadoc.jar`结尾的文件解压后点击`index.html`获取相关文档**
-- [![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.0)
+- [![](https://jitpack.io/v/stevei5mc/AutoRestart.svg)](https://jitpack.io/#stevei5mc/AutoRestart/1.0.1)
 
 <details>
 <summary>Maven</summary>
@@ -227,8 +227,23 @@ server_name="testmc"  #服务名(方便维护用的)，比如说是生存服就�
 <dependency>
 	<groupId>com.github.stevei5mc</groupId>
 	<artifactId>AutoRestart</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 </dependency>
+```
+
+</details>
+
+<details>
+<summary>Gradle</summary>
+
+- gradle.kts
+
+```kts
+  maven("https://jitpack.io")
+```
+
+```kts
+  compileOnly("com.github.stevei5mc:AutoRestart:1.0.1")
 ```
 
 </details>
