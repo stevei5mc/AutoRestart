@@ -107,8 +107,9 @@ public class RestartTask extends PluginTask<AutoRestartPlugin> {
     public static void runCommand() {
         if (main.getConfig().getBoolean("runcommand",true)) {
             ArrayList<String> globalCommands = new ArrayList<>(main.getConfig().getStringList("commands.global"));
-            for (String cmd : globalCommands) {
-                main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd);
+            for (String s : globalCommands) {
+                String[] cmd = s.split("&");
+                main.getServer().dispatchCommand(main.getServer().getConsoleSender(), cmd[0]);
             }
             if (TasksUtils.getRestartTaskType() != 3) {
                 for (Player player : main.getServer().getOnlinePlayers().values()) {

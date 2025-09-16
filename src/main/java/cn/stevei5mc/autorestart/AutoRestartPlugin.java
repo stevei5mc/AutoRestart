@@ -105,10 +105,9 @@ public class AutoRestartPlugin extends PluginBase {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             String playerLanguage = player.getLoginChainData().getLanguageCode();
-            if (!this.languageMap.containsKey(playerLanguage)) {
-                playerLanguage = this.defaultLanguage;
+            if (this.languageMap.containsKey(playerLanguage)) {
+                return this.languageMap.get(playerLanguage);
             }
-            return this.languageMap.get(playerLanguage);
         }
         return this.languageMap.get(this.defaultLanguage);
     }
