@@ -8,8 +8,6 @@ import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.utils.TasksUtils;
 
-import java.util.LinkedList;
-
 public class RunRestartTask extends BaseSubCommand {
 
     public RunRestartTask(String name) {
@@ -83,20 +81,12 @@ public class RunRestartTask extends BaseSubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
-        LinkedList<String> list = new LinkedList<>();
-        list.add("manual");
-        list.add("no-players");
-        list.add("scheduled");
-        LinkedList<String> timeUnit =  new LinkedList<>();
-        timeUnit.add("hour");
-        timeUnit.add("minutes");
-        timeUnit.add("seconds");
-        String[] list2 = list.toArray(new String[0]);
-        String[] timeUnit2 = timeUnit.toArray(new String[0]);
+        String[] taskTist = {"manual", "no-players", "scheduled"};
+        String[] timeUnit = {"hour", "minutes", "seconds"};
         return new CommandParameter[]{
-            CommandParameter.newEnum("task type",list2),
-            CommandParameter.newEnum("time unit",true,timeUnit2),
-            CommandParameter.newType("time",true,CommandParamType.INT)
+            CommandParameter.newEnum("task type", taskTist),
+            CommandParameter.newEnum("time unit", true, timeUnit),
+            CommandParameter.newType("time", true, CommandParamType.INT)
         };
     }
 }

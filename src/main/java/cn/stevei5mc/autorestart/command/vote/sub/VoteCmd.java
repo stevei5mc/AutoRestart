@@ -5,8 +5,6 @@ import cn.nukkit.command.data.CommandParameter;
 import cn.stevei5mc.autorestart.command.base.BaseSubCommand;
 import cn.stevei5mc.autorestart.utils.VoteUtils;
 
-import java.util.LinkedList;
-
 public class VoteCmd extends BaseSubCommand {
 
     public VoteCmd(String name) {
@@ -37,14 +35,9 @@ public class VoteCmd extends BaseSubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
-        LinkedList<String> vote = new LinkedList<>();
-        vote.add("approval");
-        vote.add("oppose");
-        vote.add("abstention");
-        vote.add("veto");
-        String[] vote2 = vote.toArray(new String[0]);
+        String[] vote = {"approval", "oppose", "abstention", "veto"};
         return new CommandParameter[]{
-            CommandParameter.newEnum("vote type",vote2)
+            CommandParameter.newEnum("vote type", vote)
         };
     }
 }
