@@ -81,10 +81,10 @@ public class RunRestartTask extends BaseSubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
-        String[] taskTist = {"manual", "no-players", "scheduled"};
+        String[] taskList = {"manual", "no-players", "scheduled"};
         String[] timeUnit = {"hour", "minutes", "seconds"};
         return new CommandParameter[]{
-            CommandParameter.newEnum("task type", taskTist),
+            CommandParameter.newEnum("task type", taskList),
             CommandParameter.newEnum("time unit", true, timeUnit),
             CommandParameter.newType("time", true, CommandParamType.INT)
         };

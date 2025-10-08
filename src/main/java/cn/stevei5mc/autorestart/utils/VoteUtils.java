@@ -113,18 +113,16 @@ public class VoteUtils {
                         voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_abstention")));
                         break;
                     case "oppose":
-                        if (!voter.hasPermission("autorestart.admin.vote.veto")) {
-                            votePlayer.add(playerName);
-                            oppose++;
-                            voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_oppose")));
-                        }
-                        break;
                     case "veto":
                         if (voter.hasPermission("autorestart.admin.vote.veto")) {
                             TasksUtils.cancelVoteTask();
                             for (Player player : main.getServer().getOnlinePlayers().values()) {
                                 player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_failed_veto"));
                             }
+                        }else {
+                            votePlayer.add(playerName);
+                            oppose++;
+                            voter.sendMessage(main.getLang(voter).translateString("vote_msg_vote", main.getLang(voter).translateString("vote_type_oppose")));
                         }
                         break;
                     default:
