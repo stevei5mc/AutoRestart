@@ -42,12 +42,12 @@ public class VoteUtils {
      * <br><br>注意：
      * <br>请使用TasksUtils的runVoteTask方法，如果直接运行该方法是无法启动投票任务的
      * <br>因为在运行投票任务时会顺带运行该方法，所以无需重复的运行该方法
-     * @param initiated 投票发起者
+     * @param player 投票发起者
      */
-    public void initializedData(Player initiated) {
+    public void initializedData(Player player) {
         if (!TasksUtils.getVoteTaskState()) {
             clearData(); //这里先清理一遍旧数据以防出现问题
-            String voter = initiated.getName();
+            String voter = player.getName();
             approvalVotes = (int) Math.ceil(main.getServer().getOnlinePlayers().size() * (2.0 / 3));
             votePlayer.add(voter);
             approval++;

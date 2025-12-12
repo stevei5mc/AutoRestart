@@ -9,18 +9,18 @@ import cn.stevei5mc.autorestart.utils.VoteUtils;
 
 
 public class VoteTask extends PluginTask<AutoRestartPlugin> {
-    private static int time2 = 0;
+    private static int voteTime = 0;
     private static int msgTime = 0;
     private static final AutoRestartPlugin main = AutoRestartPlugin.getInstance();
     private static final VoteUtils vu = VoteUtils.getInstance();
-    private static String voterr;
+    private static String voter;
 
-    public VoteTask(AutoRestartPlugin main,int time,Player voter) {
+    public VoteTask(AutoRestartPlugin main, int time, Player player) {
         super(main);
-        vu.initializedData(voter);
-        time2 = time;//设置投票时间
-        msgTime= time;
-        voterr = voter.getName();
+        vu.initializedData(player);
+        voteTime = time;//设置投票时间
+        msgTime = time;
+        voter = player.getName();
     }
 
     @Override
@@ -45,13 +45,13 @@ public class VoteTask extends PluginTask<AutoRestartPlugin> {
                 }
             }
         }
-        if (msgTime == time2 && msgTime > 0) {
+        if (msgTime == voteTime && msgTime > 0) {
             for (Player player : main.getServer().getOnlinePlayers().values()) {
-                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_in_initiate",voterr, "/voterestart"));
+                player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("vote_restart_msg_in_initiate", voter, "/voterestart"));
             }
             msgTime = msgTime - 30;
         }
-        if (time2 <= 0) {
+        if (voteTime <= 0) {
             if (approval >= approvalVotes) {
                 TasksUtils.runRestartTask(BaseUtils.getRestartTipTime(),4,2);
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
@@ -70,11 +70,11 @@ public class VoteTask extends PluginTask<AutoRestartPlugin> {
             }
             TasksUtils.cancelVoteTask();
         }
-        time2--;
+        voteTime--;
     }
 
-    public static int getTime() {
-        return time2;
+    public static int getRemainder() {
+        return voteTime;
     }
 
     /**
@@ -86,7 +86,7 @@ public class VoteTask extends PluginTask<AutoRestartPlugin> {
         String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
         String secondUnit = main.getLang(player).translateString("time_unit_seconds");
         if (TasksUtils.getVoteTaskState()) {
-            int time = getTime();
+            int time = getRemainder();
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
             String timee = "";

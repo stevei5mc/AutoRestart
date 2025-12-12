@@ -11,6 +11,7 @@ import cn.stevei5mc.autorestart.command.vote.VoteMain;
 import cn.stevei5mc.autorestart.utils.BaseUtils;
 import cn.stevei5mc.autorestart.utils.TasksUtils;
 import cn.stevei5mc.autorestart.utils.UpdateConfigUtils;
+import lombok.Getter;
 import tip.utils.Api;
 
 import java.io.File;
@@ -21,18 +22,13 @@ import java.util.List;
 public class AutoRestartPlugin extends PluginBase {
     private String defaultLanguage;
     private final HashMap<String, Language> languageMap = new HashMap<>();
+    @Getter
     private final List<String> languages = Arrays.asList("zh_CN", "zh_TW","en_US");
+    @Getter
     private static AutoRestartPlugin instance;
+    @Getter
     private Config config;
     private static boolean tips = false;
-
-    public Config getConfig() {
-        return this.config;
-    }
-
-    public static AutoRestartPlugin getInstance() {
-        return instance;
-    }
 
     public void onLoad() {
         instance = this;
@@ -156,9 +152,5 @@ public class AutoRestartPlugin extends PluginBase {
 
     public String getMessagePrefix() {
         return config.getString("message_prefix","§l§bAutoRestart §r§7>> ");
-    }
-
-    public List<String> getLanguages() {
-        return languages;
     }
 }
