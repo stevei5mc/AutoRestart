@@ -19,31 +19,31 @@ jobs:
       artifactName: ${{ steps.getInfo.outputs.artifactName }}
       actionUrl: ${{ steps.getInfo.outputs.actionUrl }}
     steps:
-      - name: 获取信息
-        id: getInfo
-        uses: actions/github-script@v8
-        with:
-          script: |
-            const onEventName = "${{ github.event_name }}";
-            const refName = "${{ github.ref }}";
-            let repoName = "${{ github.repository }}";
-            repoName.replace("${{ github.repository_owner }}/", "");
-            let artifactName = `${repoName}-CI-Dispatch-Build-${{ github.run_number }}`;
+    - name: 获取信息
+      id: getInfo
+      uses: actions/github-script@v8
+      with:
+        script: |
+          const onEventName = "${{ github.event_name }}";
+          const refName = "${{ github.ref }}";
+          let repoName = "${{ github.repository }}";
+          repoName.replace("${{ github.repository_owner }}/", "");
+          let artifactName = `${repoName}-CI-Dispatch-Build-${{ github.run_number }}`;
 
-            if (onEventName == "pull_request") {
-              artifactName = `${repoName}-CI-PR_${{ github.event.pull_request.number }}-Build-${{ github.run_number }}`;
-            }
+          if (onEventName == "pull_request") {
+            artifactName = `${repoName}-CI-PR_${{ github.event.pull_request.number }}-Build-${{ github.run_number }}`;
+          }
 
-            if(onEventName == "push" && refName.startwith("refs/tags/")){
-              artifactName = `${repoName}-Release-${{ steps.getVersion.outputs.version }}`;
-              const version = refName.replace("refs/tags/", "");
-              core.setOutput('version', `${version}`);
-              core.info(`Release version: ${version}`);
-            }
+          if(onEventName == "push" && refName.startwith("refs/tags/")){
+            artifactName = `${repoName}-Release-${{ steps.getVersion.outputs.version }}`;
+            const version = refName.replace("refs/tags/", "");
+            core.setOutput('version', `${version}`);
+            core.info(`Release version: ${version}`);
+          }
 
-            core.setOutput('repoName', `${repoName}`);
-            core.setOutput('artifactName', `${artifactName}`);
-            core.setOutput('actionUrl', '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}');
+          core.setOutput('repoName', `${repoName}`);
+          core.setOutput('artifactName', `${artifactName}`);
+          core.setOutput('actionUrl', '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}');
     - name: 拉取代码
       uses: actions/checkout@v6
     - name: 安装java8
