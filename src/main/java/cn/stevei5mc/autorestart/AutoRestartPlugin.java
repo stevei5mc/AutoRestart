@@ -44,8 +44,8 @@ public class AutoRestartPlugin extends PluginBase {
         if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
             tips = false; //这是为了防止一些意外的情况准备的
             loadLanguage();
-            this.getServer().getCommandMap().register("", new AdminMain());//注册命令
-            this.getServer().getCommandMap().register("", new VoteMain());
+            this.getServer().getCommandMap().register("", new AdminMain("autorestart", getLang().translateString("command-tip-autoRestart")));//注册命令
+            this.getServer().getCommandMap().register("", new VoteMain("voterestart", getLang().translateString("command-tip-autoRestart")));
             int i = BaseUtils.getRestartUseTime();
             TasksUtils.runRestartTask(i,1,1);
             if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
@@ -119,7 +119,7 @@ public class AutoRestartPlugin extends PluginBase {
 
     public void checkLanguageFilesVersion() {
         if (config.getBoolean("local_language_flies",false)) {
-            int latestVersion = 7;
+            int latestVersion = 8;
             for (String lang : languages) {
                 Config langFile = new Config(this.getDataFolder() + "/language/" + lang + ".yml");
                 int version = langFile.getInt("language_version", 1);

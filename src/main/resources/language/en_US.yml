@@ -1,6 +1,9 @@
-language_version: 7
+language_version: 8
 
 broadcast_restart_reminder_time: "§aTime remaining until server restart: §e%1%"
+
+command-tip-autoRestart: AutoRestart plugin restart management command
+command-tip-voteRestart: AutoRestart plugin vote restart command
 
 command_help_reload: §ereload config
 command_help_cancel: §ecancel restart task

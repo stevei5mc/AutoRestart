@@ -12,8 +12,8 @@ import cn.stevei5mc.autorestart.utils.TasksUtils;
 
 public class VoteMain extends BaseCommand {
     protected AutoRestartPlugin main = AutoRestartPlugin.getInstance();
-    public VoteMain() {
-        super("voterestart", "AutoRestart Command");
+    public VoteMain(String name, String description) {
+        super(name, description);
         this.setPermission("autorestart.user.vote");
         this.addSubCommand(new Initiate("initiate"));
         this.addSubCommand(new VoteCmd("vote"));

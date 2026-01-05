@@ -1,6 +1,9 @@
-language_version: 7
+language_version: 8
 
 broadcast_restart_reminder_time: "§a距離伺服器執行重啟剩餘 §e%1%"
+
+command-tip-autoRestart: AutoRestart 插件重啟管理命令
+command-tip-voteRestart: AutoRestart 插件投票重啟命令
 
 command_help_reload: §e重載配寘
 command_help_cancel: §e取消重啟任務
