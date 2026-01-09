@@ -96,7 +96,7 @@ public class TasksUtils {
         }
         int time = voteTime * 60;
 
-        boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.getRemainder() && getRestartTaskType() != 2;
+        boolean normalCondition = !voteTaskState && Server.getInstance().getOnlinePlayers().size() >= startPlayer && time < RestartTask.getRemainderTime() && getRestartTaskType() != 2;
         boolean debugCondition = !voteTaskState && main.getConfig().getBoolean("debug",false) && voter.hasPermission("autorestart.admin.vote.force");
         if (normalCondition || debugCondition) {
             TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new VoteTask(main,time,voter), 20, true);
@@ -130,7 +130,7 @@ public class TasksUtils {
         if (getRestartTaskType() == 3) {
             runTick = 100;
         }
-        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(main,RestartTask.getRemainder()), runTick, true);
+        TaskHandler taskHandler = main.getServer().getScheduler().scheduleRepeatingTask(main, new RestartTask(main,RestartTask.getRemainderTime()), runTick, true);
         restartTaskId = taskHandler.getTaskId();
     }
 

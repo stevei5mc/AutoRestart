@@ -73,12 +73,26 @@ public class VoteTask extends PluginTask<AutoRestartPlugin> {
         voteTime--;
     }
 
-    public static int getRemainder() {
+    /**
+     * 获取剩余时间 （单位：秒 s ）
+     * @return 剩余时间
+     * @deprecated
+     */
+    @Deprecated
+    public static int getTime() {
+        return getRemainderTime();
+    }
+
+    /**
+     * 获取剩余时间 （单位：秒 s ）
+     * @return 剩余时间
+     */
+    public static int getRemainderTime() {
         return voteTime;
     }
 
     /**
-     * 获取剩余时间
+     * 获取剩余时间<br>该方法用于显示剩余时间给玩家，如果想要对接其他插件使用的话请使用 getRemainderTime()
      * @param player 传入player参数以实现多语言
      * @return remainder
      */
@@ -86,7 +100,7 @@ public class VoteTask extends PluginTask<AutoRestartPlugin> {
         String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
         String secondUnit = main.getLang(player).translateString("time_unit_seconds");
         if (TasksUtils.getVoteTaskState()) {
-            int time = getRemainder();
+            int time = getRemainderTime();
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
             String timee = "";
