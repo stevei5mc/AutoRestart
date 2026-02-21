@@ -24,12 +24,12 @@ public class AdminMain extends BaseCommand {
     @Override
     public void sendHelp(CommandSender sender) {
         Language lang = main.getLang(sender);
-        String cmdname = "§a/autorestart ";
+        String cmdName = "§a/" + getName() + "";
         sender.sendMessage("§b=== AutoRestart admin command list ===");
-        sender.sendMessage(cmdname+"reload "+lang.translateString("command_help_reload"));
-        sender.sendMessage(cmdname+"cancel "+lang.translateString("command_help_cancel"));
-        sender.sendMessage(cmdname+"restart [task type] (time unit) (time) "+lang.translateString("command_help_restart"));
-        sender.sendMessage(cmdname+"pause"+lang.translateString("command_help_pause"));
+        sender.sendMessage(cmdName + "reload " + lang.translateString("command_help_reload"));
+        sender.sendMessage(cmdName + "cancel " + lang.translateString("command_help_cancel"));
+        sender.sendMessage(cmdName + "restart [task type] (time unit) (time) " + lang.translateString("command_help_restart"));
+        sender.sendMessage(cmdName + "pause" + lang.translateString("command_help_pause"));
     }
 
     @Override

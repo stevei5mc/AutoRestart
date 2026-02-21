@@ -1,5 +1,6 @@
 package cn.stevei5mc.autorestart.tasks;
 
+import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.scheduler.PluginTask;
 import cn.stevei5mc.autorestart.AutoRestartPlugin;
@@ -97,20 +98,21 @@ public class VoteTask extends PluginTask<AutoRestartPlugin> {
      * @return remainder
      */
     public static String getVoteRemainder(Player player) {
-        String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
-        String secondUnit = main.getLang(player).translateString("time_unit_seconds");
+        Language lang = main.getLang(player);
+        StringBuilder timeText = new StringBuilder();
         if (TasksUtils.getVoteTaskState()) {
             int time = getRemainderTime();
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
-            String timee = "";
             if (minutes > 0) {
-                timee = minutes + minuteUnit;
+                timeText.append(minutes).append(lang.translateString("time_unit_minutes"));
             }
-            timee = timee + seconds + secondUnit;
-            return main.getLang(player).translateString("variable_remainder",timee);
+            if (seconds >= 1) {
+                timeText.append(seconds).append(lang.translateString("time_unit_seconds"));
+            }
+            return main.getLang(player).translateString("variable_remainder", timeText);
         }else {
-            return "--"+secondUnit;
+            return lang.translateString("variable_none_data");
         }
     }
 }

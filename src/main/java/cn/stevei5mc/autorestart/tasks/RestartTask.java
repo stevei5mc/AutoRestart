@@ -1,5 +1,6 @@
 package cn.stevei5mc.autorestart.tasks;
 
+import cn.lanink.gamecore.utils.Language;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.scheduler.PluginTask;
@@ -96,25 +97,25 @@ public class RestartTask extends PluginTask<AutoRestartPlugin> {
      * @return 剩余时间
      */
     public static String getRestartRemainder(Player player) {
-        String hourUnit = main.getLang(player).translateString("time_unit_hour");
-        String minuteUnit = main.getLang(player).translateString("time_unit_minutes");
-        String secondUnit = main.getLang(player).translateString("time_unit_seconds");
+        StringBuilder timeText = new StringBuilder();
+        Language lang = main.getLang(player);
         if (TasksUtils.getRestartTaskState() >= 1 && TasksUtils.getRestartTaskType() != 3) {
             int time = getRemainderTime();
             int hours = time / 3600;
             int minutes = (time % 3600) / 60;
             int seconds = time % 60;
-            String timee = "";
             if (hours > 0) {
-                timee = hours + hourUnit;
+                timeText.append(hours).append(lang.translateString("time_unit_hour"));
             }
-            if (minutes > 0) {
-                timee = timee + minutes + minuteUnit;
+            if (hours > 0 || minutes > 0) {
+                timeText.append(minutes).append(lang.translateString("time_unit_minutes"));
             }
-            timee = timee + seconds + secondUnit;
-            return main.getLang(player).translateString("variable_remainder",timee);
+            if (seconds >= 1) {
+                timeText.append(seconds).append(lang.translateString("time_unit_seconds"));
+            }
+            return lang.translateString("variable_remainder", timeText);
         }else {
-            return "--"+secondUnit;
+            return lang.translateString("variable_none_data");
         }
     }
 
