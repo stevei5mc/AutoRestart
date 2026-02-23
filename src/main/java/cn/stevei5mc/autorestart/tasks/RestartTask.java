@@ -25,7 +25,7 @@ public class RestartTask extends PluginTask<AutoRestartPlugin> {
     public void onRun(int currentTick) {
         int taskType = TasksUtils.getRestartTaskType();
         if (taskType != 3) {
-            if (main.getConfig().getBoolean("enable_reminder_timer",true) && restartTime == broadcastCycle && broadcastCycle > 0) {
+            if (main.getConfig().getBoolean("enable_reminder_timer",true) && restartTime <= broadcastCycle && broadcastCycle > 0) {
                 broadcastCycle = broadcastCycle -main.getConfig().getInt("broadcast_restart_reminder_cycle",30) * 60;
                 for (Player player : main.getServer().getOnlinePlayers().values()) {
                     player.sendMessage(main.getMessagePrefix() + main.getLang(player).translateString("broadcast_restart_reminder_time",getRestartRemainder(player)));
