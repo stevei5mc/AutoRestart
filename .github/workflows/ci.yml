@@ -6,7 +6,9 @@ on:
       - '[0-9]+.[0-9]+.[0-9]+'
       - '[0-9]+.[0-9]+.[0-9]+-beta[0-9]+'
   pull_request:
-    branches: [master]
+    paths-ignore:
+      - "**.md"
+      - ".gitignore"
   workflow_dispatch:
 
 jobs:
@@ -74,10 +76,9 @@ jobs:
         echo Artifact id: ${{ steps.getPomInfo.outputs.artifactd }}
         echo Version: ${{ steps.getPomInfo.outputs.version }}
     - name: 构建
-      run: |
-        mvn -B package --file pom.xml
-        mkdir staging
-        cp target/*.jar staging
+      run: mvn -B package --file pom.xml
+    - name: 整理文件
+      run: mkdir staging && cp target/*.jar staging && ls -lah ./staging
     - name: 获取脚本资源
       uses: actions/checkout@v5
       with:
@@ -112,6 +113,8 @@ jobs:
       with:
         name: ${{ needs.build.outputs.artifactName }}
         path: staging
+    - name: 列出需要发布的文件
+      run: ls -lah ./staging
     - name: 发布新版本
       uses: ncipollo/release-action@v1.14.0
       with:
