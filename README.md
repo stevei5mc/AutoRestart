@@ -6,6 +6,10 @@
 ![GitHub forks](https://img.shields.io/github/forks/stevei5mc/AutoRestart?style=plastic)
 ![GitHub issues](https://img.shields.io/github/issues/stevei5mc/AutoRestart?style=plastic&color=linkGreen)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/stevei5mc/AutoRestart?style=plastic)
+## **重要消息**
+1. **预计`1.0.2`版本将成为`1.x.x(v1)`版本的最后一个版本，之后的版本将使用`2.x.x(v2)`的版本**
+2. **在发布`v2`正式版本前`v1`版本仅提供BUG修复的支持，新功能开发在`v2`版本中进行**
+3. **v2版本不会对v1版本的配置进行兼容的进行兼容的**
 ## **插件介绍**
 ### **功能介绍**
 - [x] **多语言（根据玩家客户端的语言进行匹配）**
