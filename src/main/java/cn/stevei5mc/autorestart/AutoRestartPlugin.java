@@ -41,33 +41,35 @@ public class AutoRestartPlugin extends PluginBase {
     }
 
     public void onEnable() {
-        if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") != null) {
-            tips = false; //这是为了防止一些意外的情况准备的
-            loadLanguage();
-            this.getServer().getCommandMap().register("", new AdminMain("autorestart", getLang().translateString("command_tip_autoRestart")));//注册命令
-            this.getServer().getCommandMap().register("", new VoteMain("voterestart", getLang().translateString("command_tip_voteRestart")));
-            int i = BaseUtils.getRestartUseTime();
-            TasksUtils.runRestartTask(i,1,1);
-            if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
-                tips = true;
-                Api.registerVariables("TipsVar",TipsVar.class);
-            }
-            Server.getInstance().getScheduler().scheduleDelayedTask(this, () -> {
-                checkLanguageFilesVersion();
-                if (!tips) {
-                    this.getLogger().warning("§c未检测到前置插件§aTips§c，相关变量无法生效");
-                    this.getLogger().warning("https://motci.cn/job/GameCore/          https://ci.lanink.cn/job/Tips/");
-                }
-                getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
-                getLogger().warning("§c警告! §c本插件为免费且开源的，如果您付费获取获取的，则有可能被误导");
-                getLogger().info("§aGITHUB:§b https://github.com/stevei5mc/AutoRestart");
-            },20);
-        } else {
-            //不存在作为卸载该插件
-            this.getLogger().warning("§c未检测到前置插件§aMemoriesOfTime-GameCore§c，请安装后再试!!!");
-            this.getLogger().warning("https://ci.lanink.cn/job/GameCore/         https://motci.cn/job/GameCore/");
-            this.onDisable();
+        //不存在则卸载该插件
+        if (this.getServer().getPluginManager().getPlugin("MemoriesOfTime-GameCore") == null) {
+            this.getServer().getScheduler().scheduleDelayedTask(this, () -> {
+                this.getLogger().warning("§c未检测到前置插件§aMemoriesOfTime-GameCore§c，请安装后再试!!!");
+                this.getLogger().warning("https://ci.lanink.cn/job/GameCore/         https://motci.cn/job/GameCore/");
+                this.setEnabled(false);
+            }, 20, true);
+            return;
         }
+        loadLanguage();
+        this.getServer().getCommandMap().register("", new AdminMain("autorestart", getLang().translateString("command_tip_autoRestart")));//注册命令
+        this.getServer().getCommandMap().register("", new VoteMain("voterestart", getLang().translateString("command_tip_voteRestart")));
+        int i = BaseUtils.getRestartUseTime();
+        TasksUtils.runRestartTask(i,1,1);
+        if (this.getServer().getPluginManager().getPlugin("Tips") != null) {
+            tips = true;
+            Api.registerVariables("TipsVar",TipsVar.class);
+        }else {
+            this.getServer().getScheduler().scheduleDelayedTask(this, () -> {
+                this.getLogger().warning("§c未检测到前置插件§aTips§c，相关变量无法生效");
+                this.getLogger().warning("https://ci.lanink.cn/job/Tips/");
+            }, 30, true);
+        }
+        this.getServer().getScheduler().scheduleDelayedTask(this, () -> {
+            checkLanguageFilesVersion();
+            getLogger().info(this.getLang().translateString("restart_task_restart", i, getLang().translateString("time_unit_minutes")));
+            getLogger().warning("§c警告! §c本插件为免费且开源的，如果您付费获取获取的，则有可能被误导");
+            getLogger().info("§aGITHUB:§b https://github.com/stevei5mc/AutoRestart");
+        }, 20, true);
     }
 
     public void onDisable() {
