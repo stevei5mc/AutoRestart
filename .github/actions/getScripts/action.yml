@@ -1,0 +1,22 @@
+name: "Get scripts"
+description: "Get scripts"
+
+runs:
+  using: "composite"
+  steps:
+    - name: 获取脚本资源
+      uses: actions/checkout@v7
+      with:
+        repository: 'stevei5mc/McStartServer'
+        path: ./script
+    - name: 整理脚本资源
+      shell: bash
+      run: |
+        pwd
+        cp ./script/server_script/Windows/*.bat staging
+        cp ./script/server_script/Linux/*.sh staging
+        cd ./staging
+        zip -r Windows-script.zip ./*.bat
+        zip -r Linux-script.zip ./*.sh
+        ls -lah
+        cd ../
