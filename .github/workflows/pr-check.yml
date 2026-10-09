@@ -27,7 +27,7 @@ jobs:
       uses: actions/github-script@v9
       with:
         script: |
-          const prID = "${{ github.event.pull_request.number || inputs.prNumber }}":
+          const prID = "${{ github.event.pull_request.number || inputs.prNumber }}";
           const onEventName = "${{ github.event_name }}";
 
           let repoName = "${{ github.repository }}";
